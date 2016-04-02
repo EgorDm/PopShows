@@ -2,8 +2,11 @@ package net.egordmitriev.watchall.api.services;
 
 import com.google.gson.JsonObject;
 
+import net.egordmitriev.watchall.pojo.anilist.ClientCredentials;
+
 import java.util.Map;
 
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -18,28 +21,28 @@ import retrofit2.http.QueryMap;
 public interface AnilistService {
 
     @FormUrlEncoded
-    @POST("/auth/access_token")
-    JsonObject requestAccesToken(@Field("grant_type") String grant_type, @Field("client_id") String client_id, @Field("client_secret") String client_secret);
+    @POST("/api/auth/access_token")
+    Call<ClientCredentials> requestAccessToken(@Field("grant_type") String grant_type, @Field("client_id") String client_id, @Field("client_secret") String client_secret);
 
-    @GET("/anime/{id}/page")
-    JsonObject getAnime(@Query("access_token") String access_token, @Path("id") int animeId);
+    @GET("/api/anime/{id}/page")
+    Call<JsonObject> getAnime(@Path("id") int animeId);
 
-    @GET("/browse/anime")
-    JsonObject getAnimeDiscover(@Query("access_token") String access_token, @QueryMap Map<String, String> options);
+    @GET("/api/browse/anime")
+    Call<JsonObject> getAnimeDiscover(@QueryMap Map<String, String> options);
 
-    @GET("/anime/review/{review_id}")
-    JsonObject getReview(@Query("access_token") String access_token, @Path("review_id") int reviewId);
+    @GET("/api/anime/review/{review_id}")
+    Call<JsonObject> getReview(@Path("review_id") int reviewId);
 
-    @GET("/anime/{anime_id}/reviews")
-    JsonObject getAnimeReviews(@Query("access_token") String access_token, @Path("anime_id") int animeId);
+    @GET("/api/anime/{anime_id}/reviews")
+    Call<JsonObject> getAnimeReviews(@Path("anime_id") int animeId);
 
-    @GET("/character/{id}")
-    JsonObject getCharacter(@Query("access_token") String access_token, @Path("id") int characterId);
+    @GET("/api/character/{id}")
+    Call<JsonObject> getCharacter(@Path("id") int characterId);
 
-    @GET("/staff/{id}")
-    JsonObject getStaff(@Query("access_token") String access_token, @Path("id") int staffId);
+    @GET("/api/staff/{id}")
+    Call<JsonObject> getStaff(@Path("id") int staffId);
 
-    @GET("/anime/search/{query}")
-    JsonObject searchAnime(@Path("query") String query, @Query("access_token") String access_token, @Query("page") int page);
+    @GET("/api/anime/search/{query}")
+    Call<JsonObject> searchAnime(@Path("query") String query, @Query("page") int page);
 
 }

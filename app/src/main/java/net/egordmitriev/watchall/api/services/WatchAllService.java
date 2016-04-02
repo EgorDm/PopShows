@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -23,60 +24,61 @@ public interface WatchAllService {
 
     @FormUrlEncoded
     @POST("/users/token")
-    JsonObject getToken(@Field("email") String email, @Field("password") String password);
+    Call<JsonObject> getToken(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/users/register")
-    JsonObject register(@Field("fullname") String username, @Field("password") String password, @Field("email") String email);
+    Call<JsonObject> register(@Field("fullname") String username, @Field("password") String password, @Field("email") String email);
 
     @GET("/users/profile")
-    JsonObject getProfile();
+    Call<JsonObject> getProfile();
 
     @POST("/users/edit/{id}")
-    JsonObject editProfile(@Path("id") int userID, @Body JsonObject body);
-
-    @Multipart
-    @POST("/users/edit/{id}")
-    JsonObject editAvatar(@Path("id") int userId, @Part("avatar") MultipartBody.Part file);
+    Call<JsonObject> editProfile(@Path("id") int userID, @Body JsonObject body);
 
     @Multipart
     @POST("/users/edit/{id}")
-    JsonObject editBackdrop(@Path("id") int userId, @Part("backdrop") MultipartBody.Part file);
+    Call<JsonObject> editAvatar(@Path("id") int userId, @Part("avatar") MultipartBody.Part file);
+
+    @Multipart
+    @POST("/users/edit/{id}")
+    Call<JsonObject> editBackdrop(@Path("id") int userId, @Part("backdrop") MultipartBody.Part file);
 
     @GET("/users/view/{id}")
-    JsonObject getUser(@Path("id") int userID);
+    Call<JsonObject> getUser(@Path("id") int userID);
 
 
     @GET("/activities/index")
-    JsonObject getActivities(@QueryMap Map<String, String> options);
+    Call<JsonObject> getActivities(@QueryMap Map<String, String> options);
 
     @GET("/reviews/index")
-    JsonObject getReviews(@QueryMap Map<String, String> options);
+    Call<JsonObject> getReviews(@QueryMap Map<String, String> options);
 
     @POST("/reviews/add")
-    JsonObject addReview(@Body JsonObject review);
+    Call<JsonObject> addReview(@Body JsonObject review);
 
     @POST("/reviews/edit/{id}")
-    JsonObject editReview(@Path("id") int reviewID, @Body JsonObject review);
+    Call<JsonObject> editReview(@Path("id") int reviewID, @Body JsonObject review);
 
     @POST("/reviews/delete/{id}")
-    JsonObject deleteReview(@Path("id") int reviewID);
+    Call<JsonObject> deleteReview(@Path("id") int reviewID);
 
     @POST("/watchlists/synchronize")
-    JsonObject syncWatchlist(@Body JsonObject[] watchlists);
+    Call<JsonObject> syncWatchlist(@Body JsonObject[] watchlists);
 
     @GET("/watchlists/index")
-    JsonObject getWatchlists(@Query("user") int userID, @Query("title") String query);
+    Call<JsonObject> getWatchlists(@Query("user") int userID, @Query("title") String query);
 
     @GET("/watchlists/view/{id}")
-    JsonObject viewWatchlist(@Path("id") int listID);
+    Call<JsonObject> viewWatchlist(@Path("id") int listID);
 
     @POST("/watchlists/add")
-    JsonObject addWatchlist(@Body JsonObject watchlists);
+    Call<JsonObject> addWatchlist(@Body JsonObject watchlists);
 
     @POST("/watchlists/edit/{id}")
-    JsonObject editWatchlist(@Path("id") int listID, @Body JsonObject watchlists);
+    Call<JsonObject> editWatchlist(@Path("id") int listID, @Body JsonObject watchlists);
 
     @POST("/watchlists/delete/{id}")
-    JsonObject deleteWatchlist(@Path("id") int listID);
+    Call<JsonObject> deleteWatchlist(@Path("id") int listID);
+
 }
