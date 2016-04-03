@@ -46,6 +46,7 @@ public class WatchlistsTable extends BaseTable {
             identifier = ((int) lastInsertID(sTableName)) + 1;
         }
         watchlist.base.id = identifier;
+        watchlist.detail.id = identifier;
         insertValues.put(COLUMN_TITLE, watchlist.base.title);
         insertValues.put(COLUMN_BASE_DATA, APIUtils.sGlobalParser.toJson(watchlist.base));
         insertValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(watchlist.detail));
@@ -93,6 +94,7 @@ public class WatchlistsTable extends BaseTable {
                     ret[i] = new WatchlistModel(
                             APIUtils.sGlobalParser.fromJson(cursor.getString(0), WatchlistModel.Base.class),
                             APIUtils.sGlobalParser.fromJson(cursor.getString(1), WatchlistModel.Detail.class));
+                    ret[i].base.is_local = true;
                     ret[i].server_id = cursor.getInt(2);
                     ret[i].modified = cursor.getLong(3);
                 } catch (Exception e) {
@@ -108,12 +110,20 @@ public class WatchlistsTable extends BaseTable {
     }
 
     public static WatchlistModel.Base[] getAllBase(String selection, String[] selectionArgs) {
-        return getJsonAll(sTableName, new String[]{COLUMN_BASE_DATA}, selection, selectionArgs, WatchlistModel.Base.class);
+        WatchlistModel.Base[] ret = getJsonAll(sTableName, new String[]{COLUMN_BASE_DATA}, selection, selectionArgs, WatchlistModel.Base.class);
+        if(ret != null) {
+            for (int i = 0; i < ret.length; i++) {
+                ret[i].is_local = true;
+            }
+        }
+        return ret;
     }
 
     public static WatchlistModel.Base getBase(int identifier) {
         String[] columns = {COLUMN_BASE_DATA};
-        return getJsonFirst(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, WatchlistModel.Base.class);
+        WatchlistModel.Base ret = getJsonFirst(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, WatchlistModel.Base.class);
+        if(ret != null) ret.is_local = true;
+        return ret;
     }
 
     public static WatchlistModel.Detail getDetail(int identifier) {

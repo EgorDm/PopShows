@@ -10,6 +10,8 @@ import com.google.gson.annotations.SerializedName;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.api.WatchAllServiceHelper;
+import net.egordmitriev.watchall.api.base.APIError;
+import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.anilist.AnimeModel;
@@ -39,7 +41,12 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
     @Override
     public void requestDetail(DetailCallback callback) {
         if (base.is_local) {
-            //TODO: Grab from the db the response will also be different because its local
+            detail = WatchlistsTable.getDetail(this.id);
+            if(detail != null) {
+                callback.success();
+            } else {
+                callback.failure(new APIError(1337, "Not found in saved watchlists."));
+            }
         } else {
             WatchAllServiceHelper.sService.viewWatchlist(this.id).enqueue(getDetailCallback(callback));
         }

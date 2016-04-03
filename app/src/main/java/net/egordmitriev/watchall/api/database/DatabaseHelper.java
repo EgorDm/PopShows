@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
+
 /**
  * Created by EgorDm on 4/2/2016.
  */
@@ -22,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        WatchlistsTable.createTable();
         //TODO: create tables
     }
 
