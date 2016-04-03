@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import net.egordmitriev.watchall.R;
-import net.egordmitriev.watchall.utils.PreferencesHelper;
+import net.egordmitriev.watchall.api.PreferencesHelper;
 
 import java.util.Date;
 

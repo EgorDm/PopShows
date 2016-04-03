@@ -9,7 +9,7 @@ import net.egordmitriev.watchall.MainApplication;
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.api.GlobalHelper;
 import net.egordmitriev.watchall.utils.APIUtils;
-import net.egordmitriev.watchall.utils.PreferencesHelper;
+import net.egordmitriev.watchall.api.PreferencesHelper;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +32,7 @@ public class MediaTable extends BaseTable {
         return true;
     }
 
-    public static <T> boolean upsert(String tableName, T[] item, int identifier) {
+    protected static <T> boolean upsert(String tableName, T[] item, int identifier) {
         ContentValues insertValues = new ContentValues();
         insertValues.put(COLUMN_ID, identifier);
         insertValues.put(COLUMN_MODIFIED, new Date().getTime());

@@ -20,7 +20,6 @@ public abstract class BaseModel implements Parcelable {
         this.type = type;
     }
 
-
     @Override
     public int describeContents() {
         return 0;

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">WatchAll</string>
+
+    <string name="toast_list_cache_cleared">Successfully cleared list cache!</string>
+    <string name="toast_history_cleared">Successfully search history!</string>
 </resources>

@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.utils;
+package net.egordmitriev.watchall.api;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;

@@ -1,5 +1,7 @@
 package net.egordmitriev.watchall.api.base;
 
+import com.orhanobut.logger.Logger;
+
 /**
  * Created by EgorDm on 4/1/2016.
  */
@@ -13,6 +15,7 @@ public class APIError {
     public APIError(int errorCode, String message) {
         this.errorCode = errorCode;
         this.message = message;
+        Logger.e("An error occurred with code: "+errorCode+"\nMessage: "+message);
     }
 
     public int getErrorCode() {

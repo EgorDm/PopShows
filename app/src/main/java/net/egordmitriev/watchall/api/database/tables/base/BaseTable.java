@@ -103,7 +103,7 @@ public class BaseTable {
         return (MainApplication.getDatabase().update(tableName, contentValues, "id=?", new String[]{Integer.toString(identifier)}) > 0);
     }
 
-    public static void drop(String tableName) {
+    protected static void drop(String tableName) {
         MainApplication.getDatabase().execSQL(QUERY_DROP_TABLE + tableName);
     }
 }
