@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_anilist_accestoken">pref_anilistaccestoken</string>
+    <string name="pref_anilist_tokentype">pref_anilist_tokentype</string>
+    <string name="pref_anilist_expires">pref_anilist_expires</string>
+</resources>

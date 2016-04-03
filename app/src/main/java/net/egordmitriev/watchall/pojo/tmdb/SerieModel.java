@@ -28,7 +28,9 @@ public class SerieModel extends DetailedModel<SerieModel.Base, SerieModel.Detail
 
     public SerieModel(SerieModel.Base base, SerieModel.Detail detail) {
         super(TYPE, base, detail);
-        //TODO: check if is lite
+        if (base.genre_ids == null && base.overview == null && base.backdrop_path == null) {
+            lite = true;
+        }
     }
 
     @Override

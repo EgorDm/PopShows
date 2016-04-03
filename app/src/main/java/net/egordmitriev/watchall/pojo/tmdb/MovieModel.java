@@ -28,7 +28,9 @@ public class MovieModel extends DetailedModel<MovieModel.Base, MovieModel.Detail
 
     public MovieModel(MovieModel.Base base, MovieModel.Detail detail) {
         super(TYPE, base, detail);
-        //TODO: check if is lite
+        if (base.genre_ids == null && base.overview == null && base.backdrop_path == null) {
+            lite = true;
+        }
     }
 
     @Override

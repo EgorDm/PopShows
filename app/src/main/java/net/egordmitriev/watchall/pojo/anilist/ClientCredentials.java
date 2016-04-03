@@ -5,12 +5,26 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.utils.PreferencesHelper;
+
 import java.util.Date;
 
 /**
  * Created by EgorDm on 4/2/2016.
  */
 public class ClientCredentials implements Parcelable {
+    public static final Creator<ClientCredentials> CREATOR = new Creator<ClientCredentials>() {
+        @Override
+        public ClientCredentials createFromParcel(Parcel source) {
+            return new ClientCredentials(source);
+        }
+
+        @Override
+        public ClientCredentials[] newArray(int size) {
+            return new ClientCredentials[size];
+        }
+    };
     @SerializedName("access_token")
     public String access_token;
     @SerializedName("token_type")
@@ -22,6 +36,34 @@ public class ClientCredentials implements Parcelable {
         this.access_token = access_token;
         this.expires = expires;
         this.token_type = token_type;
+    }
+
+    protected ClientCredentials(Parcel in) {
+        this.access_token = in.readString();
+        this.token_type = in.readString();
+        long tmpExpires = in.readLong();
+        this.expires = tmpExpires == -1 ? null : new Date(tmpExpires);
+    }
+
+    public void save() {
+        PreferencesHelper.getInstance().build()
+                .setString(R.string.pref_anilist_accestoken, access_token)
+                .setString(R.string.pref_anilist_tokentype, token_type)
+                .setLong(R.string.pref_anilist_expires, expires.getTime());
+    }
+
+    public static ClientCredentials load() {
+        if (PreferencesHelper.getInstance().isPrefContains(R.string.pref_anilist_expires)) {
+            Date exp = new Date(PreferencesHelper.getInstance().getLong(R.string.pref_anilist_expires));
+            if (exp.after(new Date())) {
+                return new ClientCredentials(
+                        PreferencesHelper.getInstance().getString(R.string.pref_anilist_accestoken),
+                        exp,
+                        PreferencesHelper.getInstance().getString(R.string.pref_anilist_tokentype)
+                );
+            }
+        }
+        return null;
     }
 
     @Override
@@ -44,23 +86,4 @@ public class ClientCredentials implements Parcelable {
         dest.writeString(this.token_type);
         dest.writeLong(expires != null ? expires.getTime() : -1);
     }
-
-    protected ClientCredentials(Parcel in) {
-        this.access_token = in.readString();
-        this.token_type = in.readString();
-        long tmpExpires = in.readLong();
-        this.expires = tmpExpires == -1 ? null : new Date(tmpExpires);
-    }
-
-    public static final Creator<ClientCredentials> CREATOR = new Creator<ClientCredentials>() {
-        @Override
-        public ClientCredentials createFromParcel(Parcel source) {
-            return new ClientCredentials(source);
-        }
-
-        @Override
-        public ClientCredentials[] newArray(int size) {
-            return new ClientCredentials[size];
-        }
-    };
 }

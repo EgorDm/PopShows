@@ -1,6 +1,7 @@
 package net.egordmitriev.watchall;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import net.egordmitriev.watchall.api.database.DatabaseHelper;
@@ -26,5 +27,9 @@ public class MainApplication extends Application {
 
     public static SQLiteDatabase getDatabase() {
         return sDatabaseHelper.writeableDB;
+    }
+
+    public static Context getAppContext() {
+        return sInstance.getApplicationContext();
     }
 }
