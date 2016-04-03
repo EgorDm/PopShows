@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import net.egordmitriev.watchall.MainApplication;
+import net.egordmitriev.watchall.api.database.tables.base.BaseTable;
 import net.egordmitriev.watchall.pojo.user.SearchRecord;
 
 import java.util.Date;
@@ -27,6 +28,7 @@ public class SearchSuggestTable extends BaseTable {
     public static boolean createTable() {
         if (sCreated) return false;
         createTable(sTableName, QUERY_COLUMNS);
+        sCreated = true;
         return true;
     }
 

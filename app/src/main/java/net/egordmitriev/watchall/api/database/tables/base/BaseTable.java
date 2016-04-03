@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.api.database.tables;
+package net.egordmitriev.watchall.api.database.tables.base;
 
 import android.content.ContentValues;
 import android.database.Cursor;

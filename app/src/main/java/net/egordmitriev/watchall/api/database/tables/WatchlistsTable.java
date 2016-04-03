@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.MainApplication;
+import net.egordmitriev.watchall.api.database.tables.base.BaseTable;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
 import net.egordmitriev.watchall.utils.APIUtils;
 
@@ -37,6 +38,7 @@ public class WatchlistsTable extends BaseTable {
     public static boolean createTable() {
         if (sCreated) return false;
         createTable(sTableName, QUERY_COLUMNS);
+        sCreated = true;
         return true;
     }
 
@@ -185,7 +187,7 @@ public class WatchlistsTable extends BaseTable {
             try {
                 return new Date(cursor.getLong(0));
             } catch (Exception e) {
-                Logger.e(e, "Error while retrieving server_id for watchlist items select.");
+                Logger.e(e, "Error while retrieving modified for watchlist items select.");
             } finally {
                 cursor.close();
             }
