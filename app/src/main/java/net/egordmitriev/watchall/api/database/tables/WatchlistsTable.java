@@ -1,9 +1,16 @@
 package net.egordmitriev.watchall.api.database.tables;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
+import com.google.gson.JsonObject;
+import com.orhanobut.logger.Logger;
+
+import net.egordmitriev.watchall.MainApplication;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
+import net.egordmitriev.watchall.utils.APIUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -28,19 +35,151 @@ public class WatchlistsTable extends BaseTable {
             COLUMN_MODIFIED + " INTEGER)";
 
     public static boolean createTable() {
-        if(sCreated) return false;
+        if (sCreated) return false;
         createTable(sTableName, QUERY_COLUMNS);
         return true;
     }
 
     public static boolean upsert(WatchlistModel watchlist, int identifier) {
-        Date currentDate = new Date();
         ContentValues insertValues = new ContentValues();
-        if(identifier == -1) {
+        if (identifier == -1) {
             identifier = ((int) lastInsertID(sTableName)) + 1;
         }
-
-        return true;
+        watchlist.base.id = identifier;
+        insertValues.put(COLUMN_TITLE, watchlist.base.title);
+        insertValues.put(COLUMN_BASE_DATA, APIUtils.sGlobalParser.toJson(watchlist.base));
+        insertValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(watchlist.detail));
+        insertValues.put(COLUMN_MODIFIED, new Date().getTime());
+        if (watchlist.server_id != 0) {
+            insertValues.put(COLUMN_SERVER_ID, watchlist.server_id);
+            return upsert(sTableName, insertValues, "server_id=?", new String[]{Integer.toString(watchlist.server_id)});
+        } else {
+            return upsert(sTableName, insertValues, "id=?", new String[]{Integer.toString(identifier)});
+        }
     }
 
+    public static boolean delete(int identifier) {
+        return delete(sTableName, identifier);
+    }
+
+    public static WatchlistModel get(int identifier) {
+        String[] columns = new String[]{COLUMN_BASE_DATA, COLUMN_DETAIL_DATA, COLUMN_SERVER_ID, COLUMN_MODIFIED};
+        Cursor cursor = MainApplication.getDatabase().query(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            try {
+                WatchlistModel ret = new WatchlistModel(
+                        APIUtils.sGlobalParser.fromJson(cursor.getString(0), WatchlistModel.Base.class),
+                        APIUtils.sGlobalParser.fromJson(cursor.getString(1), WatchlistModel.Detail.class));
+                ret.server_id = cursor.getInt(2);
+                ret.modified = cursor.getLong(3);
+                return ret;
+            } catch (Exception e) {
+                Logger.e(e, "Error while retrieving detail for WatchlistModel item select: " + identifier);
+            } finally {
+                cursor.close();
+            }
+        }
+        return null;
+    }
+
+    public static WatchlistModel[] getAll(String selection, String[] selectionArgs) {
+        String[] columns = new String[]{COLUMN_BASE_DATA, COLUMN_DETAIL_DATA, COLUMN_SERVER_ID, COLUMN_MODIFIED};
+        Cursor cursor = MainApplication.getDatabase().query(sTableName, columns, selection, selectionArgs, null, null, COLUMN_MODIFIED + " DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            WatchlistModel[] ret = new WatchlistModel[cursor.getCount()];
+            int i = 0;
+            while (!cursor.isAfterLast()) {
+                try {
+                    ret[i] = new WatchlistModel(
+                            APIUtils.sGlobalParser.fromJson(cursor.getString(0), WatchlistModel.Base.class),
+                            APIUtils.sGlobalParser.fromJson(cursor.getString(1), WatchlistModel.Detail.class));
+                    ret[i].server_id = cursor.getInt(2);
+                    ret[i].modified = cursor.getLong(3);
+                } catch (Exception e) {
+                    Logger.e(e, "Error while retrieving detail for watchlist items select: " + selectionArgs[0]);
+                }
+                i++;
+                cursor.moveToNext();
+            }
+            cursor.close();
+            return ret;
+        }
+        return null;
+    }
+
+    public static WatchlistModel.Base[] getAllBase(String selection, String[] selectionArgs) {
+        return getJsonAll(sTableName, new String[]{COLUMN_BASE_DATA}, selection, selectionArgs, WatchlistModel.Base.class);
+    }
+
+    public static WatchlistModel.Base getBase(int identifier) {
+        String[] columns = {COLUMN_BASE_DATA};
+        return getJsonFirst(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, WatchlistModel.Base.class);
+    }
+
+    public static WatchlistModel.Detail getDetail(int identifier) {
+        String[] columns = {COLUMN_DETAIL_DATA};
+        return getJsonFirst(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, WatchlistModel.Detail.class);
+    }
+
+    public static boolean addMedia(JsonObject media, int identifier) {
+        WatchlistModel.Detail detail = getDetail(identifier);
+        if (detail == null) return false;
+        if (detail.list_contents == null) {
+            detail.list_contents = new ArrayList<>();
+        } else {
+            int objId = media.get("id").getAsInt();
+            for (JsonObject child : detail.list_contents) {
+                if (child != null && child.get("id").getAsInt() == objId) {
+                    return false; //Already has this one.
+                }
+            }
+        }
+        detail.list_contents.add(0, media);
+        return saveJsonObject(sTableName, COLUMN_DETAIL_DATA, identifier, detail);
+    }
+
+    public static boolean removeMedia(int mediaId, int identifier) {
+        WatchlistModel.Detail detail = getDetail(identifier);
+        if (detail == null || detail.list_contents == null || detail.list_contents.size() < 1)
+            return false;
+
+        boolean ret = false;
+        for (int i = detail.list_contents.size() - 1; i >= 0; i--) {
+            if (detail.list_contents.get(i).get("id").getAsInt() == mediaId) {
+                detail.list_contents.remove(i); //Removed!
+                ret = true;
+            }
+        }
+        return ret && saveJsonObject(sTableName, COLUMN_DETAIL_DATA, identifier, detail);
+    }
+
+    public static int getServerId(int identifier) {
+        Cursor cursor = MainApplication.getDatabase().query(sTableName, new String[]{COLUMN_SERVER_ID}, "id=?",
+                new String[]{Integer.toString(identifier)}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            try {
+                return cursor.getInt(0);
+            } catch (Exception e) {
+                Logger.e(e, "Error while retrieving server_id for watchlist items select.");
+            } finally {
+                cursor.close();
+            }
+        }
+        return -1;
+    }
+
+    public static Date getModified(int identifier) {
+        Cursor cursor = MainApplication.getDatabase().query(sTableName, new String[]{COLUMN_MODIFIED}, "id=?",
+                new String[]{Integer.toString(identifier)}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            try {
+                return new Date(cursor.getLong(0));
+            } catch (Exception e) {
+                Logger.e(e, "Error while retrieving server_id for watchlist items select.");
+            } finally {
+                cursor.close();
+            }
+        }
+        return null;
+    }
 }

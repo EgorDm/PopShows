@@ -25,6 +25,8 @@ import java.util.List;
  */
 public class WatchlistModel extends DetailedModel<WatchlistModel.Base, WatchlistModel.Detail> {
     public static final int TYPE = 15;
+    public int server_id = 0;
+    public long modified;
 
     public WatchlistModel() {
         super(TYPE);
@@ -213,8 +215,22 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
         return WatchlistModel.Detail.class.getClassLoader();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.server_id);
+        dest.writeLong(this.modified);
+    }
+
     protected WatchlistModel(Parcel in) {
         super(in);
+        this.server_id = in.readInt();
+        this.modified = in.readLong();
     }
 
     public static final Creator<WatchlistModel> CREATOR = new Creator<WatchlistModel>() {

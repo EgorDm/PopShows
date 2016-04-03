@@ -3,7 +3,12 @@ package net.egordmitriev.watchall.api.database.tables;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.orhanobut.logger.Logger;
+
 import net.egordmitriev.watchall.MainApplication;
+import net.egordmitriev.watchall.utils.APIUtils;
+
+import java.lang.reflect.Array;
 
 /**
  * Created by EgorDm on 4/2/2016.
@@ -54,4 +59,46 @@ public class BaseTable {
         return ret;
     }
 
+    protected static boolean delete(String tableName, int identifier) {
+        String[] selectionArgs = {Integer.toString(identifier)};
+        return (MainApplication.getDatabase().delete(tableName, "id=?", selectionArgs) > 0);
+    }
+
+    protected static <T> T getJsonFirst(String tableName, String[] columns, String selection, String[] selectionArgs, Class<T> type) {
+        Cursor cursor = MainApplication.getDatabase().query(tableName, columns, selection, selectionArgs, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            try {
+                return APIUtils.sGlobalParser.fromJson(cursor.getString(0), type);
+            } catch (Exception e) {
+                Logger.e(e, "Error while retrieving detail for json item select: " + selectionArgs[0]);
+            } finally {
+                cursor.close();
+            }
+        }
+        return null;
+    }
+    protected static <T> T[] getJsonAll(String tableName, String[] columns, String selection, String[] selectionArgs, Class<T> type) {
+        Cursor cursor = MainApplication.getDatabase().query(tableName, columns, selection, selectionArgs, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            @SuppressWarnings("unchecked")
+            T[] ret = (T[]) Array.newInstance(type, cursor.getCount());
+            int i = 0;
+            while (!cursor.isAfterLast()) {
+                try {
+                    ret[i] = APIUtils.sGlobalParser.fromJson(cursor.getString(0), type);
+                } catch (Exception e) {
+                    Logger.e(e, "Error while retrieving detail for json items select: " + selectionArgs[0]);
+                }
+                i++;
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return null;
+    }
+    protected static <T> boolean saveJsonObject(String tableName, String column, int identifier, T item) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, APIUtils.sGlobalParser.toJson(item));
+        return (MainApplication.getDatabase().update(tableName, contentValues, "id=?", new String[]{Integer.toString(identifier)}) > 0);
+    }
 }
