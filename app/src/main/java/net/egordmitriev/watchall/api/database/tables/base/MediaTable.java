@@ -6,9 +6,13 @@ import android.database.Cursor;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.MainApplication;
+import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.api.GlobalHelper;
 import net.egordmitriev.watchall.utils.APIUtils;
+import net.egordmitriev.watchall.utils.PreferencesHelper;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by EgorDm on 4/3/2016.
@@ -28,7 +32,7 @@ public class MediaTable extends BaseTable {
         return true;
     }
 
-    protected static <T> boolean upsert(String tableName, T[] item, int identifier) {
+    public static <T> boolean upsert(String tableName, T[] item, int identifier) {
         ContentValues insertValues = new ContentValues();
         insertValues.put(COLUMN_ID, identifier);
         insertValues.put(COLUMN_MODIFIED, new Date().getTime());
@@ -36,7 +40,7 @@ public class MediaTable extends BaseTable {
         return upsert(tableName, insertValues, "id=?", new String[]{Integer.toString(identifier)});
     }
 
-    protected <T> T[] get(String tableName, int identifier, Class<T[]> classType) {
+    protected static <T> T[] get(String tableName, int identifier, Class<T[]> classType) {
         Cursor cursor =  MainApplication.getDatabase().query(tableName, new String[]{COLUMN_CONTENT}, "id=?", new String[]{Integer.toString(identifier)}, null, null, null);
 
         if(cursor != null && cursor.moveToFirst()) {
@@ -47,6 +51,14 @@ public class MediaTable extends BaseTable {
             } finally {
                 cursor.close();
             }
+        }
+        return null;
+    }
+
+    protected static  <T> T[] tryGetLocal(String tableName, int identifier, Class<T[]> classType) {
+        int networkState = GlobalHelper.getNetworkState();
+        if(networkState == 0 || !checkOutdated(tableName, identifier) || (networkState == 2 && !useMobileNetwork())) {
+            return get(tableName, identifier, classType);
         }
         return null;
     }
@@ -64,5 +76,23 @@ public class MediaTable extends BaseTable {
             }
         }
         return null;
+    }
+
+    protected static boolean checkOutdated(String tableName, int identifier) {
+        Date lastChanged = getModified(tableName, identifier);
+        if(lastChanged != null) {
+            long diffInMs = new Date().getTime() - lastChanged.getTime();
+            return TimeUnit.MILLISECONDS.toHours(diffInMs) > outdatedTime();
+        }
+        return true;
+    }
+
+    protected static int outdatedTime() {
+        String result =  PreferencesHelper.getInstance().getString(R.string.pref_datausage_sync_delay);
+        return (result != null) ? Integer.parseInt(result) : APIUtils.OUTDATED_TIME;
+    }
+
+    protected static boolean useMobileNetwork() {
+        return PreferencesHelper.getInstance().getBoolean(R.string.pref_datausage_usenetwork, false);
     }
 }

@@ -3,4 +3,7 @@
     <string name="pref_anilist_accestoken">pref_anilistaccestoken</string>
     <string name="pref_anilist_tokentype">pref_anilist_tokentype</string>
     <string name="pref_anilist_expires">pref_anilist_expires</string>
+
+    <string name="pref_datausage_sync_delay">pref_datausage_sync_delay</string>
+    <string name="pref_datausage_usenetwork">pref_datausage_usenetwork</string>
 </resources>

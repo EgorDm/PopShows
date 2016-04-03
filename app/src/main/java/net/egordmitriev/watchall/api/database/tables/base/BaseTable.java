@@ -16,6 +16,7 @@ import java.lang.reflect.Array;
 public class BaseTable {
     protected static final String COLUMN_ID = "id";
     protected static final String QUERY_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS ";
+    protected static final String QUERY_DROP_TABLE = "DROP TABLE IF EXISTS ";
 
     protected static void createTable(String tableName, String columns) {
         MainApplication.getDatabase().execSQL(QUERY_CREATE_TABLE + tableName + columns);
@@ -100,5 +101,9 @@ public class BaseTable {
         ContentValues contentValues = new ContentValues();
         contentValues.put(column, APIUtils.sGlobalParser.toJson(item));
         return (MainApplication.getDatabase().update(tableName, contentValues, "id=?", new String[]{Integer.toString(identifier)}) > 0);
+    }
+
+    public static void drop(String tableName) {
+        MainApplication.getDatabase().execSQL(QUERY_DROP_TABLE + tableName);
     }
 }

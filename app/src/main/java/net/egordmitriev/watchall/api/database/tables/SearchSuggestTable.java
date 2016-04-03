@@ -48,4 +48,9 @@ public class SearchSuggestTable extends BaseTable {
         return MainApplication.getDatabase().query(sTableName, new String[]{COLUMN_QUERY, COLUMN_DATE},
                 null, null, null, null, COLUMN_DATE + " DESC");
     }
+
+    public static void drop() {
+        drop(sTableName);
+        sCreated = false;
+    }
 }

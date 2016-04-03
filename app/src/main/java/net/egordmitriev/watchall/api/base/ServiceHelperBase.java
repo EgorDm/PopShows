@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.api;
+package net.egordmitriev.watchall.api.base;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

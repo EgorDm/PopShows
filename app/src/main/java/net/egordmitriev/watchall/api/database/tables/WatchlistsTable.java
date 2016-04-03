@@ -194,4 +194,9 @@ public class WatchlistsTable extends BaseTable {
         }
         return null;
     }
+
+    public static void drop() {
+        drop(sTableName);
+        sCreated = false;
+    }
 }

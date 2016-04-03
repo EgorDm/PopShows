@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.api;
 
+import net.egordmitriev.watchall.api.base.ServiceHelperBase;
 import net.egordmitriev.watchall.api.services.WatchAllService;
 import net.egordmitriev.watchall.utils.APIUtils;
 
