@@ -116,6 +116,11 @@ public class PreferencesHelper {
             return this;
         }
 
+        public PrefSetBuilder removePref(int resId) {
+            editor.remove(mRes.getString(resId));
+            return this;
+        }
+
         public boolean commit() {
             return editor.commit();
         }

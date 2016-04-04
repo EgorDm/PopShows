@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<account-authenticator xmlns:android="http://schemas.android.com/apk/res/android"
+                       android:accountType="nl.egordmitriev.watchit"
+                       android:label="Watchit"/>
+    <!--TODO: add icons to authenticator
+    android:icon="@drawable/ic_movie"
+    android:smallIcon="@drawable/ic_movie"-->

@@ -66,8 +66,12 @@ public class WatchlistsTable extends BaseTable {
     }
 
     public static WatchlistModel get(int identifier) {
+        return get("id=?", new String[]{Integer.toString(identifier)});
+    }
+
+    public static WatchlistModel get(String selection, String[] selectionArgs) {
         String[] columns = new String[]{COLUMN_BASE_DATA, COLUMN_DETAIL_DATA, COLUMN_SERVER_ID, COLUMN_MODIFIED};
-        Cursor cursor = MainApplication.getDatabase().query(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, null, null, null);
+        Cursor cursor = MainApplication.getDatabase().query(sTableName, columns, selection, selectionArgs, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             try {
                 WatchlistModel ret = new WatchlistModel(
@@ -77,7 +81,7 @@ public class WatchlistsTable extends BaseTable {
                 ret.modified = cursor.getLong(3);
                 return ret;
             } catch (Exception e) {
-                Logger.e(e, "Error while retrieving detail for WatchlistModel item select: " + identifier);
+                Logger.e(e, "Error while retrieving detail for WatchlistModel item select: " + selectionArgs[0]);
             } finally {
                 cursor.close();
             }
@@ -114,8 +118,8 @@ public class WatchlistsTable extends BaseTable {
     public static WatchlistModel.Base[] getAllBase(String selection, String[] selectionArgs) {
         WatchlistModel.Base[] ret = getJsonAll(sTableName, new String[]{COLUMN_BASE_DATA}, selection, selectionArgs, WatchlistModel.Base.class);
         if(ret != null) {
-            for (int i = 0; i < ret.length; i++) {
-                ret[i].is_local = true;
+            for (WatchlistModel.Base aRet : ret) {
+                aRet.is_local = true; //TODO: I doubt it will work
             }
         }
         return ret;

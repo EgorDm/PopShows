@@ -1,10 +1,23 @@
 package net.egordmitriev.watchall.api;
 
+import com.orhanobut.logger.Logger;
+
+import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
 import net.egordmitriev.watchall.api.base.ServiceHelperBase;
+import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.api.services.WatchAllService;
+import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
+import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
 import net.egordmitriev.watchall.utils.APIUtils;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -15,15 +28,81 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
 
     private static final String API_BASE_URL = "http://watchit.egordmitriev.net/api/";
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    Request original = chain.request();
+                    Request.Builder requestBuilder = original.newBuilder()
+                            .header("Accept", "application/json")
+                            .method(original.method(), original.body());
+                    if (!original.url().pathSegments().get(1).equals("token")) {
+                        if(getAuthToken() != null) {
+                            requestBuilder.header("Authorization", "Bearer " + sCredentials.token);
+                        }
+                    }
+                    return chain.proceed(requestBuilder.build());
+                }
+            })
             .addInterceptor(APIUtils.getDebugInterceptor());
     private static final Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(APIUtils.sGlobalParser));
 
-
     public static final WatchAllService sService = createService(WatchAllService.class, builder, httpClient);
 
+    public static ClientCredentials sCredentials;
+
+    /**
+     * WARNING! This method is synchronous!
+     *
+     * @return Authentication token
+     */
+    private static String getAuthToken() {
+        if (sCredentials != null && sCredentials.exp.after(new Date())) {
+            return sCredentials.token;
+        }
+        try {
+            sCredentials = WatchAllAuthenticator.refreshCredentials();
+            return sCredentials.token;
+        } catch (Exception e) {
+            Logger.e(e, "Error while requesting a access token.");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public WatchAllServiceHelper() {
+    }
+
+    public static WatchlistModel getFavourites() {
+        WatchlistModel ret = WatchlistsTable.get("title=?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
+        if (ret != null) {
+            return ret;
+        }
+        ret = new WatchlistModel(new WatchlistModel.Base(), new WatchlistModel.Detail());
+        ret.base.title = APIUtils.FAVOURITES_WATCHLIST_NAME;
+        ret.base.creator = 42; //TODO: Add the actual user id
+        ret.base.color = 0;
+        ret.base.is_public = false;
+        ret.base.is_local = true;
+        ret.detail.description = "<3 Cookies";
+        ret.detail.list_contents = new ArrayList<>();
+        return ret;
+    }
+
+    public static WatchlistModel.Base[] getMyWatchlists() {
+        return WatchlistsTable.getAllBase("title<>?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
+    }
+
+    public static boolean deleteWatchlist(int identifier) {
+        //TODO: check if logged in. If yes, delete also online
+        if (false) {
+            int server_id = WatchlistsTable.getServerId(identifier);
+            if (server_id != -1) {
+                sService.deleteWatchlist(server_id);
+            }
+        }
+        return WatchlistsTable.delete(identifier);
     }
 }

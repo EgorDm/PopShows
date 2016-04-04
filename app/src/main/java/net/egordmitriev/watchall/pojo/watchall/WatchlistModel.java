@@ -92,12 +92,10 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
         @SerializedName("icon")
         public String custom_icon;
         @SerializedName("color")
-        public int icon_color;
+        public int color;
 
         @SerializedName("modified")
         public Date modified;
-        @SerializedName("created")
-        public Date created;
         @SerializedName("is_public")
         public boolean is_public;
 
@@ -115,9 +113,8 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
             dest.writeString(this.title);
             dest.writeInt(this.creator);
             dest.writeString(this.custom_icon);
-            dest.writeInt(this.icon_color);
+            dest.writeInt(this.color);
             dest.writeLong(modified != null ? modified.getTime() : -1);
-            dest.writeLong(created != null ? created.getTime() : -1);
             dest.writeByte(is_public ? (byte) 1 : (byte) 0);
             dest.writeByte(is_local ? (byte) 1 : (byte) 0);
         }
@@ -131,11 +128,9 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
             this.title = in.readString();
             this.creator = in.readInt();
             this.custom_icon = in.readString();
-            this.icon_color = in.readInt();
+            this.color = in.readInt();
             long tmpModified = in.readLong();
             this.modified = tmpModified == -1 ? null : new Date(tmpModified);
-            long tmpCreated = in.readLong();
-            this.created = tmpCreated == -1 ? null : new Date(tmpCreated);
             this.is_public = in.readByte() != 0;
             this.is_local = in.readByte() != 0;
         }
