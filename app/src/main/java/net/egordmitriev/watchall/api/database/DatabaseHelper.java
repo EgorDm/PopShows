@@ -4,7 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import net.egordmitriev.watchall.api.database.tables.AnimesTable;
+import net.egordmitriev.watchall.api.database.tables.MoviesTable;
 import net.egordmitriev.watchall.api.database.tables.SearchSuggestTable;
+import net.egordmitriev.watchall.api.database.tables.SeriesTable;
 import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 
 /**
@@ -27,7 +30,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         WatchlistsTable.createTable();
         SearchSuggestTable.createTable();
-        //TODO: create tables
+        MoviesTable.createTable();
+        SeriesTable.createTable();
+        AnimesTable.createTable();
+        //TODO: check tables created
     }
 
     @Override
