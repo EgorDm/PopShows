@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.ui;
+package net.egordmitriev.watchall.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

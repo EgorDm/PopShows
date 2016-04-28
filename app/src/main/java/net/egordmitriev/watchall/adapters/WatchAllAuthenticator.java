@@ -4,7 +4,10 @@ import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.accounts.NetworkErrorException;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -20,6 +23,7 @@ import net.egordmitriev.watchall.api.WatchAllServiceHelper;
 import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
 import net.egordmitriev.watchall.ui.activities.AuthenticatorActivity;
 import net.egordmitriev.watchall.utils.APIUtils;
+import net.egordmitriev.watchall.utils.DataCallback;
 import net.egordmitriev.watchall.utils.exceptions.UnauthorizedException;
 
 import java.io.IOException;
@@ -153,6 +157,21 @@ public class WatchAllAuthenticator extends AbstractAccountAuthenticator {
             e.printStackTrace();
         }
         throw new UnauthorizedException();
+    }
+
+    public static void setupAccount(Activity activity, final DataCallback<Boolean> callback) {
+        getAccountManager().addAccount(WATCHALL_ACCOUNT_TYPE, WATCHALL_AUTHTOKEN_TYPE_FULL_ACCESS, null, null, activity, new AccountManagerCallback<Bundle>() {
+            @Override
+            public void run(AccountManagerFuture<Bundle> future) {
+                try {
+                    Bundle bnd = future.getResult();
+                    callback.success(true);
+                } catch (Exception e) {
+                    callback.success(false);
+                    e.printStackTrace();
+                }
+            }
+        }, null);
     }
 
     public static void logout() {

@@ -1,14 +1,20 @@
 package net.egordmitriev.watchall.api;
 
+import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
 
+import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
+import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.api.base.ServiceHelperBase;
 import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.api.services.WatchAllService;
 import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
+import net.egordmitriev.watchall.pojo.watchall.UserModel;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
 import net.egordmitriev.watchall.utils.APIUtils;
+import net.egordmitriev.watchall.utils.DataCallback;
+import net.egordmitriev.watchall.utils.ErrorUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +24,8 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class WatchAllServiceHelper extends ServiceHelperBase {
 
-    private static final String API_BASE_URL = "http://watchit.egordmitriev.net/api/";
+    public static final String API_BASE_URL = "http://watchit.egordmitriev.net/api/";
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor() {
                 @Override
@@ -97,12 +105,72 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
 
     public static boolean deleteWatchlist(int identifier) {
         //TODO: check if logged in. If yes, delete also online
-        if (false) {
+        boolean ret = WatchlistsTable.delete(identifier);
+        if (ret && WatchAllAuthenticator.getAccount() != null) {
             int server_id = WatchlistsTable.getServerId(identifier);
             if (server_id != -1) {
                 sService.deleteWatchlist(server_id);
             }
+            ret = true;
         }
-        return WatchlistsTable.delete(identifier);
+        return ret;
+    }
+
+    public static void getMyProfile(final DataCallback<UserModel> callback, boolean invalidate) {
+        if (WatchAllAuthenticator.getAccount() == null) {
+            callback.failure(null);
+            return;
+        }
+
+        if (!invalidate) {
+            UserModel ret = getMyProfileFromCache();
+            if (ret.id != -1) {
+                callback.success(ret);
+                return;
+            }
+        }
+
+        sService.getProfile().enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                APIError error = ErrorUtils.checkError(response);
+                if(error != null) {
+                    callback.failure(error);
+                }
+                try {
+                    UserModel ret = APIUtils.sTMDBParser.fromJson(response.body().get("data").getAsJsonObject(), UserModel.class);
+                    callback.success(ret);
+                    cacheMyProfile(ret);
+                } catch (Exception e) {
+                    callback.failure(new APIError(1337, e.getMessage()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.failure(new APIError(1337, t.getMessage()));
+            }
+        });
+
+
+    }
+
+    private static void cacheMyProfile(UserModel user) {
+        PreferencesHelper.getInstance().build()
+                .setInt(R.string.pref_account_user_id, user.id)
+                .setString(R.string.pref_account_user_name, user.fullname)
+                .setString(R.string.pref_account_user_email, user.email)
+                .setString(R.string.pref_account_user_avatar, user.avatar)
+                .setInt(R.string.pref_account_user_color, user.profile_color);
+    }
+
+    private static UserModel getMyProfileFromCache() {
+        return new UserModel(
+                PreferencesHelper.getInstance().getInt(R.string.pref_account_user_id, -1),
+                PreferencesHelper.getInstance().getString(R.string.pref_account_user_name),
+                PreferencesHelper.getInstance().getString(R.string.pref_account_user_email),
+                PreferencesHelper.getInstance().getString(R.string.pref_account_user_avatar),
+                PreferencesHelper.getInstance().getInt(R.string.pref_account_user_color, -1)
+        );
     }
 }

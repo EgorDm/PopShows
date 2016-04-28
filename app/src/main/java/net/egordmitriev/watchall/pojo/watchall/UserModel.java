@@ -59,6 +59,15 @@ public class UserModel extends BaseModel {
         super(TYPE);
     }
 
+    public UserModel(int id, String fullname, String email, String avatar, int profile_color) {
+        super(TYPE);
+        this.id= id;
+        this.fullname = fullname;
+        this.email = email;
+        this.avatar = avatar;
+        this.profile_color = profile_color;
+    }
+
     protected UserModel(Parcel in) {
         super(in);
         this.fullname = in.readString();

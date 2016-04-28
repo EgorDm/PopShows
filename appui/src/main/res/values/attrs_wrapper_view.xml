@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="WrapperView">
+        <attr name="parentLayoutID" format="integer"/>
+        <attr name="childContainerID" format="integer"/>
+    </declare-styleable>
+</resources>
