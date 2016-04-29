@@ -18,12 +18,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import net.egordmitriev.appui.ui.widgets.CircleImageView;
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
 import net.egordmitriev.watchall.api.WatchAllServiceHelper;
 import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.pojo.watchall.UserModel;
+import net.egordmitriev.watchall.ui.widgets.CircleImageView;
 import net.egordmitriev.watchall.utils.APIUtils;
 import net.egordmitriev.watchall.utils.DataCallback;
 

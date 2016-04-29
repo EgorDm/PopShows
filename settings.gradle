@@ -1,1 +1,1 @@
-include ':app', ':cardui', ':appui'
+include ':app', ':cardui'
