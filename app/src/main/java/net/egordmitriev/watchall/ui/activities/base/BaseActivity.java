@@ -44,9 +44,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private static final int NAVDRAWER_LAUNCH_DELAY = 250;
 
     protected void initToolbar() {
-        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(mToolbar);
-        //TODO: create a view with toolbar :D
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -109,7 +108,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void setupHeaderAccount() {
         if (WatchAllAuthenticator.getAccount() != null) {
-            final View header = getLayoutInflater().inflate(R.layout.nav_profile_view, (ViewGroup) mHeaderView, true);
+            getLayoutInflater().inflate(R.layout.comp_nav_profile_view, (ViewGroup) mHeaderView, true);
             WatchAllServiceHelper.getMyProfile(new DataCallback<UserModel>() {
                 @Override
                 public void success(UserModel data) {
@@ -130,7 +129,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
             }, false);
         } else {
-            final View header = getLayoutInflater().inflate(R.layout.nav_profile_add, (ViewGroup) mHeaderView, true);
+            final View header = getLayoutInflater().inflate(R.layout.comp_nav_profile_add, (ViewGroup) mHeaderView, true);
             View accountAddView = header.findViewById(R.id.drawer_account_add);
             accountAddView.setClickable(true);
             accountAddView.setOnClickListener(new View.OnClickListener() {

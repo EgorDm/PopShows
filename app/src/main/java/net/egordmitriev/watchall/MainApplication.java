@@ -19,6 +19,7 @@ public class MainApplication extends Application {
         super.onCreate();
         sInstance = this;
         sDatabaseHelper = new DatabaseHelper(getApplicationContext());
+        sDatabaseHelper.createTables();
     }
 
     public static MainApplication getInstance() {
@@ -26,7 +27,7 @@ public class MainApplication extends Application {
     }
 
     public static SQLiteDatabase getDatabase() {
-        return sDatabaseHelper.writeableDB;
+        return sDatabaseHelper.writableDB;
     }
 
     public static Context getAppContext() {

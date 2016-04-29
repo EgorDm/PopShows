@@ -7,10 +7,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <ViewStub
+    <LinearLayout
         android:id="@+id/main_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -19,7 +20,7 @@
         android:layout_gravity="start"
         android:background="@color/dark_primary"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/view_nav_header"
         app:itemIconTint="@color/drawer_item_icon"
         app:itemTextColor="@color/drawer_item_text"
         app:menu="@menu/drawer_view"/>

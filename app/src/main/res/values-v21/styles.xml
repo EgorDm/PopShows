@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="Base.AppTheme">
+        <item name="colorControlHighlight">@color/dark_secondary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="colorControlHighlight">@color/dark_secondary</item>
     </style>
 
     <style name="AppTheme.NoActionBar.NoTransparency">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
-        <item name="colorControlHighlight">@color/dark_secondary</item>
     </style>
 
     <style name="AppTheme.NoActionBar.NoAnimation" parent="AppTheme.NoActivityAnimation">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="colorControlHighlight">@color/dark_secondary</item>
     </style>
 </resources>

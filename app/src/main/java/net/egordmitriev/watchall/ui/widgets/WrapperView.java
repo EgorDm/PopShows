@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.widget.LinearLayout;
 
 import net.egordmitriev.watchall.R;
@@ -15,7 +14,7 @@ import net.egordmitriev.watchall.R;
  * Created by EgorDm on 4/29/2016.
  */
 public class WrapperView extends LinearLayout {
-    private ViewStub mChildContainer;
+    private ViewGroup mChildContainer;
 
     public WrapperView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -44,7 +43,7 @@ public class WrapperView extends LinearLayout {
             Log.e("Error", "WrappedLayout.WrappedLayout(): Error reading custom attributes from XML. layoutToInflate = " + parentLayoutID + ", childContainerID =" + childContainerID);
         } else {
             final View inflatedLayout = View.inflate(getContext(), parentLayoutID, this);
-            mChildContainer = (ViewStub) inflatedLayout.findViewById(childContainerID);
+            mChildContainer = (ViewGroup) inflatedLayout.findViewById(childContainerID);
         }
     }
 
@@ -53,10 +52,7 @@ public class WrapperView extends LinearLayout {
         if (mChildContainer == null) {
             super.addView(child, index, params);
         } else {
-            ViewGroup parent = (ViewGroup) mChildContainer.getParent();
-            index = parent.indexOfChild(mChildContainer);
-            parent.removeView(mChildContainer);
-            parent.addView(child, index);
+            mChildContainer.addView(child, index, params);
         }
     }
 }
