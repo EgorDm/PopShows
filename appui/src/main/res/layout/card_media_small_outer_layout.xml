@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    style="@style/card.native">
+
+    <it.gmariotti.cardslib.library.view.ForegroundLinearLayout
+        android:id="@+id/card_main_layout"
+        style="@style/card.native.main_layout_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_media_small_height"
+        android:orientation="horizontal">
+
+        <it.gmariotti.cardslib.library.view.component.CardThumbnailView
+            android:id="@+id/card_thumbnail_layout"
+            android:layout_width="@dimen/card_media_small_thumbnail_width"
+            android:layout_height="match_parent"
+            app:card_thumbnail_layout_resourceID="@layout/card_thumbnail_layout"/>
+
+        <LinearLayout
+            android:id="@+id/card_thumb_and_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <net.egordmitriev.watchit.mediacards.widgets.MediaCardHeaderView
+                android:id="@+id/card_header_layout"
+                style="@style/card.native.header_outer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card:card_header_layout_resourceID="@layout/card_media_small_header_outer_layout"/>
+
+            <FrameLayout
+                android:id="@+id/card_main_content_layout"
+                style="@style/card.native.content_outer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"/>
+
+        </LinearLayout>
+    </it.gmariotti.cardslib.library.view.ForegroundLinearLayout>
+
+    <!-- Expand layout. You can customize this element with your CardExpand class -->
+    <FrameLayout
+        android:id="@+id/card_content_expand_layout"
+        style="@style/card.native.main_contentExpand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+</LinearLayout>

@@ -3,6 +3,7 @@
 
     <string name="toast_list_cache_cleared">Successfully cleared list cache!</string>
     <string name="toast_history_cleared">Successfully search history!</string>
+    <string name="toast_logged_out">Logged out successfully</string>
 
     <string name="title_my_account">My Account</string>
     <string name="title_movies">Movies</string>
@@ -17,4 +18,40 @@
     <string name="navdrawer_open">Open navigation drawer</string>
     <string name="navdrawer_close">Close navigation drawer</string>
     <string name="text_add_account">Add an account</string>
+
+    <string name="pref_category_discovery">Discovery settings</string>
+    <string name="pref_category_account">Account settings</string>
+    <string name="pref_homepage_title">Homepage</string>
+    <string name="pref_category_datausage">Data usage</string>
+    <string name="pref_usemobnetwork_title">Use mobile network</string>
+    <string name="pref_category_storage">Storage Settings</string>
+    <string name="pref_syncdelay_title">List update delay</string>
+    <string-array name="pref_homepage_entries">
+        <item>Movies</item>
+        <item>Series</item>
+        <item>Anime</item>
+    </string-array>
+    <string-array name="pref_homepage_entryvalues">
+        <item>1</item>
+        <item>3</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="pref_syncdelay_entries">
+        <item>1 Hour</item>
+        <item>2 Hours</item>
+        <item>4 Hours</item>
+        <item>6 Hours</item>
+        <item>8 Hours</item>
+        <item>12 Hours</item>
+        <item>24 Hours</item>
+    </string-array>
+    <string-array name="pref_syncdelay_entryvalues">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>12</item>
+        <item>24</item>
+    </string-array>
 </resources>

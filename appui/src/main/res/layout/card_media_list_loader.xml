@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.egordmitriev.loaderview.LoaderView
+    android:id="@+id/loaderview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    app:error_message="Something went wrong."
+    app:loading_resourceID="@layout/card_media_list_loader_loading"
+    app:state="loading"
+    app:extra_resourceID="@layout/loader_noresults"/>

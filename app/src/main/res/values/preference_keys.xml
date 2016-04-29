@@ -6,6 +6,7 @@
 
     <string name="pref_datausage_sync_delay">pref_datausage_sync_delay</string>
     <string name="pref_datausage_usenetwork">pref_datausage_usenetwork</string>
+    <string name="pref_discovery_homepage">pref_discovery_homepage</string>
 
     <string name="pref_account_user_id">pref_account_user_id</string>
     <string name="pref_account_user_name">pref_account_user_name</string>

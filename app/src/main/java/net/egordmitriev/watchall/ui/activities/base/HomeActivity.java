@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.ui.activities.base;
 import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.ui.activities.SettingsActivity;
 
 /**
  * Created by EgorDm on 4/29/2016.
@@ -44,7 +45,7 @@ public class HomeActivity extends TabsActivity {
                // intent = new Intent(this, UserProfileActivity.class);
                 break;
             case PAGE_SETTINGS:
-                //intent = new Intent(this, SettingsActivity.class);
+                intent = new Intent(this, SettingsActivity.class);
                 break;
         }
 

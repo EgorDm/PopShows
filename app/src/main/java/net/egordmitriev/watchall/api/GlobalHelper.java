@@ -40,14 +40,14 @@ public class GlobalHelper {
         return sNetworkState;
     }
 
-    public void clearListCache() {
+    public static void clearListCache() {
         MoviesTable.drop();
         SeriesTable.drop();
         AnimesTable.drop();
         Toast.makeText(MainApplication.getAppContext(), R.string.toast_list_cache_cleared, Toast.LENGTH_LONG).show();
     }
 
-    public void clearSearchHistory() {
+    public static void clearSearchHistory() {
         SearchSuggestTable.drop();
         Toast.makeText(MainApplication.getAppContext(), R.string.toast_history_cleared, Toast.LENGTH_LONG).show();
     }

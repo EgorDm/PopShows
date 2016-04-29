@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+
+    <dimen name="divider_height">1dp</dimen>
+
+    <dimen name="card_corner_radius">2dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <dimen name="card_media_small_height">90dp</dimen>
+    <dimen name="card_media_small_thumbnail_width">60dp</dimen>
+
+    <dimen name="card_media_large_width">106dp</dimen>
+    <dimen name="card_media_large_thumbnail_height">160dp</dimen>
+
+    <dimen name="card_media_medium_height">160dp</dimen>
+
+    <dimen name="card_header_default_padding">8dp</dimen>
+    <dimen name="card_header_native_default_paddingLeft">8dp</dimen>
+    <dimen name="card_header_native_default_paddingRight">8dp</dimen>
+    <dimen name="card_header_native_default_paddingTop">8dp</dimen>
+    <dimen name="card_header_native_default_paddingBottom">8dp</dimen>
+
+    <dimen name="card_main_content_native_default_paddingLeft">8dp</dimen>
+    <dimen name="card_main_content_native_default_paddingRight">8dp</dimen>
+    <dimen name="card_main_content_native_default_paddingTop">0dp</dimen>
+    <dimen name="card_main_content_native_default_paddingBottom">4dp</dimen>
+</resources>

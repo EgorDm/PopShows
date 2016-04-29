@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="discovery_prefs"
+        android:title="@string/pref_category_discovery">
+        <ListPreference
+            android:key="@string/pref_discovery_homepage"
+            android:title="@string/pref_homepage_title"
+            android:dialogTitle="@string/pref_homepage_title"
+            android:summary="%s"
+            android:entries="@array/pref_homepage_entries"
+            android:entryValues="@array/pref_homepage_entryvalues"
+            android:defaultValue="1"
+            />
+        <Preference
+            android:key="synclists"
+            android:title="Synchronize with webserver"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="account_prefs"
+        android:title="@string/pref_category_account">
+        <Preference
+            android:key="account_prefs_logout"
+            android:title="Logout"/>
+        <Preference
+            android:key="account_prefs_login"
+            android:title="Login"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="datausage_prefs"
+        android:title="@string/pref_category_datausage">
+        <ListPreference
+            android:key="@string/pref_datausage_sync_delay"
+            android:title="@string/pref_syncdelay_title"
+            android:dialogTitle="@string/pref_syncdelay_title"
+            android:summary="Public lists will be updated every %s."
+            android:entries="@array/pref_syncdelay_entries"
+            android:entryValues="@array/pref_syncdelay_entryvalues"
+            android:defaultValue="2"/>
+        <CheckBoxPreference
+            android:key="@string/pref_datausage_usenetwork"
+            android:title="@string/pref_usemobnetwork_title"
+            android:dialogTitle="@string/pref_usemobnetwork_title"
+            android:summary="Use mobile data to synchronize when no wifi."
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="storage_prefs"
+        android:title="@string/pref_category_storage">
+        <Preference
+            android:key="storage_clear_cache"
+            android:title="Clear list cache"/>
+        <Preference
+            android:key="storage_clear_history"
+            android:title="Clear search history"/>
+    </PreferenceCategory>
+</PreferenceScreen>

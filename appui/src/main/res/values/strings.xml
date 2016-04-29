@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AppUi</string>
+
+    <string name="widget_expand_toggle_button">Expand/Collapse Button</string>
+
+    <string name="loader_no_lists">There are no lists here.</string>
+    <string name="loader_no_recent_activity_found">No recent activity found.</string>
+    <string name="loader_end_list">You have reached the end of the list.</string>
+</resources>

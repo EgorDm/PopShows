@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                style="@style/card.native.header_compound_view">
+
+    <FrameLayout
+        android:id="@+id/card_header_inner_frame"
+        style="@style/card.native.header_inner_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <FrameLayout
+        android:id="@+id/card_header_button_frame"
+        style="@style/card.native.header_button_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/card_header_button_overflow"
+            style="@style/card.native.header_button_base.overflow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/card_header_button_expand"
+            style="@style/card.native.header_button_base.expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+</RelativeLayout>

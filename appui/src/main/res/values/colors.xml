@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="accent">#FF5722</color>
+    <color name="secondary">#b3ffffff</color>
+
+    <color name="text_light">#FFFFFF</color>
+    <color name="icons">#a0a0a0</color>
+    <color name="divider">#1fffffff</color>
+
+    <color name="negative">#D32F2F</color>
+
+    <color name="dark_primary">#303030</color>
+    <color name="dark_secondary">#202020</color>
+    <color name="dialog_background">#7f000000</color>
+</resources>

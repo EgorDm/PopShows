@@ -43,6 +43,12 @@
                 android:resource="@xml/authenticator"/>
         </service>
 
+        <activity
+            android:name=".ui.activities.SettingsActivity"
+            android:label="@string/title_settings"
+            android:launchMode="singleTop">
+        </activity>
+
     </application>
 
 </manifest>
