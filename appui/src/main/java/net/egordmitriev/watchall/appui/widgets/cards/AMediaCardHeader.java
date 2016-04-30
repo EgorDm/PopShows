@@ -12,13 +12,13 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 /**
  * Created by EgorDm on 4/29/2016.
  */
-public abstract class BaseCardMediaHeader extends CardHeader {
+public abstract class AMediaCardHeader extends CardHeader {
 
-    public BaseCardMediaHeader(Context context) {
+    public AMediaCardHeader(Context context) {
         super(context, R.layout.card_media_small_header_inner_layout);
     }
 
-    public BaseCardMediaHeader(Context context, int innerLayout) {
+    public AMediaCardHeader(Context context, int innerLayout) {
         super(context, innerLayout);
     }
 

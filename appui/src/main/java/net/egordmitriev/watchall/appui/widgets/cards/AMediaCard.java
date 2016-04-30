@@ -20,12 +20,12 @@ import it.gmariotti.cardslib.library.internal.CardThumbnail;
 /**
  * Created by EgorDm on 4/29/2016.
  */
-public abstract class BaseCardMedia extends Card {
+public abstract class AMediaCard extends Card {
 
     public int clickID;
     public int type;
 
-    public BaseCardMedia(Context context, int innerLayout, int type) {
+    public AMediaCard(Context context, int innerLayout, int type) {
         super(context, innerLayout);
         this.type = type;
         init();
@@ -36,7 +36,7 @@ public abstract class BaseCardMedia extends Card {
         addCardThumbnail(new CardMediaThumbnail(mContext));
     }
 
-    protected abstract BaseCardMediaHeader getHeader();
+    protected abstract AMediaCardHeader getHeader();
 
     protected abstract String getThumbnail();
 
