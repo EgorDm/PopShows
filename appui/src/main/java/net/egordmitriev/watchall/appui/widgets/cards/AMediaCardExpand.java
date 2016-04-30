@@ -7,15 +7,15 @@ import it.gmariotti.cardslib.library.internal.CardExpand;
 /**
  * Created by EgorDm on 4/30/2016.
  */
-public abstract class AMediaCardExpand extends AMediaCardSmall {
+public abstract class AMediaCardExpand extends MediaCardSmall {
 
-    public AMediaCardExpand(Context context, int type) {
-        super(context, type);
+    public AMediaCardExpand(Context context, int type, String title, String subtitle, float rating, String special, String thumbnail) {
+        super(context, type, title, subtitle, rating, special, thumbnail);
     }
 
     @Override
     protected void init() {
-        AMediaCardHeader header = getHeader();
+        MediaCardHeader header = getHeader();
         header.setButtonExpandVisible(true);
         addCardHeader(header);
         addCardThumbnail(new CardMediaThumbnail(mContext));

@@ -25,12 +25,12 @@ public class ColorPicker extends View {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
-    public static int[] COLOR_PALETTE = new int[] { Color.parseColor("#b8c847"),
+    public static int[] COLOR_PALETTE = new int[]{Color.parseColor("#b8c847"),
             Color.parseColor("#67bb43"), Color.parseColor("#41b691"),
             Color.parseColor("#4182b6"), Color.parseColor("#4149b6"),
             Color.parseColor("#7641b6"), Color.parseColor("#b741a7"),
             Color.parseColor("#c54657"), Color.parseColor("#d1694a"),
-            Color.parseColor("#d1904a"), Color.parseColor("#d1c54a") };
+            Color.parseColor("#d1904a"), Color.parseColor("#d1c54a")};
 
     int[] colors;
 
@@ -374,8 +374,6 @@ public class ColorPicker extends View {
      * Set picker palette
      */
     public void setColors(int[] colors) {
-        // TODO: selected color can be NOT in set of colors
-        // FIXME: colors can be null
         this.colors = colors;
 
         if (!containsColor(colors, selectedColor)) {
@@ -383,7 +381,6 @@ public class ColorPicker extends View {
         }
 
         recalcCellSize();
-
         invalidate();
     }
 

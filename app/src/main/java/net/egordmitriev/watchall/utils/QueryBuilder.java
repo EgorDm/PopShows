@@ -1,7 +1,7 @@
 package net.egordmitriev.watchall.utils;
 
 import net.egordmitriev.watchall.pojo.BaseModel;
-import net.egordmitriev.watchall.pojo.user.Category;
+import net.egordmitriev.watchall.pojo.data.Category;
 
 import java.util.Date;
 import java.util.GregorianCalendar;

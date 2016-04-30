@@ -11,10 +11,16 @@ import net.egordmitriev.appui.R;
 /**
  * Created by EgorDm on 4/30/2016.
  */
-public abstract class AMediaCardSmall extends AMediaCard {
+public class MediaCardSmall extends MediaCard {
 
-    public AMediaCardSmall(Context context, int type) {
-        super(context, R.layout.card_media_small_inner_layout, type);
+    protected float mRating;
+    protected String mSpecial;
+
+    public MediaCardSmall(Context context, int type, String title, String subtitle, float rating, String special, String thumbnail) {
+        super(context, R.layout.card_media_small_inner_layout, type, title, subtitle, thumbnail);
+        mRating = rating;
+        mSpecial = special;
+        mThumbnail = thumbnail;
     }
 
     @Override
@@ -28,7 +34,11 @@ public abstract class AMediaCardSmall extends AMediaCard {
         }
     }
 
-    protected abstract float getRating();
+    protected float getRating() {
+        return mRating;
+    }
 
-    protected abstract String getSpecial();
+    protected String getSpecial() {
+        return mSpecial;
+    }
 }

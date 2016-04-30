@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.pojo.user;
+package net.egordmitriev.watchall.pojo.data;
 
 import android.os.Parcel;
 

@@ -20,14 +20,21 @@ import it.gmariotti.cardslib.library.internal.CardThumbnail;
 /**
  * Created by EgorDm on 4/29/2016.
  */
-public abstract class AMediaCard extends Card {
+public class MediaCard extends Card {
 
     public int clickID;
     public int type;
 
-    public AMediaCard(Context context, int innerLayout, int type) {
+    protected String mThumbnail;
+    protected String mCardTitle;
+    protected String mCardSubtitle;
+
+    public MediaCard(Context context, int innerLayout, int type, String title, String subtitle, String thumbnail) {
         super(context, innerLayout);
         this.type = type;
+        mThumbnail = thumbnail;
+        mCardTitle = title;
+        mCardSubtitle = subtitle;
         init();
     }
 
@@ -36,9 +43,13 @@ public abstract class AMediaCard extends Card {
         addCardThumbnail(new CardMediaThumbnail(mContext));
     }
 
-    protected abstract AMediaCardHeader getHeader();
+    protected MediaCardHeader getHeader() {
+        return new MediaCardHeader(mContext, mTitle, mCardSubtitle);
+    }
 
-    protected abstract String getThumbnail();
+    protected String getThumbnail() {
+        return mThumbnail;
+    }
 
     public void setMenu(int menuID, CardHeader.OnClickCardHeaderPopupMenuListener listener) {
         if (hasHeader()) {

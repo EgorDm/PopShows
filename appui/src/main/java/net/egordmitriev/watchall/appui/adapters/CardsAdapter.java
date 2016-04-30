@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import net.egordmitriev.appui.R;
 import net.egordmitriev.watchall.appui.interfaces.ViewAdapterImplementation;
 import net.egordmitriev.watchall.appui.widgets.CardsRecycler;
-import net.egordmitriev.watchall.appui.widgets.cards.AMediaCard;
+import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +27,7 @@ import it.gmariotti.cardslib.library.view.base.CardViewWrapper;
 /**
  * Created by EgorDm on 12/11/2015.
  */
-public class CardsAdapter<T extends AMediaCard> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ViewAdapterImplementation<T> {
+public class CardsAdapter<T extends MediaCard> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ViewAdapterImplementation<T> {
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_FOOTER = 1;

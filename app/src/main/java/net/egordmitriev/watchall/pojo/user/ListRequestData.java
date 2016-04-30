@@ -3,6 +3,8 @@ package net.egordmitriev.watchall.pojo.user;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import net.egordmitriev.watchall.pojo.data.Category;
+
 /**
  * Created by EgorDm on 4/3/2016.
  */

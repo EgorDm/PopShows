@@ -104,7 +104,6 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
     }
 
     public static boolean deleteWatchlist(int identifier) {
-        //TODO: check if logged in. If yes, delete also online
         boolean ret = WatchlistsTable.delete(identifier);
         if (ret && WatchAllAuthenticator.getAccount() != null) {
             int server_id = WatchlistsTable.getServerId(identifier);
