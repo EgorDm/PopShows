@@ -247,7 +247,6 @@ public class SerieModel extends DetailedModel<SerieModel.Base, SerieModel.Detail
         return SerieModel.Detail.class.getClassLoader();
     }
 
-
     @Override
     public int describeContents() {
         return 0;
