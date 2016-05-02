@@ -255,7 +255,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     protected int getMenu() {
-        //TODO: add a menu with search btn
-        return -1;
+        return R.menu.media_menu_list_activity;
     }
 }

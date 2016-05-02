@@ -81,7 +81,7 @@ public class CardsAdapter<T extends MediaCard> extends RecyclerView.Adapter<Recy
     }
 
     public RecyclerView.ViewHolder onCreateNormalViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(mContext).inflate(mRowLayoutId, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(mRowLayoutId, parent, false);
         return new BaseRecyclerViewAdapter.CardViewHolder(view);
     }
 

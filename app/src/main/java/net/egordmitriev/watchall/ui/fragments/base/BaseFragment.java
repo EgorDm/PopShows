@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.ui.fragments;
+package net.egordmitriev.watchall.ui.fragments.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

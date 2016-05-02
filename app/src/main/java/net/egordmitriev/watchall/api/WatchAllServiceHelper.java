@@ -1,5 +1,9 @@
 package net.egordmitriev.watchall.api;
 
+import android.app.Activity;
+import android.support.v4.app.FragmentManager;
+import android.view.MenuItem;
+
 import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
 
@@ -9,6 +13,8 @@ import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.api.base.ServiceHelperBase;
 import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.api.services.WatchAllService;
+import net.egordmitriev.watchall.helpers.AMediaCardRecyclerHelper;
+import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
 import net.egordmitriev.watchall.pojo.watchall.UserModel;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
@@ -171,5 +177,27 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
                 PreferencesHelper.getInstance().getString(R.string.pref_account_user_avatar),
                 PreferencesHelper.getInstance().getInt(R.string.pref_account_user_color, -1)
         );
+    }
+
+    public  static <T extends DetailedModel> AMediaCardRecyclerHelper.IMediaItemMenuListener<T> getMediaMenuListener(final FragmentManager manager, final Activity activity) {
+        return new AMediaCardRecyclerHelper.IMediaItemMenuListener<T>() {
+            @Override
+            public void onMenuItemClick(MenuItem menuItem, T item) {
+                switch (menuItem.getItemId()) {
+                    case R.id.media_addtolist:
+                        /*WatchlistAddToDialog dialog = WatchlistAddToDialog.newInstance(item);
+                        dialog.show(manager, "Add to list");*/
+                        break;
+                    case R.id.media_addtofav:
+                        /*if (GlobalAPIHelper.getInstance().watchlistHelper.addMedia((MediaModel) item.base, getLocalFavouritesWatchlistID())) {
+                            Toast.makeText(actitvity, String.format(actitvity.getString(R.string.toast_added_to_list), "Favourites"), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(actitvity, R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
+                        }*/
+                        break;
+                }
+                //TODO do something
+            }
+        };
     }
 }

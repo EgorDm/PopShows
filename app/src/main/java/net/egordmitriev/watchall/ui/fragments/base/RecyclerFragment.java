@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.ui.fragments;
+package net.egordmitriev.watchall.ui.fragments.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +25,7 @@ public abstract class RecyclerFragment<R extends ARecyclerHelper> extends BaseFr
     public void onCreate(Bundle savedInstanceState) {
         mHelper = getHelper();
         super.onCreate(savedInstanceState);
-        mHelper.create(savedInstanceState, getArguments());
+        mHelper.onCreate(savedInstanceState, getArguments());
     }
 
     @Nullable

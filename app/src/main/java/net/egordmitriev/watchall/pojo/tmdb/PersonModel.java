@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.pojo.tmdb;
 
+import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.JsonObject;
@@ -7,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.api.TMDBServiceHelper;
+import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.tmdb.response.MovieLiteResponse;
@@ -41,6 +43,12 @@ public class PersonModel extends DetailedModel<PersonModel.Base, PersonModel.Det
         } catch (Exception e) {
             Logger.e(e, "Error happened while populating a person model.\n"+data.toString());
         }
+    }
+
+    @Override
+    public MediaCard onCreateCard(Context context, String prefix, boolean small) {
+        //TODO: implement card
+        return null;
     }
 
     public static class Base extends BaseModel {

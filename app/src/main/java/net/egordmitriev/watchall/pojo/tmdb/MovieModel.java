@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.pojo.tmdb;
 
+import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.JsonArray;
@@ -8,9 +9,11 @@ import com.google.gson.annotations.SerializedName;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.api.TMDBServiceHelper;
+import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.tmdb.response.MovieListResponse;
+import net.egordmitriev.watchall.ui.modelviews.MovieView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -60,6 +63,18 @@ public class MovieModel extends DetailedModel<MovieModel.Base, MovieModel.Detail
         } catch (Exception e) {
             Logger.e(e, "Error happened while populating a movie model.\n"+data.toString());
         }
+    }
+
+    @Override
+    public String getPoster(boolean small) {
+        return APIUtils.getTMDBImageUrl(base.poster_path, (small)
+                ? APIUtils.Queries.Image.SIZE_SMALL_POSTER
+                : APIUtils.Queries.Image.SIZE_MEDIUM_POSTER);
+    }
+
+    @Override
+    public MediaCard onCreateCard(Context context, String prefix, boolean small) {
+        return MovieView.onCreateCard(context, this, prefix, small);
     }
 
     public static class Base extends BaseModel {

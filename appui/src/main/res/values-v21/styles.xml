@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="card.native.header_button_base.overflow">
+        <item name="android:src">@drawable/card_button_overflow</item>
+    </style>
+</resources>

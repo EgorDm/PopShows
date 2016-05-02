@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.ui.activities.base;
 import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.ui.activities.MoviePageActivity;
 import net.egordmitriev.watchall.ui.activities.SettingsActivity;
 
 /**
@@ -24,7 +25,7 @@ public class HomeActivity extends TabsActivity {
         Intent intent = null;
         switch (itemId) {
             case PAGE_MOVIES:
-                //intent = new Intent(this, MoviesPageActivity.class);
+                intent = new Intent(this, MoviePageActivity.class);
                 break;
             case PAGE_SERIES:
                 //intent = new Intent(this, SeriePageActivity.class);

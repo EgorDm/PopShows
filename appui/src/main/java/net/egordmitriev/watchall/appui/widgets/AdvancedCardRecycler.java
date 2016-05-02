@@ -19,7 +19,7 @@ public class AdvancedCardRecycler extends CardsRecycler {
     protected @FloatRange float column_width;
 
     private boolean mGridLayout;
-    private Runnable mLoadNextCallback;
+    private Runnable mLoadMoreCallback;
 
     public AdvancedCardRecycler(Context context) {
         super(context);
@@ -71,8 +71,8 @@ public class AdvancedCardRecycler extends CardsRecycler {
         }
     }
 
-    public void setLoadNextCallback(Runnable loadNextCallback) {
-        mLoadNextCallback = loadNextCallback;
+    public void setLoadMoreCallback(Runnable loadNextCallback) {
+        mLoadMoreCallback = loadNextCallback;
         OnScrollListener listener = new OnScrollListener() {
             int visibleThreshold = 5;
             int firstVisibleItem, visibleItemCount, totalItemCount, previousTotal;
@@ -95,8 +95,8 @@ public class AdvancedCardRecycler extends CardsRecycler {
                 }
 
                 if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
-                    if (mLoadNextCallback != null) {
-                        mLoadNextCallback.run();
+                    if (mLoadMoreCallback != null) {
+                        mLoadMoreCallback.run();
                     }
                     loading = true;
                 }

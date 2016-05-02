@@ -10,11 +10,11 @@ import net.egordmitriev.appui.R;
 /**
  * Created by EgorDm on 4/30/2016.
  */
-public abstract class MediaCardLarge extends MediaCard {
+public class MediaCardLarge extends MediaCard {
 
     protected String mSpecial;
 
-    public MediaCardLarge(Context context, int type, String title, String subtitle, String special, String thumbnail) {
+    public MediaCardLarge(Context context, int type, String title, String subtitle, String thumbnail, String special) {
         super(context, R.layout.card_media_large_inner_layout, type, title, subtitle, thumbnail);
         mSpecial = special;
     }

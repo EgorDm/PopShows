@@ -10,7 +10,7 @@ import it.gmariotti.cardslib.library.internal.CardExpand;
 public abstract class AMediaCardExpand extends MediaCardSmall {
 
     public AMediaCardExpand(Context context, int type, String title, String subtitle, float rating, String special, String thumbnail) {
-        super(context, type, title, subtitle, rating, special, thumbnail);
+        super(context, type, title, subtitle, thumbnail, rating, special);
     }
 
     @Override

@@ -1,11 +1,16 @@
 package net.egordmitriev.watchall.pojo;
 
+import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.JsonObject;
 
 import net.egordmitriev.watchall.api.base.APIError;
+import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.utils.ErrorUtils;
+import net.egordmitriev.watchall.utils.TypeRunnable;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,13 +21,35 @@ import retrofit2.Response;
  */
 public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> extends BaseModel {
 
-    public interface DetailCallback {
-        void success();
-        void failure(APIError error);
+    public static class DetailCallback {
+        private ArrayList<TypeRunnable<Boolean>> callbacks;
+
+        public DetailCallback(TypeRunnable<Boolean> callback) {
+            this.callbacks = new ArrayList<>();
+            callbacks.add(callback);
+        }
+
+        public void success() {
+            for (TypeRunnable<Boolean> callback : callbacks) {
+                callback.run(true);
+            }
+        }
+
+        public void failure(APIError error) {
+            //Mayby print error later
+            for (TypeRunnable<Boolean> callback : callbacks) {
+                callback.run(false);
+            }
+        }
+
+        public void addCallback(TypeRunnable<Boolean> callback) {
+            callbacks.add(callback);
+        }
     }
 
     public B base;
     public D detail;
+    private DetailCallback mCallback;
 
     public DetailedModel(int type) {
         super(type);
@@ -36,26 +63,40 @@ public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> ex
     }
 
     public abstract void requestDetail(DetailCallback callback);
+
     protected abstract void populateModel(JsonObject data);
-    protected Callback<JsonObject> getDetailCallback(final DetailCallback callback) {
+
+    protected Callback<JsonObject> getDetailCallback(DetailCallback callback) {
+        mCallback = callback;
         return new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 APIError error = ErrorUtils.checkError(response);
-                if(error != null) {
-                    callback.failure(error);
+                if (error != null) {
+                    mCallback.failure(error);
                 }
                 populateModel(response.body());
-                callback.success();
+                mCallback.success();
+                mCallback = null;
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                callback.failure(new APIError(1337, t.getMessage()));
+                mCallback.failure(new APIError(1337, t.getMessage()));
+                mCallback = null;
             }
         };
     }
 
+    public DetailCallback isRequestingDetail() {
+        return mCallback;
+    }
+
+    public String getPoster(boolean small) {
+        return null;
+    }
+
+    public abstract MediaCard onCreateCard(Context context, String prefix, boolean small);
 
     @Override
     public int describeContents() {
@@ -76,5 +117,6 @@ public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> ex
     }
 
     protected abstract ClassLoader getBaseLoader();
+
     protected abstract ClassLoader getDetailLoader();
 }

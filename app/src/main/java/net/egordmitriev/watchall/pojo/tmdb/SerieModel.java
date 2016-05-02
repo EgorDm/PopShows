@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.pojo.tmdb;
 
+import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.JsonArray;
@@ -8,9 +9,11 @@ import com.google.gson.annotations.SerializedName;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.api.TMDBServiceHelper;
+import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.tmdb.response.SerieListResponse;
+import net.egordmitriev.watchall.ui.modelviews.SerieView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -245,6 +248,18 @@ public class SerieModel extends DetailedModel<SerieModel.Base, SerieModel.Detail
     @Override
     protected ClassLoader getDetailLoader() {
         return SerieModel.Detail.class.getClassLoader();
+    }
+
+    @Override
+    public String getPoster(boolean small) {
+        return APIUtils.getTMDBImageUrl(base.poster_path, (small)
+                ? APIUtils.Queries.Image.SIZE_SMALL_POSTER
+                : APIUtils.Queries.Image.SIZE_MEDIUM_POSTER);
+    }
+
+    @Override
+    public MediaCard onCreateCard(Context context, String prefix, boolean small) {
+        return SerieView.onCreateCard(context, this, prefix, small);
     }
 
     @Override

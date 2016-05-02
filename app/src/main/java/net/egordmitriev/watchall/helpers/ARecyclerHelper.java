@@ -24,7 +24,7 @@ public abstract class ARecyclerHelper<R extends RecyclerView, A extends Recycler
     public void onSaveState(Bundle outState) {
     }
 
-    public void create(Bundle savedState, Bundle arguments) {
+    public void onCreate(Bundle savedState, Bundle arguments) {
 
     }
 

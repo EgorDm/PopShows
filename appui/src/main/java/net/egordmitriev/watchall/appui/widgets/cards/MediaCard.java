@@ -44,7 +44,7 @@ public class MediaCard extends Card {
     }
 
     protected MediaCardHeader getHeader() {
-        return new MediaCardHeader(mContext, mTitle, mCardSubtitle);
+        return new MediaCardHeader(mContext, mCardTitle, mCardSubtitle);
     }
 
     protected String getThumbnail() {

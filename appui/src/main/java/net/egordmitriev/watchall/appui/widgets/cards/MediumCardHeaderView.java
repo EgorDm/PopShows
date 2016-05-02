@@ -26,7 +26,7 @@ public class MediumCardHeaderView extends CardHeaderView {
 
     @Override
     protected void initView() {
-        card_header_layout_resourceID = R.layout.card_media_medium_header_outer_layout;
+        card_header_layout_resourceID = R.layout.card_media_small_header_outer_layout;
         super.initView();
     }
 }

@@ -16,11 +16,10 @@ public class MediaCardSmall extends MediaCard {
     protected float mRating;
     protected String mSpecial;
 
-    public MediaCardSmall(Context context, int type, String title, String subtitle, float rating, String special, String thumbnail) {
+    public MediaCardSmall(Context context, int type, String title, String subtitle,  String thumbnail, float rating, String special) {
         super(context, R.layout.card_media_small_inner_layout, type, title, subtitle, thumbnail);
         mRating = rating;
         mSpecial = special;
-        mThumbnail = thumbnail;
     }
 
     @Override

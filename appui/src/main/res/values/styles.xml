@@ -12,4 +12,8 @@
         <item name="android:stepSize">0.5</item>
         <item name="android:layout_marginTop">2dp</item>
     </style>
+
+    <style name="card.native.header_button_base.overflow">
+        <item name="android:background">@drawable/card_button_overflow</item>
+    </style>
 </resources>
