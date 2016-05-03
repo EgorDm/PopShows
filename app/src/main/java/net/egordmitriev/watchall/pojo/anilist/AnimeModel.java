@@ -45,6 +45,12 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
     }
 
     @Override
+    public String getPoster(boolean small) {
+        return (small) ? base.poster_med : base.poster_lge;
+    }
+
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
         return AnimeView.onCreateCard(context, this, prefix, small);
     }

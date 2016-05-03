@@ -1,4 +1,4 @@
-package net.egordmitriev.watchall.ui.fragments;
+package net.egordmitriev.watchall.ui.fragments.media;
 
 import net.egordmitriev.loaderview.LoaderView;
 import net.egordmitriev.watchall.R;

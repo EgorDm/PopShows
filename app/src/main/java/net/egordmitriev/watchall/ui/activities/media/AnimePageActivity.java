@@ -1,22 +1,23 @@
-package net.egordmitriev.watchall.ui.activities;
+package net.egordmitriev.watchall.ui.activities.media;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.egordmitriev.watchall.R;
-import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
+import net.egordmitriev.watchall.pojo.anilist.AnimeModel;
 import net.egordmitriev.watchall.ui.activities.base.AMediaPageActivity;
-import net.egordmitriev.watchall.ui.fragments.MovieListFragment;
+import net.egordmitriev.watchall.ui.fragments.media.AnimeListFragment;
 import net.egordmitriev.watchall.utils.MediaUtils;
 
 /**
  * Created by EgorDm on 5/1/2016.
  */
-public class MoviePageActivity extends AMediaPageActivity {
+public class AnimePageActivity extends AMediaPageActivity {
 
     private static final int[] ACTIONS = {
+            MediaUtils.ACTION_TOPAIRING,
+            MediaUtils.ACTION_JUSTADDED,
             MediaUtils.ACTION_POPULAR,
-            MediaUtils.ACTION_NEWEST,
             MediaUtils.ACTION_TOPRATED,
             MediaUtils.ACTION_UPCOMING};
 
@@ -28,19 +29,19 @@ public class MoviePageActivity extends AMediaPageActivity {
 
     @Override
     protected void createTabs(Adapter adapter) {
-        String[] titles = getResources().getStringArray(R.array.movie_tabs);
-        createTabs(adapter, titles, ACTIONS, MovieModel.TYPE, null);
+        String[] titles = getResources().getStringArray(R.array.anime_tabs);
+        createTabs(adapter, titles, ACTIONS, AnimeModel.TYPE, null);
     }
 
     @Override
     protected void createCategoryTab(Adapter adapter) {
-        adapter.addFragment(createCategoryTab(MovieModel.TYPE));
+        adapter.addFragment(createCategoryTab(AnimeModel.TYPE));
         super.createCategoryTab(adapter);
     }
 
     @Override
     protected Fragment createFragment() {
-        return new MovieListFragment();
+        return new AnimeListFragment();
     }
 
     @Override
@@ -50,6 +51,6 @@ public class MoviePageActivity extends AMediaPageActivity {
 
     @Override
     public int getOwnID() {
-        return PAGE_MOVIES;
+        return PAGE_ANIME;
     }
 }

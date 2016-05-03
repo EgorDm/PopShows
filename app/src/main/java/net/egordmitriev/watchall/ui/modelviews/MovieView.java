@@ -2,8 +2,6 @@ package net.egordmitriev.watchall.ui.modelviews;
 
 import android.content.Context;
 
-import com.orhanobut.logger.Logger;
-
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCardLarge;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCardSmall;
@@ -18,7 +16,6 @@ import net.egordmitriev.watchall.utils.MediaUtils;
 public class MovieView extends AModelView {
     public static MediaCard onCreateCard(Context context, MovieModel item, String prefix, boolean small) {
         if (small) {
-            Logger.d("ThumbnailZ is " + item.getPoster(true));
             return new MediaCardSmall(context, item.type, (prefix != null) ? prefix + item.base.title : item.base.title, getGenre(context, item),
                     item.getPoster(true), getRating(item), null);
         } else {

@@ -51,8 +51,20 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.MoviePageActivity"
+            android:name=".ui.activities.media.MoviePageActivity"
             android:label="@string/title_movies"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar.NoAnimation">
+        </activity>
+        <activity
+            android:name=".ui.activities.media.SeriePageActivity"
+            android:label="@string/title_series"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar.NoAnimation">
+        </activity>
+        <activity
+            android:name=".ui.activities.media.AnimePageActivity"
+            android:label="@string/title_anime"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar.NoAnimation">
         </activity>

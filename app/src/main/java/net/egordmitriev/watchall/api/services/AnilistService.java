@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.api.services;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import net.egordmitriev.watchall.pojo.anilist.ClientCredentials;
@@ -28,7 +29,7 @@ public interface AnilistService {
     Call<JsonObject> getAnime(@Path("id") int animeId);
 
     @GET("/api/browse/anime")
-    Call<JsonObject> getAnimeDiscover(@QueryMap Map<String, String> options);
+    Call<JsonArray> getAnimeDiscover(@QueryMap Map<String, String> options);
 
     @GET("/api/anime/review/{review_id}")
     Call<JsonObject> getReview(@Path("review_id") int reviewId);

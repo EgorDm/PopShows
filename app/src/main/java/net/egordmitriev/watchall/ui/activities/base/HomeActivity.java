@@ -3,8 +3,10 @@ package net.egordmitriev.watchall.ui.activities.base;
 import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
-import net.egordmitriev.watchall.ui.activities.MoviePageActivity;
 import net.egordmitriev.watchall.ui.activities.SettingsActivity;
+import net.egordmitriev.watchall.ui.activities.media.AnimePageActivity;
+import net.egordmitriev.watchall.ui.activities.media.MoviePageActivity;
+import net.egordmitriev.watchall.ui.activities.media.SeriePageActivity;
 
 /**
  * Created by EgorDm on 4/29/2016.
@@ -28,10 +30,10 @@ public class HomeActivity extends TabsActivity {
                 intent = new Intent(this, MoviePageActivity.class);
                 break;
             case PAGE_SERIES:
-                //intent = new Intent(this, SeriePageActivity.class);
+                intent = new Intent(this, SeriePageActivity.class);
                 break;
             case PAGE_ANIME:
-                //intent = new Intent(this, AnimePageActivity.class);
+                intent = new Intent(this, AnimePageActivity.class);
                 break;
             case PAGE_LISTS:
                 //intent = new Intent(this, WatchlistPageActivity.class);
