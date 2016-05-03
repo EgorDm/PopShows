@@ -9,7 +9,7 @@ import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.pojo.data.Category;
 import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
-import net.egordmitriev.watchall.ui.fragments.CategoryListFragment;
+import net.egordmitriev.watchall.ui.fragments.media.CategoryListFragment;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
 /**

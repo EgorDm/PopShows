@@ -49,7 +49,8 @@ public class ClientCredentials implements Parcelable {
         PreferencesHelper.getInstance().build()
                 .setString(R.string.pref_anilist_accestoken, access_token)
                 .setString(R.string.pref_anilist_tokentype, token_type)
-                .setLong(R.string.pref_anilist_expires, expires.getTime());
+                .setLong(R.string.pref_anilist_expires, expires.getTime())
+                .commit();
     }
 
     public static ClientCredentials load() {

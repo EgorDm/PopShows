@@ -1,6 +1,7 @@
-package net.egordmitriev.watchall.ui.fragments;
+package net.egordmitriev.watchall.ui.fragments.media;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import net.egordmitriev.watchall.appui.listeners.RecyclerClickListener;
 import net.egordmitriev.watchall.helpers.ARecyclerHelper;
 import net.egordmitriev.watchall.pojo.data.Category;
 import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
+import net.egordmitriev.watchall.ui.activities.media.CategoryPageActivity;
 import net.egordmitriev.watchall.ui.fragments.base.RecyclerFragment;
 import net.egordmitriev.watchall.utils.MediaUtils;
 import net.egordmitriev.watchall.utils.SaveUtils;
@@ -100,10 +102,9 @@ public class CategoryListFragment extends RecyclerFragment<ARecyclerHelper<Recyc
     }
 
     public static void openCategory(Context context, Category category) {
-        //TODO: Open category
-        /*Intent intent = new Intent(context, CategoryPageActivity.class);
-        intent.putExtra(SaveUtils.SAVED_MEDIA_DISPLAY_DATA, category);
-        context.startActivity(intent);*/
+        Intent intent = new Intent(context, CategoryPageActivity.class);
+        intent.putExtra(SaveUtils.SAVED_DISPLAY_DATA, category);
+        context.startActivity(intent);
     }
 
     public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {

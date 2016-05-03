@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import net.egordmitriev.watchall.api.AnilistServiceHelper;
 import net.egordmitriev.watchall.api.database.DatabaseHelper;
 
 /**
@@ -20,6 +21,7 @@ public class MainApplication extends Application {
         sInstance = this;
         sDatabaseHelper = new DatabaseHelper(getApplicationContext());
         sDatabaseHelper.createTables();
+        AnilistServiceHelper.setup();
     }
 
     public static MainApplication getInstance() {

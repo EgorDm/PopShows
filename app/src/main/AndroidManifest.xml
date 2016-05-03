@@ -68,6 +68,7 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar.NoAnimation">
         </activity>
+        <activity android:name=".ui.activities.media.CategoryPageActivity"/>
 
     </application>
 
