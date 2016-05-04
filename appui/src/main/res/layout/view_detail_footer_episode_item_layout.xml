@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.egordmitriev.watchit.mediacards.widgets.ExpandableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:el_headerLayout="@layout/view_detail_footer_episode_item_header_layout"
+    app:el_contentLayout="@layout/view_detail_footer_episode_item_content_layout"/>

@@ -11,6 +11,8 @@ import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
 import net.egordmitriev.watchall.pojo.tmdb.SerieModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by EgorDm on 4/3/2016.
@@ -289,4 +291,16 @@ public class MediaUtils {
     public static float convertAnimeVote(float vote) {
         return vote / 20f;
     }
+
+    public static final Map<String, Integer> ANIME_RELATION_ORDER = new HashMap<String, Integer>() {
+        {
+            put("sequel", 0);
+            put("prequel", 2);
+            put("alternative", 4);
+            put("side story", 6);
+            put("character", 8);
+            put("summary", 10);
+            put("other", 12);
+        }
+    };
 }

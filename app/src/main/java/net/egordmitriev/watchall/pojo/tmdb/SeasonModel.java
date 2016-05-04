@@ -11,6 +11,8 @@ import net.egordmitriev.watchall.api.TMDBServiceHelper;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
+import net.egordmitriev.watchall.ui.modelviews.SeasonView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -20,6 +22,16 @@ import java.util.Date;
  */
 public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Detail> {
     public static final int TYPE = 10;
+
+    public int parentID;
+
+    public static SeasonModel[] createArray(SeasonModel.Base[] models) {
+        SeasonModel[] ret = new SeasonModel[models.length];
+        for (int i = 0; i < models.length; i++) {
+            ret[i] = new SeasonModel(models[i], null);
+        }
+        return ret;
+    }
 
     public SeasonModel() {
         super(TYPE);
@@ -39,14 +51,28 @@ public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Det
         try {
             this.detail = APIUtils.sTMDBParser.fromJson(data, SeasonModel.Detail.class);
         } catch (Exception e) {
-            Logger.e(e, "Error happened while populating a season model.\n"+data.toString());
+            Logger.e(e, "Error happened while populating a season model.\n" + data.toString());
         }
     }
 
     @Override
+    public String getTitle() {
+        return "Season " + base.season_number;
+    }
+
+    @Override
+    public String getDescription() {
+        return detail.overview;
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return SeasonView.getInstance();
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        //TODO: implement card
-        return null;
+        return SeasonView.onCreateCard(context, this, prefix, small);
     }
 
     public static class Base extends BaseModel {

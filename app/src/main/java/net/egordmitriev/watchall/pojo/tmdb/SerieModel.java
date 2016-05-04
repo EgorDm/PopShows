@@ -14,6 +14,7 @@ import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.tmdb.response.SerieListResponse;
 import net.egordmitriev.watchall.ui.modelviews.SerieView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -24,6 +25,14 @@ import java.util.Date;
 public class SerieModel extends DetailedModel<SerieModel.Base, SerieModel.Detail> {
     public static final int TYPE = 11;
     public boolean lite = false;
+
+    public static SerieModel[] createArray(SerieModel.Base[] models) {
+        SerieModel[] ret = new SerieModel[models.length];
+        for(int i = 0; i < models.length; i++) {
+            ret[i] = new SerieModel(models[i], null);
+        }
+        return ret;
+    }
 
     public SerieModel() {
         super(TYPE);
@@ -258,8 +267,23 @@ public class SerieModel extends DetailedModel<SerieModel.Base, SerieModel.Detail
     }
 
     @Override
+    public String getTitle() {
+        return base.name;
+    }
+
+    @Override
+    public String getDescription() {
+        return base.overview;
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
         return SerieView.onCreateCard(context, this, prefix, small);
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return SerieView.getInstance();
     }
 
     @Override

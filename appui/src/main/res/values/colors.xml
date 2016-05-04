@@ -17,4 +17,9 @@
 
     <color name="card_native_background">#424242</color>
     <color name="card_text_color_header">#fff</color>
+
+    <color name="dark_0">#1b1b1b</color>
+    <color name="dark_1">#212121</color>
+    <color name="dark_2">#2e2e2e</color>
+    <color name="dark_3">#303030</color>
 </resources>

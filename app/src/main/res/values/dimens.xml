@@ -1,3 +1,4 @@
 <resources>a
-    <dimen name="tab_max_width">264dp</dimen>
+    <dimen name="tab_max_width">256dp</dimen>
+    <dimen name="detail_backdrop_height">256dp</dimen>
 </resources>

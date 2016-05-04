@@ -107,4 +107,13 @@
         <item>Upcoming</item>
     </string-array>
 
+    <string name="cast">Cast</string>
+    <string name="similar">Similar</string>
+    <string name="seasons">Seasons</string>
+    <string name="episodes">Episodes</string>
+    <string name="staff">Staff</string>
+    <string name="characters">Characters</string>
+    <string name="relations">Relations</string>
+    <string name="actor_in_movies">Actor in movies</string>
+    <string name="actor_in_series">Actor in series</string>
 </resources>

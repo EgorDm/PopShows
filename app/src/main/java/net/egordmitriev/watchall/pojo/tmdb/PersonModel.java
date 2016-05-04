@@ -13,6 +13,8 @@ import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.tmdb.response.MovieLiteResponse;
 import net.egordmitriev.watchall.pojo.tmdb.response.SerieLiteResponse;
+import net.egordmitriev.watchall.ui.modelviews.PersonView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -20,8 +22,16 @@ import java.util.Date;
 /**
  * Created by EgorDm on 4/2/2016.
  */
-public class PersonModel extends DetailedModel<PersonModel.Base, PersonModel.Detail>  {
+public class PersonModel extends DetailedModel<PersonModel.Base, PersonModel.Detail> {
     public static final int TYPE = 9;
+
+    public static PersonModel[] createArray(PersonModel.Base[] models) {
+        PersonModel[] ret = new PersonModel[models.length];
+        for (int i = 0; i < models.length; i++) {
+            ret[i] = new PersonModel(models[i], null);
+        }
+        return ret;
+    }
 
     public PersonModel() {
         super(TYPE);
@@ -41,14 +51,28 @@ public class PersonModel extends DetailedModel<PersonModel.Base, PersonModel.Det
         try {
             this.detail = APIUtils.sTMDBParser.fromJson(data, PersonModel.Detail.class);
         } catch (Exception e) {
-            Logger.e(e, "Error happened while populating a person model.\n"+data.toString());
+            Logger.e(e, "Error happened while populating a person model.\n" + data.toString());
         }
     }
 
     @Override
+    public String getTitle() {
+        return base.name;
+    }
+
+    @Override
+    public String getDescription() {
+        return detail.biography;
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return PersonView.getInstance();
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        //TODO: implement card
-        return null;
+        return PersonView.onCreateCard(context, this, prefix, small);
     }
 
     public static class Base extends BaseModel {

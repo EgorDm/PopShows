@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <include layout="@layout/divider"/>
+
+    <TextView
+        style="@style/MediaDetail.SectionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cast and Actors" />
+
+    <LinearLayout
+        android:id="@+id/detail_about_name_synonyms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/spacing_large">
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/synonyms"/>
+
+        <TextView
+            android:id="@+id/detail_about_name_synonyms_content"
+            style="@style/MediaDetail.SectionContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_about_name_japanese"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/spacing_large">
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/japanese_title"/>
+
+        <TextView
+            android:id="@+id/detail_about_name_japanese_content"
+            style="@style/MediaDetail.SectionContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_about_name_english"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/spacing_large">
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/english_title"/>
+
+        <TextView
+            android:id="@+id/detail_about_name_english_content"
+            style="@style/MediaDetail.SectionContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_about_name_romanji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/spacing_large">
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/romanji_title"/>
+
+        <TextView
+            android:id="@+id/detail_about_name_romanji_content"
+            style="@style/MediaDetail.SectionContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_about_name_studios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/spacing_large">
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/studios"/>
+
+        <TextView
+            android:id="@+id/detail_about_name_studios_content"
+            style="@style/MediaDetail.SectionContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,12 +1,11 @@
 package net.egordmitriev.watchall.pojo;
 
-import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.JsonObject;
 
 import net.egordmitriev.watchall.api.base.APIError;
-import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.ErrorUtils;
 import net.egordmitriev.watchall.utils.TypeRunnable;
 
@@ -19,7 +18,7 @@ import retrofit2.Response;
 /**
  * Created by EgorDm on 4/2/2016.
  */
-public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> extends BaseModel {
+public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> extends CardedModel {
 
     public static class DetailCallback {
         private ArrayList<TypeRunnable<Boolean>> callbacks;
@@ -96,8 +95,11 @@ public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> ex
         return null;
     }
 
-    public abstract MediaCard onCreateCard(Context context, String prefix, boolean small);
+    public abstract String getTitle();
 
+    public abstract String getDescription();
+
+    public abstract AModelView getModelView();
     @Override
     public int describeContents() {
         return 0;

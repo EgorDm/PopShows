@@ -11,13 +11,23 @@ import net.egordmitriev.watchall.api.AnilistServiceHelper;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
+import net.egordmitriev.watchall.ui.modelviews.CharacterView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 /**
  * Created by EgorDm on 4/2/2016.
  */
-public class CharacterModel extends DetailedModel<CharacterModel.Base, CharacterModel.Detail>  {
+public class CharacterModel extends DetailedModel<CharacterModel.Base, CharacterModel.Detail> {
     public static final int TYPE = 2;
+
+    public static CharacterModel[] createArray(CharacterModel.Base[] models) {
+        CharacterModel[] ret = new CharacterModel[models.length];
+        for (int i = 0; i < models.length; i++) {
+            ret[i] = new CharacterModel(models[i], null);
+        }
+        return ret;
+    }
 
     public CharacterModel() {
         super(TYPE);
@@ -37,14 +47,28 @@ public class CharacterModel extends DetailedModel<CharacterModel.Base, Character
         try {
             this.detail = APIUtils.sAnilistParser.fromJson(data, CharacterModel.Detail.class);
         } catch (Exception e) {
-            Logger.e(e, "Error happened while populating a character model.\n"+data.toString());
+            Logger.e(e, "Error happened while populating a character model.\n" + data.toString());
         }
     }
 
     @Override
+    public String getTitle() {
+        return detail.name_japanese;
+    }
+
+    @Override
+    public String getDescription() {
+        return detail.info;
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return CharacterView.getInstance();
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        //TODO: implement card
-        return null;
+        return CharacterView.onCreateCard(context, this, prefix, small);
     }
 
     public static class Base extends BaseModel {

@@ -11,6 +11,8 @@ import net.egordmitriev.watchall.api.AnilistServiceHelper;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
+import net.egordmitriev.watchall.ui.modelviews.StaffView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 /**
@@ -18,6 +20,14 @@ import net.egordmitriev.watchall.utils.APIUtils;
  */
 public class StaffModel extends DetailedModel<StaffModel.Base, StaffModel.Detail>  {
     public static final int TYPE = 4;
+
+    public static StaffModel[] createArray(StaffModel.Base[] models) {
+        StaffModel[] ret = new StaffModel[models.length];
+        for(int i = 0; i < models.length; i++) {
+            ret[i] = new StaffModel(models[i], null);
+        }
+        return ret;
+    }
 
     public StaffModel() {
         super(TYPE);
@@ -42,9 +52,23 @@ public class StaffModel extends DetailedModel<StaffModel.Base, StaffModel.Detail
     }
 
     @Override
+    public String getTitle() {
+        return base.name_first + " " + base.name_last;
+    }
+
+    @Override
+    public String getDescription() {
+        return detail.info;
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return StaffView.getInstance();
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        //TODO: implement card
-        return null;
+        return StaffView.onCreateCard(context, this, prefix, small);
     }
 
     public static class Base extends BaseModel {

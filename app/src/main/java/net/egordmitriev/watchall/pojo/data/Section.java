@@ -1,14 +1,17 @@
 package net.egordmitriev.watchall.pojo.data;
 
+import android.content.Context;
 import android.os.Parcel;
 
-import net.egordmitriev.watchall.pojo.BaseModel;
+import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
+import net.egordmitriev.watchall.pojo.CardedModel;
+import net.egordmitriev.watchall.ui.widgets.cards.SectionCard;
 import net.egordmitriev.watchall.utils.Utils;
 
 /**
  * Created by EgorDm on 4/30/2016.
  */
-public class Section extends BaseModel {
+public class Section extends CardedModel {
     public static final int TYPE = 17;
 
     public String sectionTitle;
@@ -48,4 +51,9 @@ public class Section extends BaseModel {
             return new Section[size];
         }
     };
+
+    @Override
+    public MediaCard onCreateCard(Context context, String prefix, boolean small) {
+        return new SectionCard(context, this);
+    }
 }

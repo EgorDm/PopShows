@@ -7,8 +7,10 @@ import android.view.View;
 
 import net.egordmitriev.watchall.appui.adapters.CardsAdapter;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
+import net.egordmitriev.watchall.pojo.CardedModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
+import net.egordmitriev.watchall.ui.activities.media.MediaDetailActivity;
 import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
@@ -23,9 +25,9 @@ import it.gmariotti.cardslib.library.internal.base.BaseCard;
 /**
  * Created by EgorDm on 5/1/2016.
  */
-public abstract class AMediaCardRecyclerHelper<T extends DetailedModel, A extends CardsAdapter<MediaCard>> extends ACardRecyclerHelper<T, A> implements Card.OnCardClickListener {
+public abstract class AMediaCardRecyclerHelper<T extends CardedModel, A extends CardsAdapter<MediaCard>> extends ACardRecyclerHelper<T, A> implements Card.OnCardClickListener {
 
-    public interface IMediaItemMenuListener<U extends DetailedModel> {
+    public interface IMediaItemMenuListener<U extends CardedModel> {
         void onMenuItemClick(MenuItem menuItem, U item);
     }
 
@@ -49,10 +51,10 @@ public abstract class AMediaCardRecyclerHelper<T extends DetailedModel, A extend
     @Override
     public void onCreate(Bundle savedState, Bundle arguments) {
         super.onCreate(savedState, arguments);
-        if(savedState != null) {
+        if (savedState != null) {
             dataEnded = savedState.getBoolean(SaveUtils.STATE_SAVED_DATA_ENDED, false);
         }
-        if(arguments != null) {
+        if (arguments != null) {
             mRequestData = arguments.getParcelable(SaveUtils.SAVED_DISPLAY_DATA);
         }
     }
@@ -61,7 +63,7 @@ public abstract class AMediaCardRecyclerHelper<T extends DetailedModel, A extend
     public void addData(final Collection<T> data) {
         super.addData(data);
         List<MediaCard> tempList = generateCards(data);
-        for(Card card : tempList) {
+        for (Card card : tempList) {
             card.setOnClickListener(this);
         }
 
@@ -74,9 +76,9 @@ public abstract class AMediaCardRecyclerHelper<T extends DetailedModel, A extend
         int i = mData.size();
         for (final T item : data) {
             i++;
-            MediaCard mediaCard = item.onCreateCard(mContext, (usingCounter) ? i+". ": null, !mGridView);
+            MediaCard mediaCard = item.onCreateCard(mContext, (usingCounter) ? i + ". " : null, !mGridView);
             mediaCard.clickID = i;
-            if(mOverflowMenu != -1) {
+            if (mOverflowMenu != -1) {
                 mediaCard.setMenu(mOverflowMenu, new CardHeader.OnClickCardHeaderPopupMenuListener() {
                     @Override
                     public void onMenuItemClick(BaseCard card, MenuItem menuItem) {
@@ -97,13 +99,11 @@ public abstract class AMediaCardRecyclerHelper<T extends DetailedModel, A extend
     @Override
     public void onClick(Card card, View view) {
         MediaCard mediaCard = (MediaCard) card;
-        DetailedModel model =  mData.get(mediaCard.clickID-1);
+        CardedModel model = mData.get(mediaCard.clickID - 1);
 
-        if(model != null) {
-            AModelView.transitionPoster = ((MediaCard.CardMediaThumbnail)mediaCard.getCardThumbnail()).getThumbnailDrawable();
-            //TODO: open detail
-            /*DetailActivity.openDetail(mContext,
-                    (DetailedItemModel<net.egordmitriev.watchit.models.base.BaseModel, net.egordmitriev.watchit.models.base.BaseModel, net.egordmitriev.watchit.views.modelviews.base.BaseMediaView>) model);*/
+        if (model != null) {
+            AModelView.transitionPoster = ((MediaCard.CardMediaThumbnail) mediaCard.getCardThumbnail()).getThumbnailDrawable();
+            MediaDetailActivity.open(mContext, (DetailedModel) model);
         }
     }
 }

@@ -14,6 +14,7 @@ import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.tmdb.response.MovieListResponse;
 import net.egordmitriev.watchall.ui.modelviews.MovieView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -24,6 +25,14 @@ import java.util.Date;
 public class MovieModel extends DetailedModel<MovieModel.Base, MovieModel.Detail> {
     public static final int TYPE = 8;
     public boolean lite = false;
+
+    public static MovieModel[] createArray(MovieModel.Base[] models) {
+        MovieModel[] ret = new MovieModel[models.length];
+        for(int i = 0; i < models.length; i++) {
+            ret[i] = new MovieModel(models[i], null);
+        }
+        return ret;
+    }
 
     public MovieModel() {
         super(TYPE);
@@ -73,8 +82,23 @@ public class MovieModel extends DetailedModel<MovieModel.Base, MovieModel.Detail
     }
 
     @Override
+    public String getTitle() {
+        return base.title;
+    }
+
+    @Override
+    public String getDescription() {
+        return base.overview;
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
         return MovieView.onCreateCard(context, this, prefix, small);
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return MovieView.getInstance();
     }
 
     public static class Base extends BaseModel {

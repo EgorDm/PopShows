@@ -12,6 +12,7 @@ import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.BaseModel;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.ui.modelviews.AnimeView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 import net.egordmitriev.watchall.utils.APIUtils;
 
 import java.util.Date;
@@ -40,7 +41,7 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
         try {
             this.detail = APIUtils.sAnilistParser.fromJson(data, AnimeModel.Detail.class);
         } catch (Exception e) {
-            Logger.e(e, "Error happened while populating a anime model.\n"+data.toString());
+            Logger.e(e, "Error happened while populating a anime model.\n" + data.toString());
         }
     }
 
@@ -49,6 +50,20 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
         return (small) ? base.poster_med : base.poster_lge;
     }
 
+    @Override
+    public String getTitle() {
+        return base.title_english;
+    }
+
+    @Override
+    public String getDescription() {
+        return detail.description;
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return AnimeView.getInstance();
+    }
 
     @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {

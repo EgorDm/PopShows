@@ -14,6 +14,43 @@ public class CreditsModel implements Parcelable {
     @SerializedName("crew")
     public PersonModel.Base[] crew;
 
+    public String getActors(int count) {
+        StringBuilder ret = null;
+        if (cast != null && cast.length > 0) {
+            ret = new StringBuilder(cast[0].name);
+            if (count > cast.length) count = cast.length;
+            for (int i = 1; i < count; i++) {
+                ret.append(", ").append(cast[i].name);
+            }
+        }
+
+        return (ret != null) ? ret.toString() : null;
+    }
+
+    public String getCrew(String jobName, int count) {
+        StringBuilder ret = null;
+        if (crew != null && crew.length > 0) {
+            ret = new StringBuilder();
+            if (count > cast.length) count = cast.length;
+            int index = 0;
+            for (PersonModel.Base person : crew) {
+                if (index < count) {
+                    if (person.job.contentEquals(jobName)) {
+                        if (index == 0) {
+                            ret.append(person.name);
+                        } else {
+                            ret.append(", ").append(person.name);
+                        }
+                        index++;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return (ret != null) ? ret.toString() : null;
+    }
 
     @Override
     public int describeContents() {

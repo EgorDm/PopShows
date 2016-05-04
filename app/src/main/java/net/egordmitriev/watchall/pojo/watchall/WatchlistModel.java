@@ -19,6 +19,8 @@ import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.anilist.AnimeModel;
 import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
 import net.egordmitriev.watchall.pojo.tmdb.SerieModel;
+import net.egordmitriev.watchall.ui.modelviews.WatchlistView;
+import net.egordmitriev.watchall.ui.modelviews.base.AModelView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +46,7 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
     public void requestDetail(DetailCallback callback) {
         if (base.is_local) {
             detail = WatchlistsTable.getDetail(this.id);
-            if(detail != null) {
+            if (detail != null) {
                 callback.success();
             } else {
                 callback.failure(new APIError(1337, "Not found in saved watchlists."));
@@ -80,14 +82,28 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
                 detail.list_contents.add(object);
             }
         } catch (Exception e) {
-            Logger.e(e, "Error happened while populating a movie model.\n"+data.toString());
+            Logger.e(e, "Error happened while populating a movie model.\n" + data.toString());
         }
     }
 
     @Override
+    public String getTitle() {
+        return base.title;
+    }
+
+    @Override
+    public String getDescription() {
+        return detail.description;
+    }
+
+    @Override
+    public AModelView getModelView() {
+        return WatchlistView.getInstance();
+    }
+
+    @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        //TODO: implement card
-        return null;
+        return WatchlistView.onCreateCard(context, this, prefix, small);
     }
 
     public static class Base extends BaseModel {

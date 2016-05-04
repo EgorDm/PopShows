@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="spacing_xlarge">32dp</dimen>
     <dimen name="spacing_large">16dp</dimen>
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="spacing_micro">4dp</dimen>
@@ -27,4 +28,12 @@
     <dimen name="card_main_content_native_default_paddingRight">8dp</dimen>
     <dimen name="card_main_content_native_default_paddingTop">0dp</dimen>
     <dimen name="card_main_content_native_default_paddingBottom">4dp</dimen>
+
+    <dimen name="detail_poster_large_offset">-24dp</dimen>
+    <dimen name="detail_poster_large_width">92dp</dimen>
+    <dimen name="detail_poster_large_height">138dp</dimen>
+    <dimen name="detail_poster_small_width">115dp</dimen>
+    <dimen name="detail_poster_small_height">172dp</dimen>
+
+    <dimen name="media_section_height">60dp</dimen>
 </resources>

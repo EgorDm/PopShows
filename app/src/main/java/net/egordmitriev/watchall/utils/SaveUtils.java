@@ -7,4 +7,5 @@ public class SaveUtils {
     public static final String STATE_SAVED_DATA_LIST = "state_saved_data_list";
     public static final String STATE_SAVED_DATA_ENDED = "state_saved_data_ended";
     public static final String SAVED_DISPLAY_DATA = "saved_display_data";
+    public static final String SAVED_DISPLAY_DATA_META = "saved_display_data_meta";
 }

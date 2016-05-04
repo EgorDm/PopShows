@@ -10,7 +10,7 @@ import net.egordmitriev.loaderview.LoaderView;
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.appui.adapters.CardsAdapter;
 import net.egordmitriev.watchall.appui.widgets.AdvancedCardRecycler;
-import net.egordmitriev.watchall.pojo.DetailedModel;
+import net.egordmitriev.watchall.pojo.CardedModel;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by EgorDm on 5/1/2016.
  */
-public abstract class ACardRecyclerHelper<T extends DetailedModel, A extends CardsAdapter> extends ARecyclerHelper<AdvancedCardRecycler, A> {
+public abstract class ACardRecyclerHelper<T extends CardedModel, A extends CardsAdapter> extends ARecyclerHelper<AdvancedCardRecycler, A> {
 
     protected ArrayList<T> mData;
     protected LoaderView mLoaderView;
@@ -37,10 +37,10 @@ public abstract class ACardRecyclerHelper<T extends DetailedModel, A extends Car
 
     @Override
     public void onCreate(Bundle savedState, Bundle arguments) {
-        if(savedState != null) {
+        if (savedState != null) {
             mData = savedState.getParcelableArrayList(SaveUtils.STATE_SAVED_DATA_LIST);
         }
-        if(mData == null && arguments != null) {
+        if (mData == null && arguments != null) {
             mData = arguments.getParcelableArrayList(SaveUtils.STATE_SAVED_DATA_LIST);
         }
         super.onCreate(savedState, arguments);
@@ -51,9 +51,9 @@ public abstract class ACardRecyclerHelper<T extends DetailedModel, A extends Car
         View layout = super.onCreateView(inflater, container, savedInstanceState);
         mLoaderView = (LoaderView) layout.findViewById(R.id.loaderview_list);
         setupRecycler();
-        if(mData == null || mData.size() < 1) {
+        if (mData == null || mData.size() < 1) {
             mData = new ArrayList<>();
-            if(canRequestInitial()) {
+            if (canRequestInitial()) {
                 onRequestInitial();
             }
         } else {
@@ -81,10 +81,10 @@ public abstract class ACardRecyclerHelper<T extends DetailedModel, A extends Car
     }
 
     public void setState(int state) {
-        if(mData == null || mData.size() < 1) {
-            if(mLoaderView != null) mLoaderView.setState(state);
+        if (mData == null || mData.size() < 1) {
+            if (mLoaderView != null) mLoaderView.setState(state);
         } else {
-            if(mLoaderView != null) mLoaderView.setState(LoaderView.STATE_IDLE);
+            if (mLoaderView != null) mLoaderView.setState(LoaderView.STATE_IDLE);
         }
     }
 
