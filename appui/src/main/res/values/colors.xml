@@ -22,4 +22,8 @@
     <color name="dark_1">#212121</color>
     <color name="dark_2">#2e2e2e</color>
     <color name="dark_3">#303030</color>
+
+    <color name="lighten_1">#1effffff</color>
+    <color name="lighten_2">#7fffffff</color>
+    <color name="lighten_3">#b2ffffff</color>
 </resources>

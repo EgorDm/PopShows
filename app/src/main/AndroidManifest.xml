@@ -51,6 +51,28 @@
         </activity>
 
         <activity
+            android:name=".ui.activities.SearchActivity"
+            android:exported="false"
+            android:label="@string/title_search"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Search">
+
+            <!-- This Activity handles the search intent -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+                <!--
+                     Intent filter does not need a category = default, since the system delivers
+                     the ACTION_SEARCH intent explicitly to the searcheable activity,
+                     using component name.
+                -->
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+
+        <activity
             android:name=".ui.activities.media.MoviePageActivity"
             android:label="@string/title_movies"
             android:launchMode="singleTop"
@@ -73,6 +95,8 @@
         <activity
             android:name=".ui.activities.media.MediaDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+
 
     </application>
 

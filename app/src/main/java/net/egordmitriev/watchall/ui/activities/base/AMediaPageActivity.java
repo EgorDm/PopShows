@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.ui.activities.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.pojo.data.Category;
 import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
+import net.egordmitriev.watchall.ui.activities.SearchActivity;
 import net.egordmitriev.watchall.ui.fragments.media.CategoryListFragment;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
@@ -30,10 +32,9 @@ public abstract class AMediaPageActivity extends HomeActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_search:
-                //TODO: Start search activity :D
-               /* Intent intent = new Intent(this, SearchActivity.class);
+                Intent intent = new Intent(this, SearchActivity.class);
                 SearchActivity.sSearchType = getMediaSearchType();
-                startActivity(intent);*/
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -54,7 +55,9 @@ public abstract class AMediaPageActivity extends HomeActivity {
     }
 
     protected void createCategoryTab(Adapter adapter) {
-    };
+    }
+
+    ;
 
     protected void createTabs(Adapter adapter, String[] titles, int[] actions, int type, Category category) {
         for (int i = 0; i < titles.length; i++) {

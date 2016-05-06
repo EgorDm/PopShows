@@ -36,7 +36,7 @@
     <string name="pref_usemobnetwork_title">Use mobile network</string>
     <string name="pref_category_storage">Storage Settings</string>
     <string name="pref_syncdelay_title">List update delay</string>
-    
+
     <string-array name="pref_homepage_entries">
         <item>Movies</item>
         <item>Series</item>
@@ -116,4 +116,22 @@
     <string name="relations">Relations</string>
     <string name="actor_in_movies">Actor in movies</string>
     <string name="actor_in_series">Actor in series</string>
+
+    <!-- Strings related to login -->
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_username_password">Incorrect username or password. Please try again.</string>
+    <string name="error_server">An error occurred. Please try again later.</string>
+    <string name="error_server_timeout">Could not reach the server. Please try again later.</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_no_network">Cannot connect to the network.</string>
+    <string name="fullname">Full name</string>
+    <string name="password">Password</string>
+    <string name="title_continue">Continue</string>
+    <string name="email">Email</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="register">Register</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
 </resources>

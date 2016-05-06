@@ -5,7 +5,9 @@ import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
+import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
 import net.egordmitriev.watchall.api.GlobalHelper;
 import net.egordmitriev.watchall.api.WatchAllServiceHelper;
@@ -49,27 +52,27 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(-1); //TODO: Create ui for Authenticator activity and add ui elements
+        setContentView(R.layout.activity_authenticator);
 
-        /*ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SignUpPagerAdapter());
         ((TabLayout) findViewById(R.id.tabs)).setupWithViewPager(viewPager);
 
         mLoginView = findViewById(R.id.view_signin);
         mRegisterView = findViewById(R.id.view_signup);
         mErrorMessage = (TextView) findViewById(R.id.errormsg);
-        mProgressBar = (ProgressBar) findViewById(R.id.loaderview);*/
+        mProgressBar = (ProgressBar) findViewById(R.id.loaderview);
 
         String accountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
         mAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);
         if (mAuthTokenType == null)
             mAuthTokenType = WatchAllAuthenticator.WATCHALL_AUTHTOKEN_TYPE_FULL_ACCESS;
 
-        /*if (accountName != null) {
+        if (accountName != null) {
             ((TextView) mLoginView.findViewById(R.id.fullname)).setText(accountName);
-        }*/
+        }
 
-        /*findViewById(R.id.btnSignIn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSignIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
@@ -80,7 +83,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
             public void onClick(View v) {
                 register();
             }
-        });*/
+        });
 
         GlobalHelper.getNetworkState();
     }
@@ -92,13 +95,13 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
         if (mRequesting) return;
         if (GlobalHelper.getNetworkState() == APIUtils.NETWORK_STATE_DISCONNECTED) {
             if (GlobalHelper.getNetworkState() == GlobalHelper.updateNetworkState()) {
-                // mErrorMessage.setText(R.string.error_no_network);
+                mErrorMessage.setText(R.string.error_no_network);
                 return;
             }
         }
-        /*mEmail = ((TextView) mRegisterView.findViewById(R.id.email)).getText().toString();
+        mEmail = ((TextView) mRegisterView.findViewById(R.id.email)).getText().toString();
         mPassword = ((TextView) mRegisterView.findViewById(R.id.password)).getText().toString();
-        final String userFullname = ((TextView) mRegisterView.findViewById(R.id.fullname)).getText().toString();*/
+        final String userFullname = ((TextView) mRegisterView.findViewById(R.id.fullname)).getText().toString();
         WatchAllServiceHelper.sService.register("Egor Dmitriev", mPassword, mEmail).enqueue(this);
         mProgressBar.setVisibility(View.VISIBLE);
         mRequesting = true;
@@ -109,12 +112,12 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
         if (mRequesting) return;
         if (GlobalHelper.getNetworkState() == APIUtils.NETWORK_STATE_DISCONNECTED) {
             if (GlobalHelper.getNetworkState() == GlobalHelper.updateNetworkState()) {
-                // mErrorMessage.setText(R.string.error_no_network);
+                mErrorMessage.setText(R.string.error_no_network);
                 return;
             }
         }
-        /*mEmail = ((TextView) mLoginView.findViewById(R.id.email)).getText().toString();
-        mPassword = ((TextView) mLoginView.findViewById(R.id.password)).getText().toString();*/
+        mEmail = ((TextView) mLoginView.findViewById(R.id.email)).getText().toString();
+        mPassword = ((TextView) mLoginView.findViewById(R.id.password)).getText().toString();
         WatchAllServiceHelper.sService.getToken(mEmail, mPassword).enqueue(this);
         mProgressBar.setVisibility(View.VISIBLE);
         mRequesting = true;
@@ -168,9 +171,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
 
     protected void displayError(APIError error) {
         if (error.getErrorCode() == 401) {
-            //mErrorMessage.setText(R.string.error_incorrect_username_password);
+            mErrorMessage.setText(R.string.error_incorrect_username_password);
         } else {
-            //mErrorMessage.setText(R.string.error_server);
+            mErrorMessage.setText(R.string.error_server);
         }
         mErrorMessage.setVisibility(View.VISIBLE);
     }
@@ -187,14 +190,14 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             int resId = 0;
-            /*switch (position) {
+            switch (position) {
                 case 0:
                     resId = R.id.view_signin;
                     break;
                 case 1:
                     resId = R.id.view_signup;
                     break;
-            }*/
+            }
             return findViewById(resId);
         }
 
@@ -216,7 +219,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == ((View) object);
+            return view == object;
         }
     }
 }
