@@ -56,6 +56,9 @@ public class AnimeView extends ALargeModelView<AnimeModel> {
     }
 
     public static String getSubtitle(AnimeModel item) {
+        if (item.base.relation_type != null) {
+            return Utils.capitalize(item.base.relation_type);
+        }
         StringBuilder ret = new StringBuilder();
         if (item.base.total_episodes > 0) {
             ret.append("Episodes: ").append(item.base.total_episodes).append(", ");

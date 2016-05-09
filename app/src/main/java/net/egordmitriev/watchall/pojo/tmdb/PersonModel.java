@@ -56,6 +56,13 @@ public class PersonModel extends DetailedModel<PersonModel.Base, PersonModel.Det
     }
 
     @Override
+    public String getPoster(boolean small) {
+        return APIUtils.getTMDBImageUrl(base.profile_path, (small)
+                ? APIUtils.Queries.Image.SIZE_SMALL_POSTER
+                : APIUtils.Queries.Image.SIZE_MEDIUM_POSTER);
+    }
+
+    @Override
     public String getTitle() {
         return base.name;
     }

@@ -138,7 +138,7 @@ public abstract class AModelView<T extends DetailedModel> {
     }
 
     public void addDataCardRow(final MediaDetailActivity activity, ViewGroup targetView, CardedModel[] data, int titleRes, int type, boolean grid, int listType) {
-        if (data == null || data.length < 1) {
+        if (data == null || data.length == 0) {
             return;
         }
 
@@ -177,25 +177,22 @@ public abstract class AModelView<T extends DetailedModel> {
         int index = 0;
         for (CardViewNative cardView : cardViews) {
             if (cardView != null) {
+                while(data.length > index && !(data[index] instanceof DetailedModel)) {
+                    index++;
+                }
                 if (data.length > index) {
-                    while (data.length > index) {
-                        index++;
+                    final CardedModel model = data[index];
+                    MediaCard cardMedia = model.onCreateCard(activity, null, false);
+                    if (model instanceof DetailedModel) {
+                        cardMedia.setOnClickListener(new Card.OnCardClickListener() {
+                            @Override
+                            public void onClick(Card card, View view) {
+                                MediaDetailActivity.open(activity, (DetailedModel) model);
+                            }
+                        });
                     }
-                    if (data.length > index) {
-                        final CardedModel model = data[index];
-                        MediaCard cardMedia = model.onCreateCard(activity, null, false);
-
-                        if (model instanceof DetailedModel) {
-                            cardMedia.setOnClickListener(new Card.OnCardClickListener() {
-                                @Override
-                                public void onClick(Card card, View view) {
-                                    MediaDetailActivity.open(activity, (DetailedModel) model);
-                                }
-                            });
-                        }
-                        cardView.setCard(cardMedia);
-                        index++;
-                    }
+                    cardView.setCard(cardMedia);
+                    index++;
                 } else {
                     cardView.setVisibility(View.GONE);
                 }

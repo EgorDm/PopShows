@@ -52,6 +52,11 @@ public class StaffModel extends DetailedModel<StaffModel.Base, StaffModel.Detail
     }
 
     @Override
+    public String getPoster(boolean small) {
+        return base.poster;
+    }
+
+    @Override
     public String getTitle() {
         return base.name_first + " " + base.name_last;
     }

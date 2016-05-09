@@ -49,7 +49,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
                     Request.Builder requestBuilder = original.newBuilder()
                             .header("Accept", "application/json")
                             .method(original.method(), original.body());
-                    if (!original.url().pathSegments().get(1).equals("token")) {
+                    if (!original.url().pathSegments().contains("token")) {
                         if(getAuthToken() != null) {
                             requestBuilder.header("Authorization", "Bearer " + sCredentials.token);
                         }

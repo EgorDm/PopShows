@@ -56,6 +56,13 @@ public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Det
     }
 
     @Override
+    public String getPoster(boolean small) {
+        return APIUtils.getTMDBImageUrl(base.poster_path, (small)
+                ? APIUtils.Queries.Image.SIZE_SMALL_POSTER
+                : APIUtils.Queries.Image.SIZE_MEDIUM_POSTER);
+    }
+
+    @Override
     public String getTitle() {
         return "Season " + base.season_number;
     }
