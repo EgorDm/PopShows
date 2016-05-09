@@ -71,6 +71,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
+        <activity
+            android:name=".ui.activities.media.MediaSearchActivity"
+            android:label="@string/title_search"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
         <activity
             android:name=".ui.activities.media.MoviePageActivity"
@@ -99,5 +105,4 @@
 
 
     </application>
-
 </manifest>

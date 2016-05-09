@@ -19,7 +19,6 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.adapters.SearchAdapter;
@@ -27,6 +26,7 @@ import net.egordmitriev.watchall.pojo.anilist.AnimeModel;
 import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
 import net.egordmitriev.watchall.pojo.tmdb.SerieModel;
 import net.egordmitriev.watchall.ui.activities.base.BaseActivity;
+import net.egordmitriev.watchall.ui.activities.media.MediaSearchActivity;
 
 /**
  * Created by EgorDm on 5/6/2016.
@@ -238,11 +238,11 @@ public class SearchActivity extends BaseActivity implements AdapterView.OnItemCl
 
     public void searchOpen(String query) {
         mResultsAdapter.submitSearch(query);
-        Toast.makeText(this, "Opening search for: " + query, Toast.LENGTH_SHORT).show();
-        /*Intent intent = new Intent(this, SearchMediaActivity.class);
+        //Toast.makeText(this, "Opening search for: " + query, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MediaSearchActivity.class);
         intent.putExtra(SearchManager.QUERY, query);
         startActivity(intent);
-        dismiss(null);*/
+        dismiss(null);
     }
 
     private void searchFor(String query) {
@@ -265,7 +265,6 @@ public class SearchActivity extends BaseActivity implements AdapterView.OnItemCl
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

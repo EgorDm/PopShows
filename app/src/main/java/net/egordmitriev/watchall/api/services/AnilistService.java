@@ -44,6 +44,6 @@ public interface AnilistService {
     Call<JsonObject> getStaff(@Path("id") int staffId);
 
     @GET("/api/anime/search/{query}")
-    Call<JsonObject> searchAnime(@Path("query") String query, @Query("page") int page);
+    Call<JsonArray> searchAnime(@Path("query") String query, @Query("page") int page);
 
 }

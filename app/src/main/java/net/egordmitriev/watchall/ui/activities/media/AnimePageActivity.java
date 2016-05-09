@@ -53,4 +53,9 @@ public class AnimePageActivity extends AMediaPageActivity {
     public int getOwnID() {
         return PAGE_ANIME;
     }
+
+    @Override
+    protected int getMediaSearchType() {
+        return AnimeModel.TYPE;
+    }
 }
