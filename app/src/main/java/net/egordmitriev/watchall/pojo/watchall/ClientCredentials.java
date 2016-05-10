@@ -32,7 +32,7 @@ public class ClientCredentials implements Parcelable {
     }
 
     public void save() {
-        PreferencesHelper.getInstance().build().setLong(R.string.pref_account_user_expires, exp.getTime());
+        PreferencesHelper.getInstance().build().setLong(R.string.pref_account_user_expires, exp.getTime()).commit();
     }
 
     public static Date load() {

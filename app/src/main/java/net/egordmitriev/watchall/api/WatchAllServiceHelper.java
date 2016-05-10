@@ -50,7 +50,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
                             .header("Accept", "application/json")
                             .method(original.method(), original.body());
                     if (!original.url().pathSegments().contains("token")) {
-                        if(getAuthToken() != null) {
+                        if (getAuthToken() != null) {
                             requestBuilder.header("Authorization", "Bearer " + sCredentials.token);
                         }
                     }
@@ -139,7 +139,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
             @Override
             public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
                 APIError error = ErrorUtils.checkError(response);
-                if(error != null) {
+                if (error != null) {
                     callback.failure(error);
                 }
                 try {
@@ -166,7 +166,8 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
                 .setString(R.string.pref_account_user_name, user.fullname)
                 .setString(R.string.pref_account_user_email, user.email)
                 .setString(R.string.pref_account_user_avatar, user.avatar)
-                .setInt(R.string.pref_account_user_color, user.profile_color);
+                .setInt(R.string.pref_account_user_color, user.profile_color)
+                .commit();
     }
 
     private static UserModel getMyProfileFromCache() {
@@ -179,7 +180,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         );
     }
 
-    public  static <T extends DetailedModel> AMediaCardRecyclerHelper.IMediaItemMenuListener<T> getMediaMenuListener(final FragmentManager manager, final Activity activity) {
+    public static <T extends DetailedModel> AMediaCardRecyclerHelper.IMediaItemMenuListener<T> getMediaMenuListener(final FragmentManager manager, final Activity activity) {
         return new AMediaCardRecyclerHelper.IMediaItemMenuListener<T>() {
             @Override
             public void onMenuItemClick(MenuItem menuItem, T item) {

@@ -75,11 +75,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
         mHandler = new Handler();
         mHeaderView = navigationView.getHeaderView(0);
-        setupHeaderAccount();
+        //setupHeaderAccount();
     }
 
     protected void updateHeaderAccount() {
-        if ((WatchAllAuthenticator.getAccount() != null && mHeaderView.findViewById(R.id.drawer_account_add) != null)
+        if(mHeaderView.findViewById(R.id.drawer_account_add) == null && mHeaderView.findViewById(R.id.drawer_profile_avatar_title) == null) {
+            setupHeaderAccount();
+        } else if ((WatchAllAuthenticator.getAccount() != null && mHeaderView.findViewById(R.id.drawer_account_add) != null)
                 || (WatchAllAuthenticator.getAccount() == null && mHeaderView.findViewById(R.id.drawer_account_add) == null)) {
             ((ViewGroup) mHeaderView).removeAllViews();
             setupHeaderAccount();
