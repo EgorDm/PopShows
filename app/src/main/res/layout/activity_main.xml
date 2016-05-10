@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <net.egordmitriev.watchall.ui.widgets.WrapperView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:childContainerID="@+id/main_content"
+    app:childContainerID="@+id/wrap_content"
     app:parentLayoutID="@layout/activity_drawer">
 
     <include layout="@layout/view_toolbar"/>

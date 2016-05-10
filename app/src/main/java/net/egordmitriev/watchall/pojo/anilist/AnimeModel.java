@@ -79,6 +79,8 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
         public String title_english;
         @SerializedName("type")
         public String type_anime;
+        @SerializedName("adult")
+        public boolean adult;
 
         @SerializedName("synonyms")
         public String[] synonyms;
@@ -105,6 +107,7 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
             super(AnimeModel.TYPE);
         }
 
+
         @Override
         public int describeContents() {
             return 0;
@@ -117,6 +120,7 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
             dest.writeString(this.title_japanese);
             dest.writeString(this.title_english);
             dest.writeString(this.type_anime);
+            dest.writeByte(adult ? (byte) 1 : (byte) 0);
             dest.writeStringArray(this.synonyms);
             dest.writeString(this.airing_status);
             dest.writeFloat(this.average_score);
@@ -134,6 +138,7 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
             this.title_japanese = in.readString();
             this.title_english = in.readString();
             this.type_anime = in.readString();
+            this.adult = in.readByte() != 0;
             this.synonyms = in.createStringArray();
             this.airing_status = in.readString();
             this.average_score = in.readFloat();

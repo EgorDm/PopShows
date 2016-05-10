@@ -34,9 +34,10 @@ public class AnimeListFragment extends RecyclerFragment<ASyncableMediaRecyclerHe
 
                 List<AnimeModel> result = new ArrayList<>(data.length);
                 for (AnimeModel.Base model : data) {
-                    //if (!model.adult) {
-                    result.add(new AnimeModel(model, null));
-                    //}
+                    //Logger.d(model.title_english + " Adult:"+ model.adult);
+                    if (!model.adult) {
+                        result.add(new AnimeModel(model, null));
+                    }
                 }
                 addData(result);
                 if (data.length < APIUtils.TMDB_RESULTS_PERPAGE) {

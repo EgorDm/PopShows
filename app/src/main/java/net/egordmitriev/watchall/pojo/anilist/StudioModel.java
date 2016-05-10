@@ -55,4 +55,9 @@ public class StudioModel extends BaseModel {
             return new StudioModel[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return studio_name;
+    }
 }

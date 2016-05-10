@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:childContainerID="@+id/main_content"
+    app:childContainerID="@+id/wrap_content"
     app:parentLayoutID="@layout/activity_drawer">
 
     <android.support.design.widget.CoordinatorLayout

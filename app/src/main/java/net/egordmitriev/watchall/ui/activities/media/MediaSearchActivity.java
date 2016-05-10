@@ -308,9 +308,9 @@ public class MediaSearchActivity extends BaseActivity implements Toolbar.OnMenuI
 
             List<DetailedModel> results = new ArrayList<>(data.length);
             for (AnimeModel.Base model : data) {
-                //;if(!model.adult) {
-                results.add(new AnimeModel(model, null));
-                //}
+                if(!model.adult) {
+                    results.add(new AnimeModel(model, null));
+                }
             }
             addData(results);
             if (data.length < APIUtils.ANILIST_RESULTS_PERPAGE) {
