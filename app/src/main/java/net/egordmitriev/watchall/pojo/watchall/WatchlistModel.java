@@ -42,6 +42,17 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
         super(TYPE, base, detail);
     }
 
+    public WatchlistModel(String title, String description, int color, boolean isPublic) {
+        super(TYPE);
+        base = new Base();
+        base.title = title;
+        base.color = color;
+        base.is_public = isPublic;
+
+        detail = new Detail();
+        detail.description = description;
+    }
+
     @Override
     public void requestDetail(DetailCallback callback) {
         if (base.is_local) {
@@ -60,7 +71,7 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
     protected void populateModel(JsonObject data) {
         try {
             detail = new Detail();
-            detail.id = base.id;
+            setID(base.id);
             detail.description = data.get("description").getAsString();
             detail.list_contents = new ArrayList<>();
             JsonArray movies = data.get("movies").getAsJsonArray();

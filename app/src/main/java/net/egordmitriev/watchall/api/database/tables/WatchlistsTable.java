@@ -47,8 +47,7 @@ public class WatchlistsTable extends BaseTable {
         if (identifier == -1) {
             identifier = ((int) lastInsertID(sTableName)) + 1;
         }
-        watchlist.base.id = identifier;
-        watchlist.detail.id = identifier;
+        watchlist.setID(identifier);
         insertValues.put(COLUMN_TITLE, watchlist.base.title);
         insertValues.put(COLUMN_BASE_DATA, APIUtils.sGlobalParser.toJson(watchlist.base));
         insertValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(watchlist.detail));

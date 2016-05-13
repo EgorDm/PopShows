@@ -26,4 +26,26 @@
     <color name="lighten_1">#1effffff</color>
     <color name="lighten_2">#7fffffff</color>
     <color name="lighten_3">#b2ffffff</color>
+
+    <color name="colorpicker_red">#F44336</color>
+    <color name="colorpicker_pink">#E91E63</color>
+    <color name="colorpicker_purple">#673AB7</color>
+    <color name="colorpicker_indigo">#3F51B5</color>
+    <color name="colorpicker_blue">#2196F3</color>
+    <color name="colorpicker_green">#4CAF50</color>
+    <color name="colorpicker_yellow">#FFEB3B</color>
+    <color name="colorpicker_orange">#FF5722</color>
+    <color name="colorpicker_grey">#607D8B</color>
+
+    <array name="colorpicker_colors">
+        <item>@color/colorpicker_red</item>
+        <item>@color/colorpicker_pink</item>
+        <item>@color/colorpicker_purple</item>
+        <item>@color/colorpicker_indigo</item>
+        <item>@color/colorpicker_blue</item>
+        <item>@color/colorpicker_green</item>
+        <item>@color/colorpicker_yellow</item>
+        <item>@color/colorpicker_orange</item>
+        <item>@color/colorpicker_grey</item>
+    </array>
 </resources>

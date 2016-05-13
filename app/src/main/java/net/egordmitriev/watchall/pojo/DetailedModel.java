@@ -100,6 +100,17 @@ public abstract class DetailedModel<B extends BaseModel, D extends BaseModel> ex
     public abstract String getDescription();
 
     public abstract AModelView getModelView();
+
+    public void setID(int id) {
+        this.id = id;
+        if(base != null) {
+            base.id = id;
+        }
+        if(detail != null) {
+            detail.id = id;
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;

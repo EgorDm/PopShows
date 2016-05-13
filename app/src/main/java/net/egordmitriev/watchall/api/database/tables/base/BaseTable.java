@@ -94,6 +94,7 @@ public class BaseTable {
                 cursor.moveToNext();
             }
             cursor.close();
+            return ret;
         }
         return null;
     }
