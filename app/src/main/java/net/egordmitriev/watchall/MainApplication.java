@@ -15,6 +15,10 @@ public class MainApplication extends Application {
     private static MainApplication sInstance;
     private static DatabaseHelper sDatabaseHelper;
 
+    /* Future plans
+    TODO: change database lists layout from current all media in list data to add media in own table and a many-to-many relationship. Like my db
+     */
+
     @Override
     public void onCreate() {
         super.onCreate();

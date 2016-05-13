@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Base.AppTheme">
     </style>
 
@@ -41,5 +42,8 @@
         <item name="android:textColorPrimary">@color/text_light</item>
         <item name="colorControlNormal">@color/text_light</item>
         <item name="colorControlActivated">@color/text_light</item>
+    </style>
+
+    <style name="PaddinglessDialog" parent="Theme.AppCompat.Dialog">
     </style>
 </resources>

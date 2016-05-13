@@ -183,6 +183,21 @@ public class WatchlistsTable extends BaseTable {
         return -1;
     }
 
+    public static int getId(String selection, String[] selectionArgs) {
+        Cursor cursor = MainApplication.getDatabase().query(sTableName, new String[]{COLUMN_ID}, selection,
+                selectionArgs, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            try {
+                return cursor.getInt(0);
+            } catch (Exception e) {
+                Logger.e(e, "Error while retrieving server_id for watchlist items select.");
+            } finally {
+                cursor.close();
+            }
+        }
+        return -1;
+    }
+
     public static Date getModified(int identifier) {
         Cursor cursor = MainApplication.getDatabase().query(sTableName, new String[]{COLUMN_MODIFIED}, "id=?",
                 new String[]{Integer.toString(identifier)}, null, null, null);

@@ -1,6 +1,7 @@
 package net.egordmitriev.watchall.helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,9 @@ import net.egordmitriev.watchall.api.WatchAllServiceHelper;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
+import net.egordmitriev.watchall.ui.activities.media.WatchlistDetailActivity;
 import net.egordmitriev.watchall.utils.APIUtils;
+import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,8 +96,8 @@ public class WatchlistPageHelper extends ASyncableMediaRecyclerHelper<WatchlistM
     public void onClick(Card card, View view) {
         MediaCard mediaCard = (MediaCard) card;
         lastViewed = mData.get(mediaCard.clickID - 1);
-        //Intent intent = new Intent(mContext, WatchlistDetailActivity.class);
-        //intent.putExtra(SaveUtils.STATE_SAVED_DATA_LIST, mLastViewed);
-        //startActivity(intent);
+        Intent intent = new Intent(mContext, WatchlistDetailActivity.class);
+        intent.putExtra(SaveUtils.STATE_SAVED_DATA_LIST, lastViewed);
+        mContext.startActivity(intent);
     }
 }

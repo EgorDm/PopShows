@@ -105,6 +105,26 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         return ret;
     }
 
+    public static int getFavouritesID() {
+        int ret = WatchlistsTable.getId("title=?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
+        if (ret != -1) {
+            return ret;
+        }
+
+        WatchlistModel favs = new WatchlistModel(new WatchlistModel.Base(), new WatchlistModel.Detail());
+        favs.base.title = APIUtils.FAVOURITES_WATCHLIST_NAME;
+        favs.base.creator = 42; //TODO: Add the actual user id
+        favs.base.color = 0;
+        favs.base.is_public = false;
+        favs.base.is_local = true;
+        favs.detail.description = "<3 Cookies";
+        favs.detail.list_contents = new ArrayList<>();
+        if (WatchlistsTable.upsert(favs, -1)) {
+            ret = WatchlistsTable.getId("title=?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
+        }
+        return ret;
+    }
+
     public static WatchlistModel.Base[] getMyWatchlists() {
         return WatchlistsTable.getAllBase("title<>?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
     }
