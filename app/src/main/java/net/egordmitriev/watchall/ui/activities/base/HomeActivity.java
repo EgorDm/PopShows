@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.ui.activities.base;
 import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.ui.activities.FavouritesActivity;
 import net.egordmitriev.watchall.ui.activities.SettingsActivity;
 import net.egordmitriev.watchall.ui.activities.WatchlistPageActivity;
 import net.egordmitriev.watchall.ui.activities.media.AnimePageActivity;
@@ -40,7 +41,7 @@ public class HomeActivity extends TabsActivity {
                 intent = new Intent(this, WatchlistPageActivity.class);
                 break;
             case PAGE_FAVOURITES:
-                //intent = new Intent(this, FavouritesActivity.class);
+                intent = new Intent(this, FavouritesActivity.class);
                 break;
             case PAGE_FRIENDS:
                 //intent = new Intent(this, TestMainActivity.class);

@@ -145,7 +145,7 @@ public class WatchlistsTable extends BaseTable {
             int objId = media.get("id").getAsInt();
             for (JsonObject child : detail.list_contents) {
                 if (child != null && child.get("id").getAsInt() == objId) {
-                    return false; //Already has this one.
+                    return true; //Already has this one.
                 }
             }
         }

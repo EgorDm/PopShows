@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/media_movetolist"
+        android:orderInCategory="100"
+        android:title="@string/title_move"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/media_addtolist"
+        android:orderInCategory="101"
+        android:title="@string/title_menu_add_to_list"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/media_deletefromlist"
+        android:orderInCategory="102"
+        android:title="@string/title_delete"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/media_list_share"
+        android:orderInCategory="103"
+        android:title="@string/title_menu_share"
+        app:showAsAction="ifRoom"/>
+</menu>

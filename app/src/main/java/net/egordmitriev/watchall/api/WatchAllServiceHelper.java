@@ -104,6 +104,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         ret.base.is_local = true;
         ret.detail.description = "<3 Cookies";
         ret.detail.list_contents = new ArrayList<>();
+        WatchlistsTable.upsert(ret, -1);
         return ret;
     }
 

@@ -98,6 +98,7 @@ public class WatchlistPageHelper extends ASyncableMediaRecyclerHelper<WatchlistM
         lastViewed = mData.get(mediaCard.clickID - 1);
         Intent intent = new Intent(mContext, WatchlistDetailActivity.class);
         intent.putExtra(SaveUtils.STATE_SAVED_DATA_LIST, lastViewed);
+        intent.putExtra(SaveUtils.SAVED_READ_WRITE, true);
         mContext.startActivity(intent);
     }
 }
