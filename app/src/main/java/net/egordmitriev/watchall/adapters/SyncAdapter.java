@@ -63,7 +63,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         } else {
             syncData = new JsonObject[0];
         }
-        //Logger.json(APIUtils.sGlobalParser.toJson(syncData));
+        Logger.json(APIUtils.sGlobalParser.toJson(syncData));
 
         try {
             Response<JsonObject> response = WatchAllServiceHelper.sService.syncWatchlist(syncData).execute();
@@ -74,7 +74,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 
             JsonArray responseData = response.body().get("data").getAsJsonArray();
-            //Logger.json(APIUtils.sGlobalParser.toJson(responseData));
+            Logger.json(APIUtils.sGlobalParser.toJson(responseData));
             for (int i = 0; i < responseData.size(); i++) {
                 JsonObject object = responseData.get(i).getAsJsonObject();
                 if (object.entrySet().size() == 3) {
@@ -87,12 +87,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         list.server_id = list.id;
                         list.setID(-1);
                         int id = WatchlistsTable.getId("server_id=?", new String[]{Integer.toString(list.server_id)});
-                        Logger.e("Name: " + list.base.title);
                         if(list.base.title.equals(APIUtils.FAVOURITES_WATCHLIST_NAME)) {
                             id = WatchAllServiceHelper.getFavouritesID();
                             WatchlistsTable.setServerId(id, list.server_id, new Date().getTime());
                             list.setID(id);
-                            Logger.e("Name is a favourite " + id);
                         }
                         WatchlistsTable.upsert(list, id);
                     }
