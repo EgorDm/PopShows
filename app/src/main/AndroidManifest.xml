@@ -112,5 +112,25 @@
             android:launchMode="singleTop">
         </activity>
 
+        <service
+            android:name=".services.SyncService"
+            android:exported="true"
+            android:permission="net.egordmitriev.watchall.SYNC"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter"/>
+        </service>
+
+        <provider
+            android:name=".services.WatchAllContentProvider"
+            android:authorities="net.egordmitriev.watchall.provider"
+            android:enabled="true"
+            android:exported="false"/>
+
     </application>
 </manifest>

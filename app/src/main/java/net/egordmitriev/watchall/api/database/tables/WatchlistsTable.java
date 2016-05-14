@@ -198,6 +198,14 @@ public class WatchlistsTable extends BaseTable {
         return -1;
     }
 
+    public static boolean setServerId(int identifier, int serverId, long modified) {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(COLUMN_SERVER_ID, serverId);
+        insertValues.put(COLUMN_MODIFIED, modified);
+        String[] selectionArgs = {Integer.toString(identifier)};
+        return (MainApplication.getDatabase().update(sTableName, insertValues, "id=?", selectionArgs) > 0);
+    }
+
     public static Date getModified(int identifier) {
         Cursor cursor = MainApplication.getDatabase().query(sTableName, new String[]{COLUMN_MODIFIED}, "id=?",
                 new String[]{Integer.toString(identifier)}, null, null, null);
@@ -211,6 +219,13 @@ public class WatchlistsTable extends BaseTable {
             }
         }
         return null;
+    }
+
+    public static boolean setModified(int server_id, long modified) {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(COLUMN_MODIFIED, modified);
+        String[] selectionArgs = {Integer.toString(server_id)};
+        return (MainApplication.getDatabase().update(sTableName, insertValues, "server_id=?", selectionArgs) > 0);
     }
 
     public static void drop() {

@@ -51,7 +51,7 @@ public class MovieModel extends DetailedModel<MovieModel.Base, MovieModel.Detail
     }
 
     @Override
-    protected void populateModel( JsonObject data) {
+    protected void populateModel(JsonObject data) {
         try {
             if(lite) {
                 lite = false;

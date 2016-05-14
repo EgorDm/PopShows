@@ -9,6 +9,7 @@ import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
 import net.egordmitriev.watchall.api.GlobalHelper;
 import net.egordmitriev.watchall.api.base.APIError;
+import net.egordmitriev.watchall.services.SyncService;
 import net.egordmitriev.watchall.ui.activities.base.BaseActivity;
 import net.egordmitriev.watchall.utils.DataCallback;
 
@@ -81,7 +82,7 @@ public class SettingsActivity extends BaseActivity {
             findPreference("synclists").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    //SyncService.syncData();
+                    SyncService.syncData();
                     return true;
                 }
             });

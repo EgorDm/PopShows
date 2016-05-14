@@ -125,6 +125,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         if (WatchlistsTable.upsert(favs, -1)) {
             ret = WatchlistsTable.getId("title=?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
         }
+        Logger.d("Returning fav id = " + ret);
         return ret;
     }
 
@@ -133,14 +134,29 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
     }
 
     public static boolean deleteWatchlist(int identifier) {
-        boolean ret = WatchlistsTable.delete(identifier);
-        if (ret && WatchAllAuthenticator.getAccount() != null) {
+        boolean ret;
+        if (WatchAllAuthenticator.getAccount() != null) {
             int server_id = WatchlistsTable.getServerId(identifier);
-            if (server_id != -1) {
-                sService.deleteWatchlist(server_id);
+            ret = WatchlistsTable.delete(identifier);
+            if (ret && server_id != -1) {
+                Logger.d("Deleting onlline " + server_id);
+                sService.deleteWatchlist(server_id).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
             }
-            ret = true;
+        } else {
+            ret = WatchlistsTable.delete(identifier);
         }
+        Logger.d("Deleting " + identifier);
+
         return ret;
     }
 
