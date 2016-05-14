@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.api;
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
@@ -18,6 +19,7 @@ import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
 import net.egordmitriev.watchall.pojo.watchall.UserModel;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
+import net.egordmitriev.watchall.ui.dialogs.WatchlistAddToDialog;
 import net.egordmitriev.watchall.utils.APIUtils;
 import net.egordmitriev.watchall.utils.DataCallback;
 import net.egordmitriev.watchall.utils.ErrorUtils;
@@ -206,18 +208,17 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
             public void onMenuItemClick(MenuItem menuItem, T item) {
                 switch (menuItem.getItemId()) {
                     case R.id.media_addtolist:
-                        /*WatchlistAddToDialog dialog = WatchlistAddToDialog.newInstance(item);
-                        dialog.show(manager, "Add to list");*/
+                        WatchlistAddToDialog dialog = WatchlistAddToDialog.newInstance(item);
+                        dialog.show(manager, "Add to list");
                         break;
                     case R.id.media_addtofav:
-                        /*if (GlobalAPIHelper.getInstance().watchlistHelper.addMedia((MediaModel) item.base, getLocalFavouritesWatchlistID())) {
-                            Toast.makeText(actitvity, String.format(actitvity.getString(R.string.toast_added_to_list), "Favourites"), Toast.LENGTH_SHORT).show();
+                        if (WatchlistsTable.addMedia(APIUtils.sGlobalParser.toJsonTree(item.base).getAsJsonObject(), WatchAllServiceHelper.getFavouritesID())) {
+                            Toast.makeText(activity, String.format(activity.getString(R.string.toast_added_to_list), "Favourites"), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(actitvity, R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
-                        }*/
+                            Toast.makeText(activity, R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
-                //TODO do something
             }
         };
     }
