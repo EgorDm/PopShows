@@ -23,8 +23,6 @@ import java.util.Date;
 public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Detail> {
     public static final int TYPE = 10;
 
-    public int parentID;
-
     public static SeasonModel[] createArray(SeasonModel.Base[] models) {
         SeasonModel[] ret = new SeasonModel[models.length];
         for (int i = 0; i < models.length; i++) {
@@ -43,7 +41,8 @@ public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Det
 
     @Override
     public void requestDetail(DetailCallback callback) {
-        TMDBServiceHelper.sService.getSeason(this.id, base.season_number).enqueue(getDetailCallback(callback));
+        Logger.d("Parent id is " + base.parentID);
+        TMDBServiceHelper.sService.getSeason(base.parentID, base.season_number).enqueue(getDetailCallback(callback));
     }
 
     @Override
@@ -91,7 +90,11 @@ public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Det
         public int season_number;
         @SerializedName("poster_path")
         public String poster_path;
+        public int parentID;
 
+        public Base() {
+            super(TYPE);
+        }
 
         @Override
         public int describeContents() {
@@ -101,14 +104,11 @@ public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Det
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
-            dest.writeLong(air_date != null ? air_date.getTime() : -1);
+            dest.writeLong(this.air_date != null ? this.air_date.getTime() : -1);
             dest.writeInt(this.episode_count);
             dest.writeInt(this.season_number);
             dest.writeString(this.poster_path);
-        }
-
-        public Base() {
-            super(TYPE);
+            dest.writeInt(this.parentID);
         }
 
         protected Base(Parcel in) {
@@ -118,6 +118,7 @@ public class SeasonModel extends DetailedModel<SeasonModel.Base, SeasonModel.Det
             this.episode_count = in.readInt();
             this.season_number = in.readInt();
             this.poster_path = in.readString();
+            this.parentID = in.readInt();
         }
 
         public static final Creator<Base> CREATOR = new Creator<Base>() {

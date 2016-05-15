@@ -112,7 +112,7 @@ public class SeasonView extends ASmallModelView<SeasonModel> {
 
     @Override
     protected void setupAboutDetail(BaseActivity activity, SeasonModel item, ViewGroup view, boolean hasDetail) {
-        //super.setupAboutDetail(activity, item, view, hasDetail);
+        ((TextView) view.findViewById(R.id.detail_about_summary)).setText(item.getDescription());
     }
 
     @Override
@@ -122,6 +122,6 @@ public class SeasonView extends ASmallModelView<SeasonModel> {
 
     @Override
     protected void setupAboutBase(BaseActivity activity, SeasonModel item, ViewGroup view) {
-        //super.setupAboutBase(activity, item, view);
+        ((TextView) view.findViewById(R.id.detail_about_summary_title)).setText(getDescriptionTitle());
     }
 }

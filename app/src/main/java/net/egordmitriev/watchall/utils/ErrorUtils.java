@@ -23,7 +23,7 @@ public class ErrorUtils {
         APIError error = new APIError();
         try {
             try {
-
+                //TODO: fix serie season crash and serie time
                 JsonObject object = new JsonParser().parse(response.errorBody().string()).getAsJsonObject();
                 if (object.has("status_code")) {
                     return new APIError(object.get("status_code").getAsInt(), object.get("status_message").getAsString());

@@ -69,6 +69,9 @@ public class SerieModel extends DetailedModel<SerieModel.Base, SerieModel.Detail
                 }
             }
             this.detail = APIUtils.sTMDBParser.fromJson(data, SerieModel.Detail.class);
+            for (SeasonModel.Base season : this.detail.seasons) {
+                season.parentID = base.id;
+            }
         } catch (Exception e) {
             Logger.e(e, "Error happened while populating a serie model.\n" + data.toString());
         }

@@ -104,9 +104,6 @@ public class SerieView extends ALargeModelView<SerieModel> {
         ViewGroup extraContainer = (ViewGroup) view.findViewById(R.id.detail_footer_data);
 
         SeasonModel[] seasons = SeasonModel.createArray(item.detail.seasons);
-        for (SeasonModel season : seasons) {
-            season.parentID = item.base.id;
-        }
         addDataCardRow(activity, extraContainer, seasons, R.string.seasons, MediaDetailActivity.PAGE_SEASONS, true);
         PersonModel[] persons = PersonModel.createArray(item.detail.credits.cast);
         addDataCardRow(activity, extraContainer, persons, R.string.cast, MediaDetailActivity.PAGE_CAST, true);
