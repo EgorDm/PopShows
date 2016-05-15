@@ -39,6 +39,8 @@ public class AnimeModel extends DetailedModel<AnimeModel.Base, AnimeModel.Detail
     @Override
     protected void populateModel(JsonObject data) {
         try {
+            //Logger.d("Start date"+ data.get("start_date").getAsLong());
+
             this.detail = APIUtils.sAnilistParser.fromJson(data, AnimeModel.Detail.class);
         } catch (Exception e) {
             Logger.e(e, "Error happened while populating a anime model.\n" + data.toString());

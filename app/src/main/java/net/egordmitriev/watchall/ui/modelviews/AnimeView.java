@@ -246,6 +246,7 @@ public class AnimeView extends ALargeModelView<AnimeModel> {
     }
 
     public String getSubtitleDetail(AnimeModel item) {
+
         return (item.detail.start_date != null)
                 ? APIUtils.sFriendlyDateFormat.format(item.detail.start_date) : "Unknown start date";
     }
