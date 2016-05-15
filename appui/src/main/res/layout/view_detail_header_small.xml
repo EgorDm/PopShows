@@ -12,7 +12,6 @@
         android:layout_height="@dimen/detail_poster_small_height"
         android:layout_marginLeft="@dimen/spacing_large"
         android:layout_marginStart="@dimen/spacing_large"
-        android:background="@color/accent"
         android:scaleType="centerCrop"/>
 
     <LinearLayout

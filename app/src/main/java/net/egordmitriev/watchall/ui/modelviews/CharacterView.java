@@ -21,11 +21,12 @@ public class CharacterView extends ASmallModelView<CharacterModel> {
     public static MediaCard onCreateCard(Context context, CharacterModel item, String prefix, boolean small) {
         if (item.base.actor != null && item.base.actor.length > 0) {
             return new MediaCardSplit(context, item.type,
-                    item.base.name_first + " " + item.base.name_last, item.base.role, item.base.poster,
-                    item.base.actor[0].name_first + " " + item.base.actor[0].name_last, item.base.actor[0].language, item.base.actor[0].poster);
+                    item.getTitle(), item.base.role, item.getPoster(false),
+                    ((item.base.actor[0].name_last != null) ? item.base.actor[0].name_first + " " +item.base.actor[0].name_last : item.base.actor[0].name_first),
+                    item.base.actor[0].language, item.base.actor[0].poster);
         } else {
             return new MediaCardSplit(context, item.type,
-                    item.base.name_first + " " + item.base.name_last, item.base.role, item.base.poster,
+                    item.getTitle(), item.base.role, item.getPoster(true),
                     "Unknown", "Unknown", null);
         }
     }

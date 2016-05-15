@@ -52,8 +52,13 @@ public class CharacterModel extends DetailedModel<CharacterModel.Base, Character
     }
 
     @Override
+    public String getPoster(boolean small) {
+        return base.poster;
+    }
+
+    @Override
     public String getTitle() {
-        return detail.name_japanese;
+        return (base.name_last != null) ? base.name_first + " " + base.name_last : base.name_first;
     }
 
     @Override

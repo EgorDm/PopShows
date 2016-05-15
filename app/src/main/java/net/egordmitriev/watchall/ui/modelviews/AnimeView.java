@@ -181,7 +181,7 @@ public class AnimeView extends ALargeModelView<AnimeModel> {
 
     @Override
     protected String getRuntime(AnimeModel item) {
-        return null;
+        return item.detail.duration + " minutes";
     }
 
     @Override

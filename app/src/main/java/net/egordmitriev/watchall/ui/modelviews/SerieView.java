@@ -114,9 +114,9 @@ public class SerieView extends ALargeModelView<SerieModel> {
     @Override
     protected String getRuntime(SerieModel item) {
         if (item.detail != null && item.detail.runtime != null && item.detail.runtime.length > 0) {
-            return (item.detail.runtime.length == 1)
-                    ? item.detail.runtime[0] + " - " + item.detail.runtime[item.detail.runtime.length - 1]
-                    : Integer.toString(item.detail.runtime[0]);
+            return (item.detail.runtime.length > 1)
+                    ? item.detail.runtime[0] + " - " + item.detail.runtime[item.detail.runtime.length - 1] + " minutes"
+                    : Integer.toString(item.detail.runtime[0]) + " minutes";
         } else {
             return null;
         }

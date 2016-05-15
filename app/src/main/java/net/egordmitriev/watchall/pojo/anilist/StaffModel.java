@@ -58,7 +58,7 @@ public class StaffModel extends DetailedModel<StaffModel.Base, StaffModel.Detail
 
     @Override
     public String getTitle() {
-        return base.name_first + " " + base.name_last;
+        return (base.name_last != null) ? base.name_first + " " + base.name_last : base.name_first;
     }
 
     @Override
