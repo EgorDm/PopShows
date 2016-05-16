@@ -36,4 +36,6 @@
     <dimen name="detail_poster_small_height">172dp</dimen>
 
     <dimen name="media_section_height">60dp</dimen>
+
+    <dimen name="user_stats_container">92dp</dimen>
 </resources>

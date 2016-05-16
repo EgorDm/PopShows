@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.ui.activities.FavouritesActivity;
+import net.egordmitriev.watchall.ui.activities.ProfileActivity;
 import net.egordmitriev.watchall.ui.activities.SettingsActivity;
 import net.egordmitriev.watchall.ui.activities.WatchlistPageActivity;
 import net.egordmitriev.watchall.ui.activities.media.AnimePageActivity;
@@ -47,14 +48,14 @@ public class HomeActivity extends TabsActivity {
                 //intent = new Intent(this, TestMainActivity.class);
                 break;
             case PAGE_PROFILE:
-               // intent = new Intent(this, UserProfileActivity.class);
+                intent = new Intent(this, ProfileActivity.class);
                 break;
             case PAGE_SETTINGS:
                 intent = new Intent(this, SettingsActivity.class);
                 break;
         }
 
-        if(intent != null) {
+        if (intent != null) {
             createBackStack(intent);
         }
     }

@@ -116,7 +116,7 @@ public class WatchlistsTable extends BaseTable {
 
     public static WatchlistModel.Base[] getAllBase(String selection, String[] selectionArgs) {
         WatchlistModel.Base[] ret = getJsonAll(sTableName, new String[]{COLUMN_BASE_DATA}, selection, selectionArgs, WatchlistModel.Base.class);
-        if(ret != null) {
+        if (ret != null) {
             for (WatchlistModel.Base aRet : ret) {
                 aRet.is_local = true; //TODO: I doubt it will work
             }
@@ -127,7 +127,7 @@ public class WatchlistsTable extends BaseTable {
     public static WatchlistModel.Base getBase(int identifier) {
         String[] columns = {COLUMN_BASE_DATA};
         WatchlistModel.Base ret = getJsonFirst(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, WatchlistModel.Base.class);
-        if(ret != null) ret.is_local = true;
+        if (ret != null) ret.is_local = true;
         return ret;
     }
 

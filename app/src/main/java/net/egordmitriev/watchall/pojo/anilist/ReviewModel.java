@@ -31,7 +31,6 @@ public class ReviewModel extends BaseModel{
     @SerializedName("user")
     public UserModel user;
 
-
     @Override
     public int describeContents() {
         return 0;

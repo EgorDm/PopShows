@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <net.egordmitriev.watchall.appui.widgets.AdvancedCardRecycler
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_large"
+        app:list_card_layout_resourceID="@layout/card_media_small_list_layout"/>
+
+    <net.egordmitriev.loaderview.LoaderView
+        android:id="@+id/loaderview_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:error_message="Something went wrong."
+        app:state="loading"
+        android:layout_gravity="center"
+        app:extra_resourceID="@layout/loader_noactivity"/>
+
+</FrameLayout>

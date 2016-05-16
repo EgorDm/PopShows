@@ -111,6 +111,11 @@
             android:label="@string/title_favourites"
             android:launchMode="singleTop">
         </activity>
+        <activity
+            android:name=".ui.activities.ProfileActivity"
+            android:label="@string/title_user_profile">
+        </activity>
+
 
         <service
             android:name=".services.SyncService"

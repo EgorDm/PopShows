@@ -34,7 +34,6 @@ public class UserModel extends BaseModel {
     @SerializedName("watchlists")
     public WatchlistModel.Base[] watchlists;
 
-
     @Override
     public int describeContents() {
         return 0;

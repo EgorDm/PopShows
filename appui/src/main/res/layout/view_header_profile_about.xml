@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        app:cardBackgroundColor="@color/card_native_background"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/user_stats_container"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_total_watched"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                    <TextView
+                        android:id="@+id/user_total_watched"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1237"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/user_stats_container"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_reviews"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                    <TextView
+                        android:id="@+id/user_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1237"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/user_stats_container"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_followers"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                    <TextView
+                        android:id="@+id/user_followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1237"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/user_stats_container"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_following"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                    <TextView
+                        android:id="@+id/user_following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1237"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/detail_extra_section"
+        style="@style/card_section_container"
+        android:layout_height="60dp"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_large">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_feed"/>
+
+        <TextView
+            android:id="@+id/detail_extra_section_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:text="@string/user_activity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+    </LinearLayout>
+</LinearLayout>

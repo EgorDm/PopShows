@@ -15,7 +15,7 @@ import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.appui.adapters.LoaderCardsAdapter;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
-import net.egordmitriev.watchall.pojo.DetailedModel;
+import net.egordmitriev.watchall.pojo.CardedModel;
 import net.egordmitriev.watchall.utils.DataCallback;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.Collection;
 /**
  * Created by EgorDm on 5/1/2016.
  */
-public abstract class ASyncableMediaRecyclerHelper<T extends DetailedModel, U>
+public abstract class ASyncableMediaRecyclerHelper<T extends CardedModel, U>
         extends AMediaCardRecyclerHelper<T, LoaderCardsAdapter<MediaCard>>
         implements LoaderView.LoaderViewCallback, Runnable {
 
@@ -45,7 +45,7 @@ public abstract class ASyncableMediaRecyclerHelper<T extends DetailedModel, U>
             public void failure(APIError error) {
                 setState(LoaderView.STATE_ERROR);
                 mLockedRequest = false;
-                if(error!= null) Logger.e(error.getMessage());
+                if (error != null) Logger.e(error.getMessage());
             }
         };
     }
@@ -63,6 +63,7 @@ public abstract class ASyncableMediaRecyclerHelper<T extends DetailedModel, U>
         mLockedRequest = true;
         mRequestData.page = mCurrentPage;
     }
+
     @Override
     public void onRequestInitial() {
         setState(LoaderView.STATE_LOADING);
@@ -71,7 +72,7 @@ public abstract class ASyncableMediaRecyclerHelper<T extends DetailedModel, U>
 
     @Override
     public void onRetryClick() {
-        if(!mLockedRequest && !dataEnded) {
+        if (!mLockedRequest && !dataEnded) {
             requestData();
         }
     }
@@ -80,7 +81,7 @@ public abstract class ASyncableMediaRecyclerHelper<T extends DetailedModel, U>
     @Override
     public void run() {
         mCurrentPage++;
-        if(!dataEnded && !mLockedRequest) {
+        if (!dataEnded && !mLockedRequest) {
             requestData();
         }
     }
@@ -106,7 +107,7 @@ public abstract class ASyncableMediaRecyclerHelper<T extends DetailedModel, U>
     @Override
     public void setState(int state) {
         super.setState(state);
-        if(mData == null || mData.size() < 1) {
+        if (mData == null || mData.size() < 1) {
             mAdapter.setLoaderState(LoaderView.STATE_IDLE);
         } else {
             mAdapter.setLoaderState(state);
