@@ -54,8 +54,12 @@ public abstract class ASyncableMediaRecyclerHelper<T extends CardedModel, U>
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = super.onCreateView(inflater, container, savedInstanceState);
         mLoaderView.setListener(this);
-        mRecycler.setLoadMoreCallback(this);
+        setupLoadMore();
         return layout;
+    }
+
+    protected void setupLoadMore() {
+        mRecycler.setLoadMoreCallback(this);
     }
 
     public void requestData() {

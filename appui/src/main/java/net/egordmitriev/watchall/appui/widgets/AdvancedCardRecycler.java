@@ -16,7 +16,9 @@ import android.view.View;
  */
 public class AdvancedCardRecycler extends CardsRecycler {
 
-    protected @FloatRange float column_width;
+    protected
+    @FloatRange
+    float column_width;
 
     private boolean mGridLayout;
     private Runnable mLoadMoreCallback;
@@ -71,12 +73,12 @@ public class AdvancedCardRecycler extends CardsRecycler {
         }
     }
 
+    public boolean loadingMore = false;
     public void setLoadMoreCallback(Runnable loadNextCallback) {
         mLoadMoreCallback = loadNextCallback;
         OnScrollListener listener = new OnScrollListener() {
             int visibleThreshold = 5;
             int firstVisibleItem, visibleItemCount, totalItemCount, previousTotal;
-            boolean loading;
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -87,18 +89,18 @@ public class AdvancedCardRecycler extends CardsRecycler {
                     firstVisibleItem = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
                 }
 
-                if (loading) {
+                if (loadingMore) {
                     if (totalItemCount > previousTotal) {
-                        loading = false;
+                        loadingMore = false;
                         previousTotal = totalItemCount;
                     }
                 }
 
-                if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+                if (!loadingMore && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
                     if (mLoadMoreCallback != null) {
                         mLoadMoreCallback.run();
                     }
-                    loading = true;
+                    loadingMore = true;
                 }
             }
         };

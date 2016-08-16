@@ -9,7 +9,6 @@ import android.view.View;
 
 import net.egordmitriev.loaderview.LoaderView;
 import net.egordmitriev.watchall.R;
-import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.helpers.ASyncableMediaRecyclerHelper;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
@@ -20,6 +19,7 @@ import net.egordmitriev.watchall.utils.APIUtils;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
@@ -43,6 +43,11 @@ public class WatchlistListFragment extends RecyclerFragment<WatchlistListFragmen
         public void onCreate(Bundle savedState, Bundle arguments) {
             super.onCreate(savedState, arguments);
             mRequestData = new ListRequestData(-1, WatchlistModel.TYPE);
+        }
+
+        @Override
+        protected void setupLoadMore() {
+
         }
 
         @Override
@@ -72,15 +77,18 @@ public class WatchlistListFragment extends RecyclerFragment<WatchlistListFragmen
         public void requestData() {
             super.requestData();
             onRequestInitial();
-    }
+        }
 
         @Override
         public void onRequestInitial() {
             super.onRequestInitial();
-            //GlobalAPIHelper.getInstance().watchlistHelper.getLocalWatchlistBase(mAPICallback);
+            // mRequestCallback.success(null);
+        }
 
-            mRequestCallback.success(WatchlistsTable.getAllBase(null, null));
-            //TODO: load from arguments
+        @Override
+        public void addData(Collection<WatchlistModel> data) {
+            super.addData(data);
+            mAdapter.setLoaderState(LoaderView.STATE_EXTRA);//TODO: chnage fklin loader
         }
 
         @Override

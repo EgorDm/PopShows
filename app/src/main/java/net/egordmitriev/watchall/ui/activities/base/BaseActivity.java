@@ -96,7 +96,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                     if (data.avatar == null) {
                         ((TextView) mHeaderView.findViewById(R.id.drawer_profile_avatar_title)).setText(data.fullname);
                     } else {
-                        Glide.with(BaseActivity.this).load(APIUtils.getAvatarUrl(data.id)).into(avatar);
+                        Glide.with(BaseActivity.this).load(APIUtils.getAvatarUrl(data.id)).placeholder(R.drawable.noposter_media).into(avatar);
                     }
                 }
 

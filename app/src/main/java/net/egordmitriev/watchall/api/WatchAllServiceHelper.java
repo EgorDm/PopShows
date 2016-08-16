@@ -160,6 +160,29 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         return ret;
     }
 
+    public static void getUser(final DataCallback<UserModel> callback, int userID) {
+        sService.getUser(userID).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                APIError error = ErrorUtils.checkError(response);
+                if (error != null) {
+                    callback.failure(error);
+                }
+                try {
+                    UserModel ret = APIUtils.sGlobalParser.fromJson(response.body().get("data").getAsJsonObject(), UserModel.class);
+                    callback.success(ret);
+                } catch (Exception e) {
+                    callback.failure(new APIError(1337, e.getMessage()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.failure(new APIError(1337, t.getMessage()));
+            }
+        });
+    }
+
     public static void getMyProfile(final DataCallback<UserModel> callback, boolean invalidate) {
         if (WatchAllAuthenticator.getAccount() == null) {
             callback.failure(null);
@@ -182,7 +205,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
                     callback.failure(error);
                 }
                 try {
-                    UserModel ret = APIUtils.sTMDBParser.fromJson(response.body().get("data").getAsJsonObject(), UserModel.class);
+                    UserModel ret = APIUtils.sGlobalParser.fromJson(response.body().get("data").getAsJsonObject(), UserModel.class);
                     callback.success(ret);
                     cacheMyProfile(ret);
                 } catch (Exception e) {
