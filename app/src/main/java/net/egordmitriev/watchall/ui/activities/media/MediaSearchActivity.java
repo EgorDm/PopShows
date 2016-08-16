@@ -193,7 +193,6 @@ public class MediaSearchActivity extends BaseActivity implements Toolbar.OnMenuI
 
         private String mQuery;
 
-
         public void performSearch(String pQuery, int pMediatype) {
             mResultsAdapter.submitSearch(pQuery);
             if (pQuery != null && !pQuery.equals(mQuery)) {
@@ -296,6 +295,8 @@ public class MediaSearchActivity extends BaseActivity implements Toolbar.OnMenuI
             if (data.length < APIUtils.TMDB_RESULTS_PERPAGE) {
                 dataEnded = true;
                 setState(LoaderView.STATE_EXTRA);
+            } else {
+                mRecycler.loadingMore = false;
             }
         }
 
@@ -316,6 +317,8 @@ public class MediaSearchActivity extends BaseActivity implements Toolbar.OnMenuI
             if (data.length < APIUtils.ANILIST_RESULTS_PERPAGE) {
                 dataEnded = true;
                 setState(LoaderView.STATE_EXTRA);
+            } else {
+                mRecycler.loadingMore = false;
             }
         }
 
