@@ -39,7 +39,7 @@ public class SerieListFragment extends RecyclerFragment<ASyncableMediaRecyclerHe
                     //}
                 }
                 addData(result);
-                if (data.length < APIUtils.ANILIST_RESULTS_PERPAGE) {
+                if (data.length < APIUtils.TMDB_RESULTS_PERPAGE) {
                     dataEnded = true;
                     setState(LoaderView.STATE_EXTRA);
                 }
