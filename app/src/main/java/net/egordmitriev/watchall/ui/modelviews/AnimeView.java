@@ -200,7 +200,7 @@ public class AnimeView extends ALargeModelView<AnimeModel> {
         crewStub.setLayoutResource(R.layout.view_detail_about_nameinfo);
         View nameView = crewStub.inflate();
         displayTextContainer((TextView) nameView.findViewById(R.id.detail_about_name_synonyms_content),
-                TextUtils.join(", ", item.base.synonyms));
+                (item.base.synonyms != null) ? TextUtils.join(", ", item.base.synonyms) : "None");
         displayTextContainer((TextView) nameView.findViewById(R.id.detail_about_name_japanese_content),
                 item.base.title_japanese);
         displayTextContainer((TextView) nameView.findViewById(R.id.detail_about_name_english_content),
