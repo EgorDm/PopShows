@@ -119,9 +119,7 @@
 
         <service
             android:name=".services.SyncService"
-            android:exported="true"
-            android:permission="net.egordmitriev.watchall.SYNC"
-            android:process=":sync">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter"/>
             </intent-filter>

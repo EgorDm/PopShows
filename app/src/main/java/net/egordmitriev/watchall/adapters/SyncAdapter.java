@@ -63,6 +63,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         } else {
             syncData = new JsonObject[0];
         }
+        //Log.d("PRETTYLOGGER", APIUtils.sGlobalParser.toJson(syncData));
         Logger.json(APIUtils.sGlobalParser.toJson(syncData));
 
         try {
@@ -71,7 +72,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             if (error != null) {
                 return;
             }
-
 
             JsonArray responseData = response.body().get("data").getAsJsonArray();
             Logger.json(APIUtils.sGlobalParser.toJson(responseData));
@@ -110,7 +110,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         JsonObject ret = APIUtils.sGlobalParser.toJsonTree(data.base, WatchlistModel.Base.class).getAsJsonObject();
         ret.addProperty("modified", data.modified / 1000);
         ret.remove("id");
-        if(data.server_id != -1) {
+        ret.add("local_id", new JsonPrimitive(data.id));
+        if(data.server_id > 0) {
             ret.add("id", new JsonPrimitive(data.server_id));
         }
         if (data.detail != null) {

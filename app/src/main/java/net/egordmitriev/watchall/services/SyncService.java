@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.orhanobut.logger.Logger;
+
 import net.egordmitriev.watchall.adapters.SyncAdapter;
 import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
 
@@ -32,6 +34,7 @@ public class SyncService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Logger.d("test bind");
         return sSyncAdapter.getSyncAdapterBinder();
     }
 
