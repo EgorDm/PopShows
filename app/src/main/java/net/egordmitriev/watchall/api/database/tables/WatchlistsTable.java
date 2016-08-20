@@ -44,6 +44,10 @@ public class WatchlistsTable extends BaseTable {
     }
 
     public static boolean upsert(WatchlistModel watchlist, int identifier) {
+        return upsert(watchlist,identifier,  Utils.convertMillsToUnix(new Date().getTime()));
+    }
+
+    public static boolean upsert(WatchlistModel watchlist, int identifier, long modified) {
         ContentValues insertValues = new ContentValues();
         if (identifier == -1) {
             identifier = ((int) lastInsertID(sTableName)) + 1;
@@ -52,7 +56,7 @@ public class WatchlistsTable extends BaseTable {
         insertValues.put(COLUMN_TITLE, watchlist.base.title);
         insertValues.put(COLUMN_BASE_DATA, APIUtils.sGlobalParser.toJson(watchlist.base));
         insertValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(watchlist.detail));
-        insertValues.put(COLUMN_MODIFIED, Utils.convertMillsToUnix(new Date().getTime()));
+        insertValues.put(COLUMN_MODIFIED, modified);
         if (watchlist.server_id != 0) {
             insertValues.put(COLUMN_SERVER_ID, watchlist.server_id);
             return upsert(sTableName, insertValues, "server_id=?", new String[]{Integer.toString(watchlist.server_id)});

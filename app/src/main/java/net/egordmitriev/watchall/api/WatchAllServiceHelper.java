@@ -104,7 +104,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         ret.base.is_local = true;
         ret.detail.description = "<3 Cookies";
         ret.detail.list_contents = new ArrayList<>();
-        WatchlistsTable.upsert(ret, -1);
+        WatchlistsTable.upsert(ret, -1, 0);
         return ret;
     }
 
@@ -122,7 +122,7 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         favs.base.is_local = true;
         favs.detail.description = "<3 Cookies";
         favs.detail.list_contents = new ArrayList<>();
-        if (WatchlistsTable.upsert(favs, -1)) {
+        if (WatchlistsTable.upsert(favs, -1, 0)) {
             ret = WatchlistsTable.getId("title=?", new String[]{APIUtils.FAVOURITES_WATCHLIST_NAME});
         }
         Logger.d("Returning fav id = " + ret);
