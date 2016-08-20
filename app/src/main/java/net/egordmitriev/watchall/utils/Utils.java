@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.utils;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,5 +26,17 @@ public class Utils {
         }
         //noinspection unchecked
         return list.toArray((T[]) Array.newInstance(object.getClass().getComponentType(), list.size()));
+    }
+
+    public static Date convertUnixToDate(long unix) {
+        int numberOfDigits = String.valueOf(unix).length();
+        if(numberOfDigits <= 10) {
+            return new Date(unix*1000L);
+        }
+        return new Date(unix);
+    }
+
+    public static long convertMillsToUnix(long mills) {
+        return mills/1000L;
     }
 }

@@ -10,6 +10,7 @@ import net.egordmitriev.watchall.MainApplication;
 import net.egordmitriev.watchall.api.database.tables.base.BaseTable;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
 import net.egordmitriev.watchall.utils.APIUtils;
+import net.egordmitriev.watchall.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class WatchlistsTable extends BaseTable {
         insertValues.put(COLUMN_TITLE, watchlist.base.title);
         insertValues.put(COLUMN_BASE_DATA, APIUtils.sGlobalParser.toJson(watchlist.base));
         insertValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(watchlist.detail));
-        insertValues.put(COLUMN_MODIFIED, new Date().getTime());
+        insertValues.put(COLUMN_MODIFIED, Utils.convertMillsToUnix(new Date().getTime()));
         if (watchlist.server_id != 0) {
             insertValues.put(COLUMN_SERVER_ID, watchlist.server_id);
             return upsert(sTableName, insertValues, "server_id=?", new String[]{Integer.toString(watchlist.server_id)});
@@ -125,7 +126,7 @@ public class WatchlistsTable extends BaseTable {
     }
 
     public static WatchlistModel.Base getBase(int identifier) {
-        String[] columns = {COLUMN_BASE_DATA};
+        String[] columns = {COLUMN_BASE_DATA, COLUMN_MODIFIED};
         WatchlistModel.Base ret = getJsonFirst(sTableName, columns, "id=?", new String[]{Integer.toString(identifier)}, WatchlistModel.Base.class);
         if (ret != null) ret.is_local = true;
         return ret;
@@ -150,7 +151,12 @@ public class WatchlistsTable extends BaseTable {
             }
         }
         detail.list_contents.add(0, media);
-        return saveJsonObject(sTableName, COLUMN_DETAIL_DATA, identifier, detail);
+
+        Logger.d("putting newest modified.");
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(detail));
+        contentValues.put(COLUMN_MODIFIED, Utils.convertMillsToUnix(new Date().getTime()));
+        return saveObjectValues(sTableName, contentValues, identifier);
     }
 
     public static boolean removeMedia(int mediaId, int identifier) {
@@ -165,7 +171,11 @@ public class WatchlistsTable extends BaseTable {
                 ret = true;
             }
         }
-        return ret && saveJsonObject(sTableName, COLUMN_DETAIL_DATA, identifier, detail);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_DETAIL_DATA, APIUtils.sGlobalParser.toJson(detail));
+        contentValues.put(COLUMN_MODIFIED, Utils.convertMillsToUnix(new Date().getTime()));
+         return ret && saveObjectValues(sTableName, contentValues, identifier);
     }
 
     public static int getServerId(int identifier) {
@@ -211,7 +221,7 @@ public class WatchlistsTable extends BaseTable {
                 new String[]{Integer.toString(identifier)}, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             try {
-                return new Date(cursor.getLong(0));
+                return Utils.convertUnixToDate(cursor.getLong(0));
             } catch (Exception e) {
                 Logger.e(e, "Error while retrieving modified for watchlist items select.");
             } finally {

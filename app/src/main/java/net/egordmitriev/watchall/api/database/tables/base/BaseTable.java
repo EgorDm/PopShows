@@ -3,6 +3,9 @@ package net.egordmitriev.watchall.api.database.tables.base;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.MainApplication;
@@ -69,7 +72,12 @@ public class BaseTable {
         Cursor cursor = MainApplication.getDatabase().query(tableName, columns, selection, selectionArgs, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             try {
-                return APIUtils.sGlobalParser.fromJson(cursor.getString(0), type);
+                JsonParser parser = new JsonParser();
+                JsonObject obj = parser.parse(cursor.getString(0)).getAsJsonObject();
+                if(columns.length > 1) {
+                    obj.add("modified", new JsonPrimitive(cursor.getLong(1)));
+                }
+                return APIUtils.sGlobalParser.fromJson(obj, type);
             } catch (Exception e) {
                 Logger.e(e, "Error while retrieving detail for json item select: " + selectionArgs[0]);
             } finally {
@@ -84,9 +92,14 @@ public class BaseTable {
             @SuppressWarnings("unchecked")
             T[] ret = (T[]) Array.newInstance(type, cursor.getCount());
             int i = 0;
+            JsonParser parser = new JsonParser();
             while (!cursor.isAfterLast()) {
                 try {
-                    ret[i] = APIUtils.sGlobalParser.fromJson(cursor.getString(0), type);
+                    JsonObject obj = parser.parse(cursor.getString(0)).getAsJsonObject();
+                    if(columns.length > 1) {
+                        obj.add("modified", new JsonPrimitive(cursor.getLong(1)));
+                    }
+                    ret[i] = APIUtils.sGlobalParser.fromJson(obj, type);
                 } catch (Exception e) {
                     Logger.e(e, "Error while retrieving detail for json items select: " + selectionArgs[0]);
                 }
@@ -102,6 +115,9 @@ public class BaseTable {
         ContentValues contentValues = new ContentValues();
         contentValues.put(column, APIUtils.sGlobalParser.toJson(item));
         return (MainApplication.getDatabase().update(tableName, contentValues, "id=?", new String[]{Integer.toString(identifier)}) > 0);
+    }
+    protected static <T> boolean saveObjectValues(String tableName, ContentValues values, int identifier) {
+        return (MainApplication.getDatabase().update(tableName, values, "id=?", new String[]{Integer.toString(identifier)}) > 0);
     }
 
     protected static void drop(String tableName) {
