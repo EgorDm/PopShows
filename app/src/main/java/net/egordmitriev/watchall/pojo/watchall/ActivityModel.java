@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.annotations.SerializedName;
+import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCardSmall;
@@ -33,19 +34,23 @@ public class ActivityModel extends CardedModel {
     public String name;
     @SerializedName("poster")
     public String poster;
+    @SerializedName("data_type")
+    public int media_type;
 
-    public ActivityModel(int type, int action_type, int data_id, Date created, String name, String poster) {
+    public ActivityModel(int type, int media_type, int action_type, int data_id, Date created, String name, String poster) {
         super(type);
         this.action_type = action_type;
         this.data_id = data_id;
         this.created = created;
         this.name = name;
         this.poster = poster;
+        this.media_type = media_type;
     }
 
     @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        return new MediaCardSmall(context, -1, getTitle(), getSubtitle(), APIUtils.posterFromType(type, poster), -1f, null);
+        Logger.d("Poster: " + APIUtils.posterFromType(media_type, poster) + "\n " + media_type);
+        return new MediaCardSmall(context, -1, getTitle(), getSubtitle(), APIUtils.posterFromType(media_type, poster), -1f, null);
     }
 
     private String getTitle() {
@@ -79,6 +84,7 @@ public class ActivityModel extends CardedModel {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.action_type);
+        dest.writeInt(this.media_type);
         dest.writeLong(created != null ? created.getTime() : -1);
         dest.writeInt(this.data_id);
         dest.writeString(this.name);
@@ -92,6 +98,7 @@ public class ActivityModel extends CardedModel {
     protected ActivityModel(Parcel in) {
         super(in);
         this.action_type = in.readInt();
+        this.media_type = in.readInt();
         long tmpCreated = in.readLong();
         this.created = tmpCreated == -1 ? null : new Date(tmpCreated);
         this.data_id = in.readInt();

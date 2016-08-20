@@ -15,6 +15,7 @@ import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.api.WatchAllServiceHelper;
 import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
+import net.egordmitriev.watchall.pojo.watchall.ActivityModel;
 import net.egordmitriev.watchall.pojo.watchall.ReviewModel;
 import net.egordmitriev.watchall.pojo.watchall.UserModel;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
@@ -27,6 +28,7 @@ import net.egordmitriev.watchall.utils.DataCallback;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -129,7 +131,13 @@ public class ProfileActivity extends TabsActivity implements AppBarLayout.OnOffs
 
     @Override
     protected Adapter setupTabs(Adapter adapter) {
-        adapter.addFragment(new Adapter.FragmentTab(new ProfileAboutFragment(), "About"));
+
+        ProfileAboutFragment aboutFragment = new ProfileAboutFragment();
+        Bundle aboutBundle = new Bundle();
+        ArrayList<ActivityModel> activities = new ArrayList<>(Arrays.asList(mUserModel.activities));
+        aboutBundle.putParcelableArrayList(SaveUtils.STATE_SAVED_DATA_LIST, activities);
+        aboutFragment.setArguments(aboutBundle);
+        adapter.addFragment(new Adapter.FragmentTab(aboutFragment, "About"));
         WatchlistListFragment watchlistListFragment = new WatchlistListFragment();
 
         Bundle watchlistBundle = new Bundle();

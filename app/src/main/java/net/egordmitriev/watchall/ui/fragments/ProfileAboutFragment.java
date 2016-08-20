@@ -1,6 +1,7 @@
 package net.egordmitriev.watchall.ui.fragments;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +14,13 @@ import net.egordmitriev.watchall.appui.adapters.ALoaderHeaderCardsAdapter;
 import net.egordmitriev.watchall.appui.adapters.LoaderCardsAdapter;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.helpers.ASyncableMediaRecyclerHelper;
-import net.egordmitriev.watchall.pojo.anilist.AnimeModel;
-import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
 import net.egordmitriev.watchall.pojo.watchall.ActivityModel;
 import net.egordmitriev.watchall.ui.fragments.base.RecyclerFragment;
+import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,10 +44,15 @@ public class ProfileAboutFragment extends RecyclerFragment<ProfileAboutFragment.
 
         @Override
         public void onRequestInitial() {
-            ActivityModel[] ret = new ActivityModel[2];
-            ret[0] = new ActivityModel(AnimeModel.TYPE, ActivityModel.ACTION_WATCHED, 1, new Date(), "Cowboy Bebop", "1");
-            ret[1] = new ActivityModel(MovieModel.TYPE, ActivityModel.ACTION_REVIEWED, 550, new Date(), "Fight Club", "/hNFMawyNDWZKKHU4GYCBz1krsRM.jpg");
-            mRequestCallback.success(ret);
+            Bundle args = getArguments();
+            if (args != null) {
+                ArrayList<ActivityModel> activities = args.getParcelableArrayList(SaveUtils.STATE_SAVED_DATA_LIST);
+                if (activities != null) {
+                    ActivityModel[] ret = activities.toArray(new ActivityModel[activities.size()]);
+                    mRequestCallback.success(ret);
+                }
+            }
+            mRequestCallback.success(new ActivityModel[0]);
             //TODO: ask server for activities
         }
 

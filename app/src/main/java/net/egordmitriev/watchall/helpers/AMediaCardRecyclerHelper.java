@@ -55,7 +55,11 @@ public abstract class AMediaCardRecyclerHelper<T extends CardedModel, A extends 
             dataEnded = savedState.getBoolean(SaveUtils.STATE_SAVED_DATA_ENDED, false);
         }
         if (arguments != null) {
-            mRequestData = arguments.getParcelable(SaveUtils.SAVED_DISPLAY_DATA);
+            ListRequestData requestData = arguments.getParcelable(SaveUtils.SAVED_DISPLAY_DATA);
+            if(requestData != null) {
+                mRequestData = requestData;
+            }
+
         }
     }
 
