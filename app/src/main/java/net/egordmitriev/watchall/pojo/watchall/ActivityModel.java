@@ -60,7 +60,7 @@ public class ActivityModel extends CardedModel {
                 ret.append("Watched ");
                 break;
             case ACTION_ADDED_TO_LIST:
-                ret.append("Added ");
+                ret.append("Added to list ");
                 break;
             case ACTION_REVIEWED:
                 ret.append("Placed a review on ");
