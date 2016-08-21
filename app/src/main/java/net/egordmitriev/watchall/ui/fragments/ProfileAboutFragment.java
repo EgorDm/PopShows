@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import net.egordmitriev.loaderview.LoaderView;
 import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.api.WatchAllServiceHelper;
+import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.appui.adapters.ALoaderHeaderCardsAdapter;
 import net.egordmitriev.watchall.appui.adapters.LoaderCardsAdapter;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
@@ -17,6 +19,7 @@ import net.egordmitriev.watchall.helpers.ASyncableMediaRecyclerHelper;
 import net.egordmitriev.watchall.pojo.user.ListRequestData;
 import net.egordmitriev.watchall.pojo.watchall.ActivityModel;
 import net.egordmitriev.watchall.ui.fragments.base.RecyclerFragment;
+import net.egordmitriev.watchall.utils.DataCallback;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
@@ -78,7 +81,26 @@ public class ProfileAboutFragment extends RecyclerFragment<ProfileAboutFragment.
         @Override
         public void requestData() {
             super.requestData();
-            mRequestCallback.success(null);
+            DataCallback<ActivityModel[]> callback = new DataCallback<ActivityModel[]>() {
+                @Override
+                public void success(ActivityModel[] data) {
+                    mRequestCallback.success(data);
+                    mLoaderView.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void failure(APIError error) {
+                    mLoaderView.setState(LoaderView.STATE_ERROR);
+                    if(error.getErrorCode() == 404) {
+                        dataEnded = true;
+                        setState(LoaderView.STATE_EXTRA);
+                        return;
+                    }
+                    mRequestCallback.failure(error);
+                }
+            };
+            int user_id = getArguments().getInt(SaveUtils.SAVED_DISPLAY_DATA_META);
+            WatchAllServiceHelper.getActivities(callback, user_id, mCurrentPage);
             //TODO: ask server for even more activities
         }
 

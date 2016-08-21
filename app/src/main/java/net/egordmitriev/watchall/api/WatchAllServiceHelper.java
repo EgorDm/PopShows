@@ -16,6 +16,7 @@ import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.api.services.WatchAllService;
 import net.egordmitriev.watchall.helpers.AMediaCardRecyclerHelper;
 import net.egordmitriev.watchall.pojo.DetailedModel;
+import net.egordmitriev.watchall.pojo.watchall.ActivityModel;
 import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
 import net.egordmitriev.watchall.pojo.watchall.UserModel;
 import net.egordmitriev.watchall.pojo.watchall.WatchlistModel;
@@ -27,6 +28,8 @@ import net.egordmitriev.watchall.utils.ErrorUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -220,6 +223,33 @@ public class WatchAllServiceHelper extends ServiceHelperBase {
         });
 
 
+    }
+
+    public static void getActivities(final DataCallback<ActivityModel[]> callback, int userID, int page) {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", Integer.toString(page));
+        params.put("user_id", Integer.toString(userID));
+        sService.getActivities(params).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                APIError error = ErrorUtils.checkError(response);
+                if (error != null) {
+                    callback.failure(error);
+                    return;
+                }
+                try {
+                    ActivityModel[] ret = APIUtils.sGlobalParser.fromJson(response.body().get("activities").getAsJsonArray(), ActivityModel[].class);
+                    callback.success(ret);
+                } catch (Exception e) {
+                    callback.failure(new APIError(1337, e.getMessage()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.failure(new APIError(1337, t.getMessage()));
+            }
+        });
     }
 
     private static void cacheMyProfile(UserModel user) {

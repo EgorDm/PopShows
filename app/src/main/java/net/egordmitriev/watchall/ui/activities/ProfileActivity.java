@@ -136,6 +136,7 @@ public class ProfileActivity extends TabsActivity implements AppBarLayout.OnOffs
         Bundle aboutBundle = new Bundle();
         ArrayList<ActivityModel> activities = new ArrayList<>(Arrays.asList(mUserModel.activities));
         aboutBundle.putParcelableArrayList(SaveUtils.STATE_SAVED_DATA_LIST, activities);
+        aboutBundle.putInt(SaveUtils.SAVED_DISPLAY_DATA_META, mUserModel.id);
         aboutFragment.setArguments(aboutBundle);
         adapter.addFragment(new Adapter.FragmentTab(aboutFragment, "About"));
         WatchlistListFragment watchlistListFragment = new WatchlistListFragment();

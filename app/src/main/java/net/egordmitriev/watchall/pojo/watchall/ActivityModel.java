@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 
 import com.google.gson.annotations.SerializedName;
-import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCard;
 import net.egordmitriev.watchall.appui.widgets.cards.MediaCardSmall;
@@ -49,7 +48,6 @@ public class ActivityModel extends CardedModel {
 
     @Override
     public MediaCard onCreateCard(Context context, String prefix, boolean small) {
-        Logger.d("Poster: " + APIUtils.posterFromType(media_type, poster) + "\n " + media_type);
         return new MediaCardSmall(context, -1, getTitle(), getSubtitle(), APIUtils.posterFromType(media_type, poster), -1f, null);
     }
 
