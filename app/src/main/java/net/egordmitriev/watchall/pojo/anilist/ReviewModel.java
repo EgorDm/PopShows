@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by EgorDm on 4/2/2016.
  */
-public class ReviewModel extends BaseModel{
+public class ReviewModel extends BaseModel {
     public static final int TYPE = 3;
 
     @SerializedName("date")

@@ -131,7 +131,6 @@ public class ProfileActivity extends TabsActivity implements AppBarLayout.OnOffs
 
     @Override
     protected Adapter setupTabs(Adapter adapter) {
-
         ProfileAboutFragment aboutFragment = new ProfileAboutFragment();
         Bundle aboutBundle = new Bundle();
         ArrayList<ActivityModel> activities = new ArrayList<>(Arrays.asList(mUserModel.activities));
@@ -157,7 +156,7 @@ public class ProfileActivity extends TabsActivity implements AppBarLayout.OnOffs
 
         DefaultMediaListFragment reviewFragment = new DefaultMediaListFragment();
         Bundle args = new Bundle();
-        ArrayList<ReviewModel> models = new ArrayList<>();
+        ArrayList<ReviewModel> models = new ArrayList<>(Arrays.asList(mUserModel.reviews));
         models.add(new ReviewModel(null, new Date(), "Was a very fun movie",
                 "I liked it very much but it still kind of strange how the doctor pulled off a stunt like this. I could not beleive my eyes",
                 new UserModel(12, "Egor Dmitriev", "lolol", null, -30), 3.5f));
