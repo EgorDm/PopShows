@@ -47,13 +47,14 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnSignIn"
         style="@style/AppTheme.Button.Accent"
-        android:layout_above="@+id/btnForgotPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_xlarge"
         android:height="58dp"
         android:text="@string/title_continue"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
 <!--
     <android.support.v7.widget.AppCompatButton
