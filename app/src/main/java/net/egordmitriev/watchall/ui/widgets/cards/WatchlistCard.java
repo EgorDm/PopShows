@@ -23,7 +23,7 @@ public class WatchlistCard extends MediaCard {
     protected WatchlistModel mWatchlist;
 
     public WatchlistCard(Context context, WatchlistModel watchlist) {
-        super(context, R.layout.card_media_medium_inner_layout, watchlist.type, watchlist.base.title, "TODO: subtitle", watchlist.base.custom_icon);
+        super(context, R.layout.card_media_medium_inner_layout, watchlist.type, watchlist.base.title, "", watchlist.base.custom_icon);
         mWatchlist = watchlist;
     }
 

@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
-import com.orhanobut.logger.Logger;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.pojo.data.Category;
@@ -16,10 +17,14 @@ import net.egordmitriev.watchall.ui.activities.SearchActivity;
 import net.egordmitriev.watchall.ui.fragments.media.CategoryListFragment;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
+import java.util.Random;
+
 /**
  * Created by EgorDm on 5/1/2016.
  */
 public abstract class AMediaPageActivity extends HomeActivity {
+
+    private AdView mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +35,17 @@ public abstract class AMediaPageActivity extends HomeActivity {
         mViewPager.setCurrentItem(getStarterTab(), false);
         //mTabLayout.getTabAt(getStarterTab()).select();
         //mTabLayout.setScrollPosition(2,0f,true);
-        Logger.d("Select"+getStarterTab());
+
+        mAdView = (AdView) findViewById(R.id.adView);
+
+        Random r = new Random();
+        if(r.nextInt(10) + 1 > 6) {
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("85B8D6B951E3199CC6775109FE4EDB32")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }
+
     }
 
     @Override

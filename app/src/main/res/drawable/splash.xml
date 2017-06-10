@@ -4,7 +4,7 @@
     <item
         android:drawable="@color/splash"/>
 
-    <item>
+    <item android:bottom="80dp">
         <bitmap
             android:gravity="center"
             android:src="@drawable/splash_logo"/>

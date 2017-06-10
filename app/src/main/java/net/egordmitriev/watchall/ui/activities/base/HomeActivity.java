@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.ui.activities.base;
 import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.ui.activities.AboutActivity;
 import net.egordmitriev.watchall.ui.activities.FavouritesActivity;
 import net.egordmitriev.watchall.ui.activities.SettingsActivity;
 import net.egordmitriev.watchall.ui.activities.WatchlistPageActivity;
@@ -22,6 +23,7 @@ public class HomeActivity extends TabsActivity {
 /*    protected static final int PAGE_FRIENDS = R.id.nav_friends;
     protected static final int PAGE_PROFILE = R.id.nav_profile;*/
     protected static final int PAGE_SETTINGS = R.id.nav_settings;
+    protected static final int PAGE_ABOUT = R.id.nav_about;
     protected static final int PAGE_SEARCH = 9;
 
     @Override
@@ -51,6 +53,9 @@ public class HomeActivity extends TabsActivity {
                 break;*/
             case PAGE_SETTINGS:
                 intent = new Intent(this, SettingsActivity.class);
+                break;
+            case PAGE_ABOUT:
+                intent = new Intent(this, AboutActivity.class);
                 break;
         }
 

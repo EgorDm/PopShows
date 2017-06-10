@@ -43,8 +43,23 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+            android:layout_weight="0"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-4143151420048054/5401840121">
+        </com.google.android.gms.ads.AdView>
+
+
     </android.support.design.widget.CoordinatorLayout>
+
+
 
 </net.egordmitriev.watchall.ui.widgets.WrapperView>

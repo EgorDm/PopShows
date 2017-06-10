@@ -43,6 +43,11 @@
                 android:checkable="true"
                 android:icon="@drawable/ic_settings"
                 android:title="@string/title_settings"/>
+            <item
+                android:id="@+id/nav_about"
+                android:checkable="true"
+                android:icon="@drawable/ic_information"
+                android:title="@string/title_about"/>
         </menu>
     </item>
 </menu>

@@ -12,12 +12,14 @@ import net.egordmitriev.watchall.ui.activities.base.HomeActivity;
 import net.egordmitriev.watchall.ui.activities.media.AnimePageActivity;
 import net.egordmitriev.watchall.ui.activities.media.MoviePageActivity;
 import net.egordmitriev.watchall.ui.activities.media.SeriePageActivity;
+import net.egordmitriev.watchall.utils.Ads;
 
 public class MainActivity extends HomeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Ads.Initialize(this);
 
         String result = PreferencesHelper.getInstance().getString(R.string.pref_discovery_homepage);
         int homepage = (result != null) ? Integer.parseInt(result) : 1;
