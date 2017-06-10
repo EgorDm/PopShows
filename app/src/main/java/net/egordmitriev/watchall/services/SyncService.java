@@ -39,7 +39,7 @@ public class SyncService extends Service {
         Bundle extras = new Bundle();
         extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-
         ContentResolver.requestSync(WatchAllAuthenticator.getAccount(), AUTHORITY, extras);
+
     }
 }

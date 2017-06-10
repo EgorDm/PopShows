@@ -3,6 +3,7 @@ package net.egordmitriev.watchall.ui.activities;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
+import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.adapters.WatchAllAuthenticator;
@@ -21,6 +23,7 @@ import net.egordmitriev.watchall.api.GlobalHelper;
 import net.egordmitriev.watchall.api.WatchAllServiceHelper;
 import net.egordmitriev.watchall.api.base.APIError;
 import net.egordmitriev.watchall.pojo.watchall.ClientCredentials;
+import net.egordmitriev.watchall.services.SyncService;
 import net.egordmitriev.watchall.utils.APIUtils;
 import net.egordmitriev.watchall.utils.ErrorUtils;
 
@@ -136,6 +139,10 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity implemen
             WatchAllAuthenticator.getAccountManager().setPassword(account, intent.getStringExtra(PARAM_USER_PASS));
         }
         WatchAllAuthenticator.getAccountManager().setAuthToken(account, mAuthTokenType, intent.getStringExtra(AccountManager.KEY_AUTHTOKEN));
+
+        ContentResolver.setIsSyncable(account, SyncService.AUTHORITY, 1);
+        ContentResolver.setSyncAutomatically(account, SyncService.AUTHORITY, true);
+        Logger.d("Adding sync queue");
 
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);

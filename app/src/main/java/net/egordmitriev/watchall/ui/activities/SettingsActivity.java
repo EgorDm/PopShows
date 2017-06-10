@@ -1,5 +1,6 @@
 package net.egordmitriev.watchall.ui.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -83,6 +84,9 @@ public class SettingsActivity extends BaseActivity {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     SyncService.syncData();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        Toast.makeText(getContext(), "Synchronizing", Toast.LENGTH_LONG).show();
+                    }
                     return true;
                 }
             });
