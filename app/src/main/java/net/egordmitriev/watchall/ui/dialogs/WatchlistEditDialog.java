@@ -67,7 +67,6 @@ public class WatchlistEditDialog extends DialogFragment {
         mTitleInput = (EditText) dialogView.findViewById(R.id.dialog_edit_title);
         mDescInput = (EditText) dialogView.findViewById(R.id.dialog_edit_description);
         mColorInput = (ColorPicker) dialogView.findViewById(R.id.dialog_edit_color);
-        mPublicInput = (CheckBox) dialogView.findViewById(R.id.dialog_edit_public);
 
         builder.setTitle((sData == null) ? R.string.title_create_list : R.string.title_edit_list);
         builder.setView(dialogView)
@@ -85,7 +84,6 @@ public class WatchlistEditDialog extends DialogFragment {
             mTitleInput.setText(sData.getTitle());
             if (sData.detail != null) mDescInput.setText(sData.detail.description);
             mColorInput.setSelectedColor(sData.base.color);
-            mPublicInput.setChecked(sData.base.is_public);
         }
 
         Dialog ret = builder.create();
@@ -110,7 +108,7 @@ public class WatchlistEditDialog extends DialogFragment {
 
                     if (success) {
                         if (sData == null) {
-                            sData = new WatchlistModel(mTitleInput.getText().toString(), mDescInput.getText().toString(), mColorInput.getColor(), mPublicInput.isChecked());
+                            sData = new WatchlistModel(mTitleInput.getText().toString(), mDescInput.getText().toString(), mColorInput.getColor(), false);
                         } else {
                             sData.base.title = mTitleInput.getText().toString();
                             if (sData.detail == null) {
@@ -118,7 +116,7 @@ public class WatchlistEditDialog extends DialogFragment {
                             }
                             sData.detail.description = mDescInput.getText().toString();
                             sData.base.color = mColorInput.getColor();
-                            sData.base.is_public = mPublicInput.isChecked();
+                            //sData.base.is_public = mPublicInput.isChecked();
                         }
 
                         if (toAdd != null) {

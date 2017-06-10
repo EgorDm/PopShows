@@ -4,7 +4,6 @@ import android.content.Intent;
 
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.ui.activities.FavouritesActivity;
-import net.egordmitriev.watchall.ui.activities.ProfileActivity;
 import net.egordmitriev.watchall.ui.activities.SettingsActivity;
 import net.egordmitriev.watchall.ui.activities.WatchlistPageActivity;
 import net.egordmitriev.watchall.ui.activities.media.AnimePageActivity;
@@ -20,8 +19,8 @@ public class HomeActivity extends TabsActivity {
     protected static final int PAGE_ANIME = R.id.nav_anime;
     protected static final int PAGE_LISTS = R.id.nav_lists;
     protected static final int PAGE_FAVOURITES = R.id.nav_favourites;
-    protected static final int PAGE_FRIENDS = R.id.nav_friends;
-    protected static final int PAGE_PROFILE = R.id.nav_profile;
+/*    protected static final int PAGE_FRIENDS = R.id.nav_friends;
+    protected static final int PAGE_PROFILE = R.id.nav_profile;*/
     protected static final int PAGE_SETTINGS = R.id.nav_settings;
     protected static final int PAGE_SEARCH = 9;
 
@@ -44,12 +43,12 @@ public class HomeActivity extends TabsActivity {
             case PAGE_FAVOURITES:
                 intent = new Intent(this, FavouritesActivity.class);
                 break;
-            case PAGE_FRIENDS:
+/*            case PAGE_FRIENDS:
                 //intent = new Intent(this, TestMainActivity.class);
                 break;
             case PAGE_PROFILE:
                 intent = new Intent(this, ProfileActivity.class);
-                break;
+                break;*/
             case PAGE_SETTINGS:
                 intent = new Intent(this, SettingsActivity.class);
                 break;

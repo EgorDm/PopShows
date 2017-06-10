@@ -132,7 +132,7 @@ public class WatchlistModel extends DetailedModel<WatchlistModel.Base, Watchlist
         @SerializedName("modified")
         public Date modified;
         @SerializedName("is_public")
-        public boolean is_public;
+        public boolean is_public = false;
 
         public boolean is_local = false;
 
