@@ -55,6 +55,7 @@
         android:text="@string/title_continue"
         android:textStyle="bold"/>
 
+<!--
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnForgotPassword"
         android:layout_width="wrap_content"
@@ -65,5 +66,6 @@
         android:textColor="@color/lighten_3"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
+-->
 
 </RelativeLayout>
