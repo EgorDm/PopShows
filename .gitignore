@@ -5,4 +5,8 @@
 /.idea/libraries
 .DS_Store
 /build
+<<<<<<< 5e88bde3e297b8928d71bed97f50253cc6ca585f
 /captures
+=======
+/captures
+>>>>>>> Added gitignore
