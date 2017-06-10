@@ -46,7 +46,7 @@
                 android:minHeight="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
-            <net.egordmitriev.watchall.ui.widgets.CircleImageView
+            <net.egordmitriev.popshows.ui.widgets.CircleImageView
                 android:id="@+id/profile_avatar_image"
                 android:layout_width="96dp"
                 android:layout_height="96dp"

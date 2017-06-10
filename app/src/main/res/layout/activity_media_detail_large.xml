@@ -94,7 +94,7 @@
         fab:menu_labels_position="left"
         fab:menu_openDirection="up"
         fab:menu_backgroundColor="@android:color/transparent"
-        app:layout_behavior="net.egordmitriev.watchall.ui.activities.listeners.ScrollOffBottomBehaviour">
+        app:layout_behavior="net.egordmitriev.popshows.ui.activities.listeners.ScrollOffBottomBehaviour">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/media_addtofav"

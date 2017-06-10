@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sync-adapter
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:contentAuthority="net.egordmitriev.watchall.provider"
-    android:accountType="nl.egordmitriev.watchall"
+    android:contentAuthority="net.egordmitriev.popshows.provider"
+    android:accountType="nl.egordmitriev.popshows"
     android:userVisible="true"
     android:supportsUploading="true"
     android:allowParallelSyncs="true"

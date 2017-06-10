@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "net.egordmitriev.watchall"
+        applicationId "net.egordmitriev.popshows"
         minSdkVersion 14
         targetSdkVersion 25
         versionName "${project.VERSION_MAJOR}.${project.VERSION_MINOR}.${project.VERSION_PATCH}"

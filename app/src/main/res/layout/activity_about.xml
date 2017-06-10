@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.egordmitriev.watchall.ui.activities.AboutActivity">
+    tools:context="net.egordmitriev.popshows.ui.activities.AboutActivity">
 
     <include layout="@layout/view_toolbar"/>
 

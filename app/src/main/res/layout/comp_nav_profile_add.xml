@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_large">
 
-        <net.egordmitriev.watchall.ui.widgets.CircleImageView
+        <net.egordmitriev.popshows.ui.widgets.CircleImageView
             android:layout_width="76dp"
             android:layout_height="76dp"
             android:background="@drawable/profile_circle"

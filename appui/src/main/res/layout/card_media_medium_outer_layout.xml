@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <net.egordmitriev.watchall.appui.widgets.cards.MediumCardHeaderView
+        <net.egordmitriev.popshows.appui.widgets.cards.MediumCardHeaderView
             android:id="@+id/card_header_layout"
             style="@style/card.native.header_outer_layout"
             card:card_header_layout_resourceID="@layout/card_media_medium_header_outer_layout"

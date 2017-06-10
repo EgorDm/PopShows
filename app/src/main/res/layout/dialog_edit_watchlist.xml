@@ -33,7 +33,7 @@
             android:maxLines="1"/>
     </android.support.design.widget.TextInputLayout>
 
-    <net.egordmitriev.watchall.appui.widgets.ColorPicker
+    <net.egordmitriev.popshows.appui.widgets.ColorPicker
         android:id="@+id/dialog_edit_color"
         android:layout_width="match_parent"
         android:layout_height="48dp"
