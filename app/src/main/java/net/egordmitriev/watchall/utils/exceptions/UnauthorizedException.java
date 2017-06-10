@@ -5,6 +5,6 @@ package net.egordmitriev.watchall.utils.exceptions;
  */
 public class UnauthorizedException extends Exception {
     public UnauthorizedException() {
-        super("User is not logged in with a valid WatchAll account!");
+        super("User is not logged in with a valid PopShows account!");
     }
 }
