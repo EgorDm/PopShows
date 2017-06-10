@@ -18,19 +18,20 @@ public class TabsActivity extends BaseActivity {
 
     protected Adapter mAdapter;
     protected ViewPager mViewPager;
+    protected TabLayout mTabLayout;
 
     @SuppressWarnings("ConstantConditions")
     protected void initTabs() {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
         if (mViewPager != null) {
             mAdapter = new Adapter(getSupportFragmentManager());
             mAdapter = setupTabs(mAdapter);
             mViewPager.setAdapter(mAdapter);
         }
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         if (mViewPager != null) {
-            tabLayout.setupWithViewPager(mViewPager);
+            mTabLayout.setupWithViewPager(mViewPager);
         }
 
     }

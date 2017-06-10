@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
+import com.orhanobut.logger.Logger;
+
 import net.egordmitriev.watchall.R;
 import net.egordmitriev.watchall.pojo.data.Category;
 import net.egordmitriev.watchall.pojo.tmdb.MovieModel;
@@ -26,6 +28,9 @@ public abstract class AMediaPageActivity extends HomeActivity {
         initToolbar();
         initTabs();
         mViewPager.setCurrentItem(getStarterTab(), false);
+        //mTabLayout.getTabAt(getStarterTab()).select();
+        //mTabLayout.setScrollPosition(2,0f,true);
+        Logger.d("Select"+getStarterTab());
     }
 
     @Override
