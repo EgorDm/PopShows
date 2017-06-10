@@ -69,7 +69,10 @@ public class SettingsActivity extends BaseActivity {
                     WatchAllAuthenticator.setupAccount(getActivity(), new DataCallback<Boolean>() {
                         @Override
                         public void success(Boolean data) {
-                            Toast.makeText(getActivity(), "Logged in? " + data, Toast.LENGTH_SHORT).show();
+                            if(data) {
+                                Toast.makeText(getActivity(), "Logged in successfully!", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
 
                         @Override

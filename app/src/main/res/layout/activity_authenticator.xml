@@ -8,7 +8,14 @@
         android:id="@+id/signup_header"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@color/lighten_1">
+        android:background="@color/splash">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/splash_logo"
+            android:scaleType="centerInside"
+            android:padding="32dp"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
@@ -16,7 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:tabMaxWidth="@dimen/tab_max_width"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            />
     </RelativeLayout>
 
     <TextView

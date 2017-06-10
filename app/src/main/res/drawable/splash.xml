@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/splash"/>
+
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/splash_logo"/>
+
+    </item>
+    <item android:top="320dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/tmdb"/>
+    </item>
+    <item android:top="460dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/anilist"/>
+    </item>
+
+</layer-list>
