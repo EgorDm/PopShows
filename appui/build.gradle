@@ -25,6 +25,8 @@ dependencies {
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
 
+    compile 'com.github.clans:fab:1.6.4'
+
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'net.egordmitriev.loaderview:loaderview:1.3'
     compile 'net.egordmitriev.colorizedprogressbar:colorizedprogressbar:1.0'

@@ -11,16 +11,25 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 import net.egordmitriev.watchall.R;
+import net.egordmitriev.watchall.api.WatchAllServiceHelper;
+import net.egordmitriev.watchall.api.database.tables.WatchlistsTable;
 import net.egordmitriev.watchall.pojo.DetailedModel;
 import net.egordmitriev.watchall.ui.activities.base.BaseActivity;
+import net.egordmitriev.watchall.ui.dialogs.WatchlistAddToDialog;
 import net.egordmitriev.watchall.ui.fragments.base.BaseFragment;
 import net.egordmitriev.watchall.ui.fragments.media.detail.DetailAboutFragment;
 import net.egordmitriev.watchall.ui.fragments.media.detail.DetailMainFragment;
+import net.egordmitriev.watchall.utils.APIUtils;
 import net.egordmitriev.watchall.utils.SaveUtils;
 
 import java.util.ArrayList;
@@ -93,6 +102,33 @@ public class MediaDetailActivity extends BaseActivity {
         mViewPager.setAdapter(mDetailPagerAdapter);
 
         final AppBarLayout appBar = (AppBarLayout) findViewById(R.id.appbar);
+        if(layoutRes != R.layout.activity_media_detail_small) {
+            final FloatingActionMenu fabMenu = (FloatingActionMenu) findViewById(R.id.fab);
+            fabMenu.setClosedOnTouchOutside(true);
+            final FragmentManager manager = getSupportFragmentManager();
+            final FloatingActionButton fav = (FloatingActionButton) findViewById(R.id.media_addtofav);
+            fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fabMenu.hideMenu(true);
+                    if (WatchlistsTable.addMedia(APIUtils.sGlobalParser.toJsonTree(mModel.base).getAsJsonObject(), WatchAllServiceHelper.getFavouritesID())) {
+                        Toast.makeText(getBaseContext(), String.format(getBaseContext().getString(R.string.toast_added_to_list), "Favourites"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            final FloatingActionButton addToList = (FloatingActionButton) findViewById(R.id.media_addtolist);
+            addToList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fabMenu.hideMenu(true);
+                    WatchlistAddToDialog dialog = WatchlistAddToDialog.newInstance(mModel);
+                    dialog.show(manager, "Add to list");
+                }
+            });
+        }
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
