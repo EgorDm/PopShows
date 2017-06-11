@@ -21,9 +21,9 @@
         android:title="@string/title_delete"
         app:showAsAction="always"/>
 
-    <item
+<!--    <item
         android:id="@+id/media_list_share"
         android:orderInCategory="103"
         android:title="@string/title_menu_share"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"/>-->
 </menu>
