@@ -30,7 +30,7 @@ public class WatchlistView extends AModelView<WatchlistModel> {
     }
 
     public static String getSubtitle(WatchlistModel item) {
-        return "TODO";
+        return "";
     }
 
     private static WatchlistView sInstance;
