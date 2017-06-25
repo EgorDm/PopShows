@@ -12,14 +12,13 @@ import net.egordmitriev.popshows.ui.activities.base.HomeActivity;
 import net.egordmitriev.popshows.ui.activities.media.AnimePageActivity;
 import net.egordmitriev.popshows.ui.activities.media.MoviePageActivity;
 import net.egordmitriev.popshows.ui.activities.media.SeriePageActivity;
-import net.egordmitriev.popshows.utils.Ads;
 
 public class MainActivity extends HomeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Ads.Initialize(this);
+        //Ads.Initialize(this); TODO: waiting for permission
 
         String result = PreferencesHelper.getInstance().getString(R.string.pref_discovery_homepage);
         int homepage = (result != null) ? Integer.parseInt(result) : 1;

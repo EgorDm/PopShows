@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import net.egordmitriev.popshows.R;
@@ -16,8 +15,6 @@ import net.egordmitriev.popshows.pojo.user.ListRequestData;
 import net.egordmitriev.popshows.ui.activities.SearchActivity;
 import net.egordmitriev.popshows.ui.fragments.media.CategoryListFragment;
 import net.egordmitriev.popshows.utils.SaveUtils;
-
-import java.util.Random;
 
 /**
  * Created by EgorDm on 5/1/2016.
@@ -38,13 +35,13 @@ public abstract class AMediaPageActivity extends HomeActivity {
 
         mAdView = (AdView) findViewById(R.id.adView);
 
-        Random r = new Random();
-        if(r.nextInt(10) + 1 > 6) {
+        /*Random r = new Random(); TODO: waiting for permission
+        if(r.nextInt(100) < 20) {
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice("85B8D6B951E3199CC6775109FE4EDB32")
                     .build();
             mAdView.loadAd(adRequest);
-        }
+        }*/
 
     }
 
