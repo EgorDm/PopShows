@@ -10,7 +10,7 @@
             android:summary="%s"
             android:entries="@array/pref_homepage_entries"
             android:entryValues="@array/pref_homepage_entryvalues"
-            android:defaultValue="1"
+            android:defaultValue="8"
             />
         <Preference
             android:key="synclists"
