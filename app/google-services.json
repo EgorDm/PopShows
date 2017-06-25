@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "680369898178",
+    "firebase_url": "https://popshows-85a31.firebaseio.com",
+    "project_id": "popshows-85a31",
+    "storage_bucket": "popshows-85a31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680369898178:android:6a15b45d106b8896",
+        "android_client_info": {
+          "package_name": "net.egordmitriev.popshows"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680369898178-3h0kb94niv9u9763celoq3ocmmhigb5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJJMivhhwZ7K2Wax1_DEhdocFyugaR5_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

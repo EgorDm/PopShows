@@ -36,7 +36,7 @@ public abstract class AMediaPageActivity extends HomeActivity {
         mAdView = (AdView) findViewById(R.id.adView);
 
         /*Random r = new Random(); TODO: waiting for permission
-        if(r.nextInt(100) < 20) {
+        if(r.nextInt(100) < 7) {
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice("85B8D6B951E3199CC6775109FE4EDB32")
                     .build();
