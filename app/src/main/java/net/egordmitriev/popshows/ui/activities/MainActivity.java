@@ -21,7 +21,7 @@ public class MainActivity extends HomeActivity {
         //Ads.Initialize(this); TODO: waiting for permission
 
         String result = PreferencesHelper.getInstance().getString(R.string.pref_discovery_homepage);
-        int homepage = (result != null) ? Integer.parseInt(result) : 1;
+        int homepage = (result != null) ? Integer.parseInt(result) : 8;
         Intent intent;
         switch (homepage) {
             case MovieModel.TYPE:
