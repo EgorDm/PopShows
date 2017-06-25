@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,11 +20,17 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.orhanobut.logger.Logger;
 
 import net.egordmitriev.popshows.R;
 import net.egordmitriev.popshows.api.WatchAllServiceHelper;
 import net.egordmitriev.popshows.api.database.tables.WatchlistsTable;
 import net.egordmitriev.popshows.pojo.DetailedModel;
+import net.egordmitriev.popshows.pojo.anilist.AnimeModel;
+import net.egordmitriev.popshows.pojo.anilist.CharacterModel;
+import net.egordmitriev.popshows.pojo.anilist.StaffModel;
+import net.egordmitriev.popshows.pojo.tmdb.MovieModel;
+import net.egordmitriev.popshows.ui.activities.SearchActivity;
 import net.egordmitriev.popshows.ui.activities.base.BaseActivity;
 import net.egordmitriev.popshows.ui.dialogs.WatchlistAddToDialog;
 import net.egordmitriev.popshows.ui.fragments.base.BaseFragment;
@@ -153,6 +160,27 @@ public class MediaDetailActivity extends BaseActivity {
             }
         });
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search:
+                Intent intent = new Intent(this, SearchActivity.class);
+                if(mModel instanceof AnimeModel || mModel instanceof CharacterModel ||
+                        mModel instanceof StaffModel) {
+                    SearchActivity.sSearchType = AnimeModel.TYPE;
+                } else {
+                    SearchActivity.sSearchType = MovieModel.TYPE;
+                }
+                startActivity(intent);
+                Logger.d("Search clicked");
+                /**/
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public DetailedModel getModel() {
         return mModel;
