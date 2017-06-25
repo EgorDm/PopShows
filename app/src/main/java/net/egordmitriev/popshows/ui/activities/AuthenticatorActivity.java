@@ -1,7 +1,6 @@
 package net.egordmitriev.popshows.ui.activities;
 
 import android.accounts.Account;
-import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import net.egordmitriev.popshows.api.WatchAllServiceHelper;
 import net.egordmitriev.popshows.api.base.APIError;
 import net.egordmitriev.popshows.pojo.watchall.ClientCredentials;
 import net.egordmitriev.popshows.services.SyncService;
+import net.egordmitriev.popshows.ui.activities.base.AppCompAccountAuthenticatorActivity;
 import net.egordmitriev.popshows.utils.APIUtils;
 import net.egordmitriev.popshows.utils.ErrorUtils;
 
@@ -34,7 +34,7 @@ import retrofit2.Response;
 /**
  * Created by EgorDm on 4/4/2016.
  */
-public class AuthenticatorActivity extends AccountAuthenticatorActivity implements Callback<JsonObject> {
+public class AuthenticatorActivity extends AppCompAccountAuthenticatorActivity implements Callback<JsonObject> {
 
     public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
     public final static String ARG_AUTH_TYPE = "AUTH_TYPE";
