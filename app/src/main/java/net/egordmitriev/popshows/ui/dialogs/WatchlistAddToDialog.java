@@ -68,7 +68,9 @@ public class WatchlistAddToDialog extends DialogFragment {
         dialogView.setDivider(null);
         mAdapter = new ItemAdapter(getActivity(), new ArrayList<WatchlistModel.Base>());
         dialogView.setAdapter(mAdapter);
-        mAdapter.addAll(WatchAllServiceHelper.getMyWatchlists());
+
+        WatchlistModel.Base[] myLists = WatchAllServiceHelper.getMyWatchlists();
+        if (myLists != null) mAdapter.addAll(myLists);
 
         builder.setTitle((!moveMedia) ? R.string.title_addto_list : R.string.title_moveto_list);
         builder.setView(dialogView);
