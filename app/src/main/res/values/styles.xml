@@ -18,6 +18,16 @@
         <!--<item name="android:windowAnimationStyle">@null</item>-->
     </style>
 
+    <style name="AppTheme.NoActionBar.NoTransparency">
+<!--        <item name="windowDrawsSystemBarBackgrounds">true</item>
+        <item name="statusBarColor">@color/primary_dark</item>-->
+    </style>
+
+    <style name="AppTheme.NoActionBar.NoAnimation" parent="AppTheme.NoActivityAnimation">
+<!--        <item name="windowDrawsSystemBarBackgrounds">true</item>
+        <item name="statusBarColor">@android:color/transparent</item>-->
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.Search" parent="AppTheme">
