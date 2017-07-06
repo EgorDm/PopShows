@@ -10,7 +10,7 @@ android {
         targetSdkVersion 26
         versionName "${project.VERSION_MAJOR}.${project.VERSION_MINOR}.${project.VERSION_PATCH}"
         versionCode Integer.parseInt(project.VERSION_MAJOR) * 10000 + Integer.parseInt(project.VERSION_MINOR) * 100 + Integer.parseInt(project.VERSION_PATCH)
-        project.ext.set("archivesBaseName", "PopShows-" + defaultConfig.versionName);
+        project.ext.set("archivesBaseName", "../releases/PopShows-" + defaultConfig.versionName);
     }
     buildTypes {
         release {
