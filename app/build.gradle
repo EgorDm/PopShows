@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
 
     defaultConfig {
         applicationId "net.egordmitriev.popshows"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionName "${project.VERSION_MAJOR}.${project.VERSION_MINOR}.${project.VERSION_PATCH}"
         versionCode Integer.parseInt(project.VERSION_MAJOR) * 10000 + Integer.parseInt(project.VERSION_MINOR) * 100 + Integer.parseInt(project.VERSION_PATCH)
         project.ext.set("archivesBaseName", "PopShows-" + defaultConfig.versionName);
@@ -26,9 +26,9 @@ dependencies {
 
 
     compile project(':appui')
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.0.0-beta2'
+    compile 'com.android.support:design:26.0.0-beta2'
+    compile 'com.android.support:support-v4:26.0.0-beta2'
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
@@ -36,8 +36,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.orhanobut:logger:1.10'
     compile 'com.android.support.constraint:constraint-layout:1.1.0-beta1'
-    compile 'com.google.android.gms:play-services-ads:11.0.0'
-    compile 'com.google.firebase:firebase-core:11.0.0'
+    compile 'com.google.android.gms:play-services-ads:11.0.2'
+    compile 'com.google.firebase:firebase-core:11.0.2'
     testCompile 'junit:junit:4.12'
 }
 
